@@ -1,0 +1,12 @@
+2009-06-07: Version 0.3.0
+
+  * Added plot option to crosstab, compmeans and freq.
+
+  * Renamed function crosstabs to crosstab.
+
+  * LogRegR2 now accepts "probit" models.
+
+  * Fixed bug in the weighted standard deviation calculus (compmeans).
+
+2009-06-05: Version 0.2.1
+

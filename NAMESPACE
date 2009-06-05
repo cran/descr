@@ -1,0 +1,3 @@
+
+export(crosstab, LogRegR2, freq, fromUTF8, toUTF8, descr, compmeans, histkdnc, fwf2csv)
+
