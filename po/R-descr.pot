@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-07 16:31-0300\n"
+"POT-Creation-Date: 2009-08-11 12:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,106 +16,272 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: R/descr.R:106 R/descr.R:127 R/descr.R:151
+#: R/CrossTable.R:38
+msgid "max.width must be >= 1"
+msgstr ""
+
+#: R/CrossTable.R:67
+msgid "all entries of x must be nonnegative and finite"
+msgstr ""
+
+#: R/CrossTable.R:91
+msgid "x must be either a vector or a 2 dimensional matrix, if y is not given"
+msgstr ""
+
+#: R/CrossTable.R:96
+msgid "x and y must have the same length"
+msgstr ""
+
+#: R/CrossTable.R:120
+msgid "dnn must have length of 2, one element for each table dimension"
+msgstr ""
+
+#: R/CrossTable.R:251
+msgid "unknown format"
+msgstr ""
+
+#: R/CrossTable.R:259 R/xtable.R:9
+msgid "Column Total"
+msgstr ""
+
+#: R/CrossTable.R:260 R/xtable.R:8
+msgid "Row Total"
+msgstr ""
+
+#: R/CrossTable.R:286
+msgid "Cell Contents"
+msgstr ""
+
+#: R/CrossTable.R:290
+msgid "|                       N |"
+msgstr ""
+
+#: R/CrossTable.R:292
+msgid "|              Expected N |"
+msgstr ""
+
+#: R/CrossTable.R:294 R/CrossTable.R:310
+msgid "| Chi-square contribution |"
+msgstr ""
+
+#: R/CrossTable.R:296
+msgid "|           N / Row Total |"
+msgstr ""
+
+#: R/CrossTable.R:298
+msgid "|           N / Col Total |"
+msgstr ""
+
+#: R/CrossTable.R:300
+msgid "|         N / Table Total |"
+msgstr ""
+
+#: R/CrossTable.R:306
+msgid "|                   Count |"
+msgstr ""
+
+#: R/CrossTable.R:308
+msgid "|         Expected Values |"
+msgstr ""
+
+#: R/CrossTable.R:312
+msgid "|             Row Percent |"
+msgstr ""
+
+#: R/CrossTable.R:314
+msgid "|          Column Percent |"
+msgstr ""
+
+#: R/CrossTable.R:316
+msgid "|           Total Percent |"
+msgstr ""
+
+#: R/CrossTable.R:318
+msgid "|                Residual |"
+msgstr ""
+
+#: R/CrossTable.R:320
+msgid "|            Std Residual |"
+msgstr ""
+
+#: R/CrossTable.R:322
+msgid "|           Adj Std Resid |"
+msgstr ""
+
+#: R/CrossTable.R:327
+msgid "Total Observations in Table:"
+msgstr ""
+
+#: R/CrossTable.R:378
+msgid "Number of Missing Observations:"
+msgstr ""
+
+#: R/CrossTable.R:477
+msgid "Statistics for All Table Factors"
+msgstr ""
+
+#: R/CrossTable.R:482 R/CrossTable.R:490 R/CrossTable.R:502 R/CrossTable.R:510
+msgid "Chi^2 ="
+msgstr ""
+
+#: R/CrossTable.R:483 R/CrossTable.R:491 R/CrossTable.R:503 R/CrossTable.R:511
+msgid "d.f. ="
+msgstr ""
+
+#: R/CrossTable.R:484 R/CrossTable.R:492 R/CrossTable.R:504 R/CrossTable.R:512
+#: R/CrossTable.R:530 R/CrossTable.R:535 R/CrossTable.R:540 R/CrossTable.R:547
+msgid "p ="
+msgstr ""
+
+#: R/CrossTable.R:521
+msgid "Fisher's Exact Test for Count Data"
+msgstr ""
+
+#: R/CrossTable.R:526
+msgid "Sample estimate odds ratio:"
+msgstr ""
+
+#: R/CrossTable.R:528
+msgid "Alternative hypothesis: true odds ratio is not equal to 1"
+msgstr ""
+
+#: R/CrossTable.R:531 R/CrossTable.R:536 R/CrossTable.R:541
+#, c-format
+msgid "95% confidence interval:"
+msgstr ""
+
+#: R/CrossTable.R:533
+msgid "Alternative hypothesis: true odds ratio is less than 1"
+msgstr ""
+
+#: R/CrossTable.R:538
+msgid "Alternative hypothesis: true odds ratio is greater than 1"
+msgstr ""
+
+#: R/CrossTable.R:545
+msgid "Alternative hypothesis: two.sided"
+msgstr ""
+
+#: R/CrossTable.R:557
+msgid "Minimum expected frequency:"
+msgstr ""
+
+#: R/CrossTable.R:562
+msgid "Cells with Expected Frequency < 5:"
+msgstr ""
+
+#: R/CrossTable.R:563
+msgid "of"
+msgstr ""
+
+#: R/compmeans.R:21 R/compmeans.R:42 R/compmeans.R:66
 msgid "Warning:"
 msgstr ""
 
-#: R/descr.R:107
+#: R/compmeans.R:22
 msgid "boxplot of weighted values not implemented yet."
 msgstr ""
 
-#: R/descr.R:117 R/descr.R:141
+#: R/compmeans.R:32 R/compmeans.R:56
 msgid "and"
 msgstr ""
 
-#: R/descr.R:117
+#: R/compmeans.R:32
 msgid "have different lengths"
 msgstr ""
 
-#: R/descr.R:124
+#: R/compmeans.R:39
 msgid "was converted into a factor, but the new variable had too many levels"
 msgstr ""
 
-#: R/descr.R:128
+#: R/compmeans.R:43
 msgid "was converted into factor!"
 msgstr ""
 
-#: R/descr.R:141
+#: R/compmeans.R:56
 msgid "have different lengths."
 msgstr ""
 
-#: R/descr.R:152
+#: R/compmeans.R:67
 msgid "was converted from factor into numeric!"
 msgstr ""
 
-#: R/descr.R:163
+#: R/compmeans.R:78
 msgid "rows with missing values dropped"
 msgstr ""
 
-#: R/descr.R:187 R/descr.R:281
+#: R/compmeans.R:102 R/freq.R:25
 msgid "Total"
 msgstr ""
 
-#: R/descr.R:189
+#: R/compmeans.R:104
 msgid "Mean"
 msgstr ""
 
-#: R/descr.R:189
+#: R/compmeans.R:104
 msgid "N"
 msgstr ""
 
-#: R/descr.R:189
+#: R/compmeans.R:104
 msgid "Std. Dev."
 msgstr ""
 
-#: R/descr.R:299 R/descr.R:306
-msgid "Frequency"
+#: R/compmeans.R:122
+msgid "Mean value of"
 msgstr ""
 
-#: R/descr.R:299 R/descr.R:306
-msgid "Percent"
+#: R/compmeans.R:123
+msgid "according to"
 msgstr ""
 
-#: R/descr.R:300
-msgid "Valid Percent"
-msgstr ""
-
-#: R/descr.R:300 R/descr.R:307
-msgid "Cum Percent"
-msgstr ""
-
-#: R/descr.R:355
+#: R/descr.R:81
 msgid "No logistic regression model, no pseudo R^2 computed."
 msgstr ""
 
-#: R/descr.R:367
+#: R/descr.R:93
 msgid "Chi2"
 msgstr ""
 
-#: R/descr.R:368
+#: R/descr.R:94
 msgid "Df"
 msgstr ""
 
-#: R/descr.R:369
+#: R/descr.R:95
 msgid "Sig."
 msgstr ""
 
-#: R/descr.R:370
+#: R/descr.R:96
 msgid "Cox & Snell Index"
 msgstr ""
 
-#: R/descr.R:371
+#: R/descr.R:97
 msgid "Nagelkerke Index"
 msgstr ""
 
-#: R/descr.R:372
+#: R/descr.R:98
 msgid "McFadden's R2"
 msgstr ""
 
-#: R/descr.R:384
+#: R/freq.R:43 R/freq.R:50
+msgid "Frequency"
+msgstr ""
+
+#: R/freq.R:43 R/freq.R:50
+msgid "Percent"
+msgstr ""
+
+#: R/freq.R:44
+msgid "Valid Percent"
+msgstr ""
+
+#: R/freq.R:44 R/freq.R:51
+msgid "Cum Percent"
+msgstr ""
+
+#: R/fwf2csv.R:7
 msgid "The vectors \"names\", \"begin\" and \"end\" must have the same length."
 msgstr ""
 
-#: R/descr.R:387
+#: R/fwf2csv.R:10
 msgid "File not found:"
 msgstr ""

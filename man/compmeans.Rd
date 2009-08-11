@@ -1,9 +1,9 @@
 \name{compmeans}
 \alias{compmeans}
-\title{Means of a numerical vector according to a factor}
+\title{Means of a numerical vector according to a factor with boxplot}
 \description{Calculates the means of a numerical vector according to a factor.}
 \usage{
-compmeans(x, f, w, digits = 6, sort = FALSE, maxlevels = 60, 
+compmeans(x, f, w, sort = FALSE, maxlevels = 60, 
     plot = getOption("descr.plot"), xlab = deparse(substitute(f)),
     ylab = deparse(substitute(x)), \dots)
 }
@@ -11,7 +11,6 @@ compmeans(x, f, w, digits = 6, sort = FALSE, maxlevels = 60,
   \item{x}{A numeric vector.}
   \item{f}{A factor.}
   \item{w}{Optional vector with weights.}
-  \item{digits}{Precision of output.}
   \item{sort}{If \code{TRUE}, sorts the lines by the means values.}
   \item{maxlevels}{Maximum number of levels that \code{x} converted into factor
       should have.}

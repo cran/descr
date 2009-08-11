@@ -12,7 +12,7 @@ is a data frame, the function prints the \code{label} and invokes
 descr(x)
 }
 \arguments{
-  \item{x}{ The object to be described.}
+  \item{x}{The object to be described.}
 }
 
 \value{

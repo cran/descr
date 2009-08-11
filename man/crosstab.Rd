@@ -1,8 +1,9 @@
 \name{crosstab}
 \alias{crosstab}
-\title{Cross tabulation}
+\title{Cross tabulation with mosaic plot}
 \description{
-Outputs a cross table for two factors.
+This function is a wrapper for \code{\link{CrossTable}}, adding a
+mosaic plot and making it easier to do a weighted cross-tabulation.
 }
 \usage{
 crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
@@ -17,22 +18,22 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
 \arguments{
   \item{x, y}{Vectors in a matrix or a dataframe.}
   \item{weight}{An optional vector for a weighted cross tabulation.}
-  \item{digits}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{max.width}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{expected}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{prop.r}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{prop.c}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{prop.t}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{prop.chisq}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{chisq}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{fisher}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{mcnemar}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{resid}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{sresid}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{asresid}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{missing.include}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{format}{See \code{\link[gmodels]{CrossTable}}.}
-  \item{dnn}{See \code{\link[gmodels]{CrossTable}}.}
+  \item{digits}{See \code{\link{CrossTable}}.}
+  \item{max.width}{See \code{\link{CrossTable}}.}
+  \item{expected}{See \code{\link{CrossTable}}.}
+  \item{prop.r}{See \code{\link{CrossTable}}.}
+  \item{prop.c}{See \code{\link{CrossTable}}.}
+  \item{prop.t}{See \code{\link{CrossTable}}.}
+  \item{prop.chisq}{See \code{\link{CrossTable}}.}
+  \item{chisq}{See \code{\link{CrossTable}}.}
+  \item{fisher}{See \code{\link{CrossTable}}.}
+  \item{mcnemar}{See \code{\link{CrossTable}}.}
+  \item{resid}{See \code{\link{CrossTable}}.}
+  \item{sresid}{See \code{\link{CrossTable}}.}
+  \item{asresid}{See \code{\link{CrossTable}}.}
+  \item{missing.include}{See \code{\link{CrossTable}}.}
+  \item{format}{See \code{\link{CrossTable}}.}
+  \item{dnn}{See \code{\link{CrossTable}}.}
   \item{plot}{Logical: if \code{TRUE} (default), a mosaic plot is produced.
     You may put \code{options(descr.plot = FALSE)} in your \file{.Rprofile} to
     change the default function behavior.}
@@ -47,14 +48,13 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
 }
 
 \details{
-\code{crosstab} invokes the \code{\link[gmodels]{CrossTable}} function in the
+\code{crosstab} invokes the \code{\link{CrossTable}} function in the
 \pkg{gmodels} package with all boolean options set to \code{FALSE} and
 \code{"SPSS"} as the default \code{format} option.
 }
 
-\author{Jakson A. Aquino \email{jalvesaq@gmail.com}, based on function written
-by Dirk Enzmann}
+\author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
 
-\seealso{\code{\link[gmodels]{CrossTable}}}
+\seealso{\code{\link{CrossTable}}}
 
 \keyword{file}

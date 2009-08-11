@@ -1,0 +1,24 @@
+
+fwf2csv <- function(fwffile, csvfile, names, begin, end)
+{
+    # Check for errors
+    ncols = length(names)
+    if(length(begin) != ncols || length(end) != ncols){
+	stop("The vectors \"names\", \"begin\" and \"end\" must have the same length.")
+    }
+    if(file.exists(fwffile) == FALSE){
+        msg <- paste(gettext("File not found:"), fwffile)
+        stop(msg)
+    }
+
+    .C("realfwf2csv",
+	as.character(fwffile),
+	as.character(csvfile),
+	as.character(names),
+	as.integer(begin),
+	as.integer(end),
+	ncols, PACKAGE="descr")
+
+    return (invisible(NULL))
+}
+
