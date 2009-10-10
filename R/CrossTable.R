@@ -237,6 +237,7 @@ print.CrossTable <- function(x, ...)
   mcnemar <- x$print.mcnemar
   missing.include <- x$missing.include
   format <- x$format
+  outDec <- getOption("OutDec")
 
   nsep <- "  | " # normal separator
   if(format == "SAS") {
@@ -256,8 +257,8 @@ print.CrossTable <- function(x, ...)
     expected <- prop.chisq <- prop.c <- prop.t <- resid <- sresid <- asresid <- FALSE
 
   ## Column and Row Total Headings
-  ColTotal <- gettext("Column Total", domain = "R-descr")
-  RowTotal <- gettext("Row Total", domain = "R-descr")
+  ColTotal <- gettext("Total", domain = "R-descr")
+  RowTotal <- ColTotal
 
   ## Set consistent column widths based upon dimnames and table values
   CWidth <- max(digits + 2, c(nchar(t), nchar(dimnames(t)[[2]]), nchar(RS), nchar(CS), nchar(RowTotal)))
@@ -323,8 +324,7 @@ print.CrossTable <- function(x, ...)
     cat("|-------------------------|\n")
   } ## End of if(format=="SPSS")
 
-  cat("\n")
-  cat(gettext("Total Observations in Table:", domain = "R-descr"), GT, "\n\n")
+  #cat(gettext("Total Observations in Table:", domain = "R-descr"), GT, "\n\n")
 
   ## Print 1 X N vector
   if (vector.x) {
@@ -367,7 +367,7 @@ print.CrossTable <- function(x, ...)
       if(prop.r)
         cat(cat(SpaceSep2, sep = " | ", collapse=""),
         cat(formatC(CPT[, start[i]:end[i]] * hdd, width = CWidth-1,
-            digits = digits, format = "f"), sep = psep,
+            digits = digits, format = "f", decimal.mark = outDec), sep = psep,
           collapse = ""), sep = "", collapse="\n")
       cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
           1), sep = "|", collapse = "\n")
@@ -380,102 +380,147 @@ print.CrossTable <- function(x, ...)
     return(invisible(x))
   } ## End of if (vector.x)
 
-  ## Print table header
-  if (is.na(RowData) == FALSE)
-  {
-    cat(SpaceSep1, "|", ColData, "\n")
-    cat(cat(formatC(RowData, width = RWidth, format = "s"), sep = " | ",
-        collapse=""),
-      cat(formatC(dimnames(t)[[2]], width = CWidth-1, format = "s"),
-        sep = nsep, collapse=""),
-      cat(RowTotal, sep = " | ", collapse = "\n"), sep = "", collapse="")
-  }
-  else
-    cat(SpaceSep1, formatC(dimnames(t)[[2]], width = CWidth, format = "s"),
-    RowTotal, sep = " | ", collapse = "\n")
 
-  cat(RowSep1, rep(RowSep, ncol(t) + 1), sep = "|", collapse = "\n")
-
-  ## Print table cells
+  nelements <- 1 + expected + prop.chisq + prop.r + prop.c + prop.t + resid + sresid + asresid
+  nr <- nrow(t) * nelements + 1
+  nc <- ncol(t)
+  m <- matrix(nrow = nr, ncol = nc + 1)
+  rnames <- vector(mode = "character", length = nr)
+  ## Fill matrix with table cells values converted into character
+  k <- 1
   for (i in 1:nrow(t))
   {
-    cat(cat(FirstCol[i], sep = " | ", collapse=""),
-      cat(formatC(c(t[i, ], RS[i]), width = CWidth-1, format = "d"),
-        sep = nsep, collapse = "\n"), sep = "", collapse="")
+    for(l in 1:nc)
+      m[k, l] <- formatC(t[i,l], format = "d")
+    m[k, nc + 1] <- RS[i]
+    rnames[k] <- rownames(t)[i]
+    k <- k + 1
 
-    if (expected)
-      cat(cat(SpaceSep1, sep = " | ", collapse=""),
-      cat(formatC(CST$expected[i, ], digits = digits, format = "f",
-          width = CWidth-1), sep = nsep, collapse=""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
+    if(expected){
+      for(l in 1:nc)
+        m[k, l] <- formatC(CST$expected[i, l], digits = 1, format = "f",
+          decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    if (prop.chisq)
-      cat(cat(SpaceSep1, sep = " | ", collapse=""),
-      cat(formatC((((CST$expected[i, ]-t[i, ])^2)/CST$expected[i, ]),
-          digits = digits, format = "f",
-          width = CWidth-1), sep = nsep, collapse=""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
-    if (prop.r)
-      cat(cat(SpaceSep1, sep = " | ", collapse=""),
-      cat(formatC(c(CPR[i, ]*hdd, hdd*RS[i] / GT),
-          width = CWidth-1, digits = digits, format = "f"),
-        sep = psep, collapse = "\n"), sep = "", collapse="")
+    if(prop.chisq){
+      for(l in 1:nc)
+        m[k, l] <- formatC((((CST$expected[i, l]-t[i, l])^2)/CST$expected[i, l]),
+          digits = digits, format = "f", decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    if (prop.c)
-      cat(cat(SpaceSep1, sep = " | ", collapse=""),
-      cat(formatC(CPC[i, ]*hdd, width = CWidth-1,
-          digits = digits, format = "f"), sep = psep, collapse=""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
+    if(prop.r){
+      for(l in 1:nc)
+        m[k, l] <- formatC(CPR[i, l]*hdd, digits = digits, format = "f",
+          decimal.mark = outDec)
+      m[k, nc + 1] <- formatC(hdd*RS[i] / GT, digits = digits, format = "f",
+          decimal.mark = outDec)
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    if (prop.t)
-      cat(cat(SpaceSep1, sep = " | ", collapse=""),
-      cat(formatC(CPT[i, ]*hdd, width = CWidth-1, digits = digits,
-          format = "f"), sep = psep, collapse=""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
+    if(prop.c){
+      for(l in 1:nc)
+        m[k, l] <- formatC(CPC[i, l]*hdd, digits = digits, format = "f",
+          decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    if (resid)
-      cat(cat(SpaceSep1, sep = " | ", collapse = ""),
-      cat(formatC(CST$observed[i, ]-CST$expected[i, ], digits = digits,
-          format = "f", width = CWidth-1), sep = nsep,
-        collapse = ""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
+    if(prop.t){
+      for(l in 1:nc)
+        m[k, l] <- formatC(CPT[i, l]*hdd, digits = digits, format = "f",
+          decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    if (sresid)
-      cat(cat(SpaceSep1, sep = " | ", collapse = ""),
-      cat(formatC(CST$residual[i, ], digits = digits,
-          format = "f", width = CWidth-1), sep = nsep,
-        collapse = ""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
+    if(resid){
+      for(l in 1:nc)
+        m[k, l] <- formatC(CST$observed[i, l]-CST$expected[i, l], digits = digits,
+          format = "f", decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    if (asresid)
-      cat(cat(SpaceSep1, sep = " | ", collapse = ""),
-      cat(formatC(ASR[i, ], digits = digits,
-          format = "f", width = CWidth-1), sep = nsep,
-        collapse = ""),
-      cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapse="")
+    if(sresid){
+      for(l in 1:nc)
+        m[k, l] <- formatC(CST$residual[i, l], digits = digits,
+          format = "f", decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
 
-    cat(RowSep1, rep(RowSep, ncol(t) + 1), sep = "|", collapse = "\n")
+    if(asresid){
+      for(l in 1:nc)
+        m[k, l] <- formatC(ASR[i, l], digits = digits, format = "f",
+          decimal.mark = outDec)
+      m[k, nc + 1] <- " "
+      rnames[k] <- paste("<=>", as.character(k))
+      k <- k + 1
+    }
   }
 
-  ## Print Column Totals
-  cat(cat(ColTotal, sep = " | ", collapse=""),
-    cat(formatC(c(CS, GT), width = CWidth-1, format = "d"), sep = nsep,
-      collapse = "\n"), sep = "", collapse="")
+  ## Fill Column Totals
+  ColTotal <- gettext("Total", domain = "R-descr")
+  RowTotal <- ColTotal
+  rnames[k] <- RowTotal
+  for(l in 1:nc)
+    m[k, l] <- formatC(c(CS[l]), format = "d")
+  m[k, nc + 1] <- formatC(GT, format = "d")
+  colnames(m) <- c(colnames(t), ColTotal)
 
-  if (prop.c)
-    cat(cat(SpaceSep1, sep = " | ", collapse=""),
-    cat(formatC(hdd*CS/GT, width = CWidth-1, digits = digits,
-        format = "f"), sep = psep, collapse = ""),
-    cat(SpaceSep2, sep = " | ", collapse = "\n"), sep = "", collapes="")
+  ## Print table cells
+  nc <- nc + 1
+  colWidths <- vector(mode = "numeric", length = nc)
+  mcolnames <- colnames(m)
+  cat("\n\n")
+  for(i in 1:nc)
+    colWidths[i] <- max(c(nchar(m[, i]), nchar(mcolnames[i])))
+  labelwidth <- max(nchar(rnames)) + 1
+  dashedline <- rep("-", sum(colWidths) + 3 * nc + labelwidth)
+  ddashedline <- gsub("-", "=", dashedline)
 
-  cat(RowSep1, rep(RowSep, ncol(t) + 1), sep = "|", collapse = "\n")
+  cat("\n", ddashedline, "\n", sep = "")
+  cat(formatC(" ", width = labelwidth))
+  for(j in 1:nc)
+    cat("  ", formatC(mcolnames[j], width = colWidths[j]))
+  for(i in 1:nr){
+    if(length(grep("<=>", rnames[i])) == 0){
+      cat("\n", dashedline, "\n", sep = "")
+      cat(formatC(rnames[i], width = labelwidth, format = "s", flag = "-"), sep = "")
+    } else {
+      cat("\n", formatC(" ", width = labelwidth), sep = "")
+    }
+    for(j in 1:nc){
+      cat("  ", formatC(m[i,j], width = colWidths[j]))
+    }
+  }
+  if(prop.c){
+    cat("\n", formatC(" ", width = labelwidth), sep = "")
+    for(j in 1:(nc - 1)){
+      cat("  ", formatC(hdd*CS[j]/GT, width = colWidths[j], digits = digits,
+              format = "f", decimal.mark = outDec))
+    }
+  }
+  cat("\n", ddashedline, "\n", sep = "")
+
 
   ## Print Statistics
   if (chisq)
   {
     cat(rep("\n", 2))
     cat(gettext("Statistics for All Table Factors", domain = "R-descr"),
-        "\n\n\n", sep="")
+        "\n\n", sep="")
 
     cat(CST$method, "\n")
     cat("------------------------------------------------------------\n")
@@ -548,7 +593,7 @@ print.CrossTable <- function(x, ...)
     }
   } ## End Of If(Fisher) Loop
 
-  cat(rep("\n", 2))
+  #  cat(rep("\n", 2))
 
   if(format == "SPSS"){
     if (any(dim(t) >= 2) & any(chisq, mcnemar, fisher))
@@ -569,4 +614,8 @@ print.CrossTable <- function(x, ...)
   }
   return(invisible(x))
 }
+
+as.data.frame.CrossTable <- function(x, ...) as.data.frame(x$t, ...)
+
+
 

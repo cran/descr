@@ -18,8 +18,9 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
     if(is.factor(f) && length(levels(f)) < maxlevels){
       boxplot(x ~ f, ylab=ylab, xlab=xlab, ...)
       if(missing(w) == FALSE){
-        cat(gettext("Warning:"),
-          gettext("boxplot of weighted values not implemented yet."),
+        cat(gettext("Warning:", domain = "R-descr"),
+          gettext("boxplot of weighted values not implemented yet.", domain =
+              "R-descr"),
           "\n\n")
       }
     }
@@ -29,18 +30,21 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
   lf <- length(f)
   lx <- length(x)
   if (lf != lx) {
-    msg <- paste(f.name, gettext("and"), n.name, gettext("have different lengths"))
+    msg <- paste(f.name, gettext("and", domain = "R-descr"), n.name,
+        gettext("have different lengths", domain = "R-descr"))
     stop(msg)
   }
   if (is.factor(f) == FALSE) {
     f <- factor(f)
     nl <- length(levels(f))
     if (nl > maxlevels) {
-      msg <- paste(f.name, gettext("was converted into a factor, but the new variable had too many levels"))
+      msg <- paste(f.name,
+          gettext("was converted into a factor, but the new variable had too many levels",
+              domain = "R-descr"))
       stop(msg)
     }
-    msg <- paste(gettext("Warning:"), " \"", f.name, "\" ", 
-      gettext("was converted into factor!"), sep = "")
+    msg <- paste(gettext("Warning:", domain = "R-descr"), " \"", f.name, "\" ", 
+      gettext("was converted into factor!", domain = "R-descr"), sep = "")
     cat(msg, "\n")
   } else{
     class(f) <- "factor"
@@ -53,7 +57,8 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
   } else {
     lw <- length(w)
     if (lw != lf) {
-      msg <- paste(f.name, gettext("and"), "weight", gettext("have different lengths."))
+      msg <- paste(f.name, gettext("and", domain = "R-descr"), "weight",
+          gettext("have different lengths.", domain = "R-descr"))
       stop(msg)
     }
   }
@@ -63,8 +68,8 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
 
   if (is.factor(x) == TRUE) {
     x <- as.numeric(x)
-    msg <- paste(gettext("Warning:"), " \"", n.name, "\" ", 
-      gettext("was converted from factor into numeric!"))
+    msg <- paste(gettext("Warning:", domain = "R-descr"), " \"", n.name, "\" ", 
+      gettext("was converted from factor into numeric!", domain = "R-descr"))
     cat(msg, "\n")
   }
   has.w <- FALSE
@@ -75,7 +80,7 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
   lf2 <- length(f)
   if (lf > lf2) {
     cat("\n")
-    msg <- gettext("rows with missing values dropped")
+    msg <- gettext("rows with missing values dropped", domain = "R-descr")
     cat((lf - lf2), msg, "\n\n")
   }
 
@@ -99,9 +104,10 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
   wsd[l+1] <- wtd.sd(x, w)
   tab <- cbind(xmean, wsum, wsd)
   tabrn <- rownames(tab)
-  tabrn[l+1] <- gettext("Total")
+  tabrn[l+1] <- gettext("Total", domain = "R-descr")
   rownames(tab) <- tabrn
-  colnames(tab) <- c(gettext("Mean"), gettext("N"), gettext("Std. Dev."))
+  colnames(tab) <- c(gettext("Mean", domain = "R-descr"), gettext("N", domain =
+          "R-descr"), gettext("Std. Dev.", domain = "R-descr"))
   if (sort == TRUE) {
     ordl <- order(xmean)
     tab <- tab[ordl,]
@@ -121,8 +127,34 @@ print.meanscomp <- function(x, ...)
   # 'descr' namespace.
   msg1 <- gettext("Mean value of", domain = "R-descr")
   msg2 <- gettext("according to", domain = "R-descr")
-  cat(msg1, ' "', clab, '" ', msg2, ' "', rlab, '"\n', sep="")
+  lwd <- getOption("width")
+  msg <- paste(msg1, ' "', clab, '" ', msg2, ' "', rlab, '"', sep="")
+
+  # Break the label string if it is too large:
+  if(nchar(msg) < lwd){
+    cat(msg, "\n", sep = "")
+  } else {
+    if((nchar(msg1) + nchar(clab)) < lwd) {
+      msg <- paste(msg1, ' "', clab, '" ', sep="")
+      if((nchar(msg) + nchar(msg2)) < lwd) {
+        cat(msg, msg2, '\n', '"', rlab, '"', '\n', sep = "")
+      } else {
+        cat(msg, "\n", sep = "")
+        if((nchar(msg2) + nchar(rlab)) < (lwd - 1)){
+          cat(msg2, ' "', rlab, '"\n', sep="")
+        } else {
+          cat(msg2, '\n"', rlab, '"\n', sep="")
+        }
+      }
+    } else {
+      cat(msg1, '\n"', clab, '"\n', sep = "")
+      if((nchar(msg2) + nchar(rlab)) < (lwd - 1)){
+        cat(msg2, ' "', rlab, '"\n', sep="")
+      } else {
+        cat(msg2, '\n"', rlab, '"\n', sep="")
+      }
+    }
+  }
   print(x$table, ...)
 }
-
 

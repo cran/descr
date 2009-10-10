@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <R.h>
 
 void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
     int *end, int *ncols){
 
-  int i, j, k, len, l = 0, min, max = 0;
+  int i, j, k, len, l = 0, min, max = 0, maxget, nskipped = 0;
   char *b;
   char value[255];
   FILE *fwf, *csv;
@@ -17,18 +18,26 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
       max = end[i];
     begin[i] -= 1;
   }
-  max += 2;
-  min = max - 1;
+  max += 3;
+  min = max - 3;
+  maxget = max * 2;
 
-  b = (char*)malloc(max * sizeof(char));
-  if(b == NULL)
+  b = (char*)malloc((maxget + 3) * sizeof(char));
+  if(b == NULL){
+    Rprintf("\nError: could not allocate memory (%d bytes)\n", maxget + 3 *
+        sizeof(char));
     return;
+  }
   fwf = fopen(fwffile[0], "r");
-  if(fwf == NULL)
+  if(fwf == NULL){
+    Rprintf("\nError: could not read file \"%s\".\n", fwffile[0]);
     return;
+  }
   csv = fopen(csvfile[0], "w");
-  if(csv == NULL)
+  if(csv == NULL){
+    Rprintf("\nError: could not write file \"%s\".\n", csvfile[0]);
     return;
+  }
 
   /* Put the header in the csv file */
   for(i = 0; i < n; i++){
@@ -39,25 +48,23 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
   }
 
   /* Put the rows in the csv file */
-  while(fgets(b, max, fwf)){
+  while(fgets(b, maxget - 3, fwf)){
     l++;
+    len = strlen(b);
+    if(len < 3){
+      nskipped += 1;
+      continue;
+    }
+    if(len < min){
+      Rprintf("\nError: line %d has only %d characters.\n", l, len);
+      fclose(csv);
+      fclose(fwf);
+      return;
+    }
     for(i = 0; i < n; i++){
-      len = strlen(b);
-      if(len < min){
-	fprintf(csv, "\nError: line %d is too short (%d characters)\n",
-            l, len);
-        fclose(csv);
-        fclose(fwf);
-	return;
-      }
-
       j = begin[i];
-
-      /* skip empty spaces at the beginning of the field*/
-      while(b[j] == ' ' && j < end[i])
-	j++;
       k = 0;
-      while(b[j] != ' ' && j < end[i]){
+      while(j < end[i]){
 	value[k] = b[j];
 	k++;
 	j++;
@@ -85,4 +92,8 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
   /* Finish */
   fclose(fwf);
   fclose(csv);
+  Rprintf("\n%d lines written in \"%s\".\n", l, csvfile[0]);
+  if(nskipped > 0)
+    Rprintf("\n%d lines from \"%s\" skipped because shorter than 3 characters.\n",
+        nskipped, fwffile[0]);
 }

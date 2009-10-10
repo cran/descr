@@ -1,12 +1,58 @@
-2009-06-07: Version 0.3.0
+Version 0.3.2 (2009-10-10)
+--------------------------
 
-  * Added plot option to crosstab, compmeans and freq.
+  Bug fix:
 
-  * Renamed function crosstabs to crosstab.
+    - Fixed documentation link to read.fwf().
 
-  * LogRegR2 now accepts "probit" models.
+    - Added domain = "R-descr" to all gettext().
 
-  * Fixed bug in the weighted standard deviation calculus (compmeans).
+    - Fixed conversion of fwf into csv when the fwf had \r\n line terminators
+      and R was running on Linux. Also fixed reading of strings with spaces.
 
-2009-06-05: Version 0.2.1
+  Changes:
+
+    - Inverted colors in the mosaic plot produced by crosstab().
+
+    - Only add cumulative percent to frequency table if the object is "ordered".
+
+    - print.CrossTable():
+        - Removed the message "Total Observations in Table", since the number is
+          printed in the table anyway.
+        - Removed vertical bars from the output to give room for longer
+          factor labels.
+        - getOption("OutDec") now is used to format the numbers.
+        - Expected frequency now is always printed with one decimal digit.
+
+  New features:
+
+    - Added function file.head(), which shows the first lines of a file (useful
+      before read.table()).
+
+
+Version 0.3.1 (2009-08-11)
+--------------------------
+
+  New features:
+
+    - Included a version of CrossTable, adapted from gmodels package, with
+      methods for print and xtable.
+
+    - Added xtable methods for classes freqtable and meanscomp.
+
+
+Version 0.3.0 (2009-06-07)
+--------------------------
+
+  New features:
+
+    - Added plot option to crosstab, compmeans and freq.
+
+    - Renamed function crosstabs to crosstab.
+
+    - LogRegR2 now accepts "probit" models.
+
+  Bug fixes:
+
+    - Fixed bug in the weighted standard deviation calculus in compmeans.
 

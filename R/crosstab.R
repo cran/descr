@@ -3,9 +3,10 @@ crosstab <- function (x, y, weight = NULL, digits = 3, max.width = 5,
   expected = FALSE, prop.r = FALSE, prop.c = FALSE, prop.t = FALSE,
   prop.chisq = FALSE, chisq = FALSE, fisher = FALSE, mcnemar = FALSE,
   resid = FALSE, sresid = FALSE, asresid = FALSE, missing.include = FALSE,
-  format = "SPSS", dnn = NULL, plot = getOption("descr.plot"), main = "",
+  format = "SPSS", dnn = NULL,
+  plot = getOption("descr.plot"), main = "",
   xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-  col = gray.colors(length(levels(y))), ...) 
+  col = gray.colors(length(levels(y)), 0.9, 0.3), ...) 
 {
   if (length(weight) == 0) 
     tab <- table(x, y)

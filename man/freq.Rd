@@ -6,7 +6,7 @@ Prints a frequency table of the selected object. Optionally, the frequency
 might be weighted.
 }
 \usage{
-freq(x, w, plot = getOption("descr.plot"), y.axis = "count", \dots)
+freq(x, w, plot = getOption("descr.plot"), y.axis = c("count", "percent"), \dots)
 }
 \arguments{
   \item{x}{The factor from which the frequency of values is desired.}
@@ -19,12 +19,15 @@ freq(x, w, plot = getOption("descr.plot"), y.axis = "count", \dots)
   \item{\dots}{Further arguments to be passed to
       \code{\link[graphics]{barplot}}.}
 }
-
+\details{
+A column with cumulative percents are added to the frequency table if \code{x}
+is an \code{ordered factor}.
+}
 \value{
-  An object of class \code{matrix} if \code{x} do has not the attribute "label".
-  Otherwise, a list with class \code{freqtable} containing the following
-  components:
-  \item{label}{A character string correponding to the label of \code{x}.}
+  A list with class \code{freqtable} containing the following components:
+  \item{label}{A character string correponding to either the attribute "label"
+    of \code{x} or, if \code{x} does not have this attribute, the name of
+      \code{x}.}
   \item{freqtable}{A matrix with frequencies, sums and standard deviations.}
 }
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}, based on function written by Dirk Enzmann}

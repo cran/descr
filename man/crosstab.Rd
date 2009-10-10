@@ -12,7 +12,7 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
         sresid = FALSE, asresid = FALSE, missing.include = FALSE,
         format = "SPSS", dnn = NULL, plot = getOption("descr.plot"),
         main = "", xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-        col = gray.colors(length(levels(y))), \dots)
+        col = gray.colors(length(levels(y)), 0.9, 0.3), \dots)
 }
 
 \arguments{

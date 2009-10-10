@@ -26,7 +26,7 @@ fwf2csv(fwffile, csvfile, names, begin, end)
   The return value is NULL, but \code{cvsfile} is created if the function is
   successful. The file is a text table with fields separated by tabular
   characters without quotes around the strings. This function is useful if you
-  have a very big fixed width formated file to read and \link[base]{read.fwf()}
+  have a very big fixed width formated file to read and \link[utils]{read.fwf}
   would be too slow.
 }
 

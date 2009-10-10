@@ -20,7 +20,7 @@ Nagelkerke Index of a logistic regression model.
   A object of class \code{list} with the calculated indexes.
 }
 
-\author{Dirk Enzmann \email{dirk.enzmann@jura.uni-hamburg.de}}
+\author{Dirk Enzmann}
 
 \examples{
 # Suppose that "happy" is a factor and "income" is a numeric vector in a data frame:
