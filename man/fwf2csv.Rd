@@ -2,20 +2,22 @@
 \alias{fwf2csv}
 \title{Fast conversion of a fwf file into a csv one}
 \description{
-Convert fixed width formated file into a tab separated one.
+  Convert fixed width formated file into a tab separated one.
 }
 \usage{
-fwf2csv(fwffile, csvfile, names, begin, end)
+fwf2csv(fwffile, csvfile, names, begin, end, verbose = getOption("verbose"))
 }
 \arguments{
   \item{fwffile}{The fixed width format file.}
   \item{csvfile}{The csv file to be created. The fields will be separated by tab
-  characters and there will be no quotes around strings.}
+    characters and there will be no quotes around strings.}
   \item{names}{A character vector with column names.}
   \item{begin}{A numeric vector with the begin offset of values in the fixed
-  width format file.}
+    width format file.}
   \item{end}{A numeric vector with the end offset of values in the fixed width
-  format file.}
+    format file.}
+  \item{verbose}{Logical: if \code{TRUE} a message about the number of saved
+    lines is printed.}
 }
 
 \value{

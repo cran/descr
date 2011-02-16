@@ -11,7 +11,7 @@ file.head(file, n, truncate.cols = TRUE)
 }
 \arguments{
   \item{file}{Character: The name of the file whose first lines should be
-  printed.}
+    printed.}
   \item{n}{The number of lines to show.}
   \item{truncate.cols}{Logical: if \code{TRUE} truncate the lines.}
 }

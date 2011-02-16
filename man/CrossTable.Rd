@@ -6,12 +6,13 @@
   similar to S-Plus crosstabs() and SAS Proc Freq (or SPSS format)
   with Chi-square, Fisher and McNemar tests of the independence
   of all table factors.
-  }
+}
 \usage{
-CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE,
-  prop.c=TRUE, prop.t=TRUE, prop.chisq=TRUE, chisq = FALSE, fisher=FALSE,
-  mcnemar=FALSE, resid=FALSE, sresid=FALSE, asresid=FALSE,
-  missing.include=FALSE, format=c("SAS","SPSS"), dnn = NULL, \dots)
+CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE, prop.r = TRUE,
+           prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE, chisq = FALSE,
+           fisher = FALSE, mcnemar = FALSE, resid = FALSE, sresid = FALSE,
+           asresid = FALSE, missing.include = FALSE, format = c("SAS","SPSS"),
+           dnn = NULL, \dots)
 }
 \arguments{
   \item{x}{A vector or a matrix. If y is specified, x must be a vector}
@@ -20,17 +21,17 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE,
     proportions}
   \item{max.width}{In the case of a 1 x n table, the default will be
     to print the output horizontally. If the number of columns exceeds
-      max.width, the table will be wrapped for each successive increment
-      of max.width columns. If you want a single column vertical table,
-         set max.width to 1}
+    max.width, the table will be wrapped for each successive increment
+    of max.width columns. If you want a single column vertical table,
+    set max.width to 1}
   \item{expected}{If \code{TRUE}, chisq will be set to \code{TRUE} and
     expected cell counts from the \eqn{\chi^2}{Chi-Square} will be
-      included}
+    included}
   \item{prop.r}{If \code{TRUE}, row proportions will be included}
   \item{prop.c}{If \code{TRUE}, column proportions will be included}
   \item{prop.t}{If \code{TRUE}, table proportions will be included}
   \item{prop.chisq}{If \code{TRUE}, chi-square contribution of each cell will be
-  included}
+    included}
   \item{chisq}{If \code{TRUE}, the results of a chi-square test will
     be included}
   \item{fisher}{If \code{TRUE}, the results of a Fisher Exact test will
@@ -40,12 +41,12 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE,
   \item{resid}{If \code{TRUE}, residual (Pearson) will be included}
   \item{sresid}{If \code{TRUE},  standardized residual will be included}
   \item{asresid}{If \code{TRUE}, adjusted standardized residual will be
-  included}
+    included}
   \item{missing.include}{If \code{TRUE}, then remove any unused factor levels}
   \item{format}{Either SAS (default) or SPSS, depending on the type of
     output desired.}
   \item{dnn}{the names to be given to the dimensions in the result (the dimnames
-  names).}
+    names).}
   \item{\dots}{Optional arguments passed to \code{\link[stats]{chisq.test}}.}
 }
 \details{
@@ -74,43 +75,43 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE,
   prop.tbl:     An n by m matrix containing cell table proportions
 
   chisq:        Results from the Chi-Square test. A list with class
-                'htest'. See ?chisq.test for details
+  'htest'. See ?chisq.test for details
 
   chisq.corr:   Results from the corrected Chi-Square test. A list with
-                class 'htest'. See ?chisq.test for details. ONLY
-                included in the case of a 2 x 2 table.
+  class 'htest'. See ?chisq.test for details. ONLY
+  included in the case of a 2 x 2 table.
 
   fisher.ts:    Results from the two-sided Fisher Exact test. A list
-                with class 'htest'. See ?fisher.test for details. ONLY
-                included if 'fisher' = TRUE.
+  with class 'htest'. See ?fisher.test for details. ONLY
+  included if 'fisher' = TRUE.
 
   fisher.lt:    Results from the Fisher Exact test with HA = "less". A
-                list with class 'htest'. See ?fisher.test for details.
-                ONLY included if 'fisher' = TRUE and in the case of a
-                2 x 2 table.
+  list with class 'htest'. See ?fisher.test for details.
+  ONLY included if 'fisher' = TRUE and in the case of a
+  2 x 2 table.
 
   fisher.gt:    Results from the Fisher Exact test with HA = "greater".
-                A list with class 'htest'. See ?fisher.test for details.
-                ONLY included if 'fisher' = TRUE and in the case of a
-                2 x 2 table.
+  A list with class 'htest'. See ?fisher.test for details.
+  ONLY included if 'fisher' = TRUE and in the case of a
+  2 x 2 table.
 
   mcnemar:      Results from the McNemar test. A list with class
-                'htest'. See ?mcnemar.test for details. ONLY included
-                if 'mcnemar' = TRUE.
+  'htest'. See ?mcnemar.test for details. ONLY included
+  if 'mcnemar' = TRUE.
 
   mcnemar.corr: Results from the corrected McNemar test. A list with
-                class 'htest'. See ?mcnemar.test for details. ONLY
-                included if 'mcnemar' = TRUE and in the case of a
-                2 x 2 table.
+  class 'htest'. See ?mcnemar.test for details. ONLY
+  included if 'mcnemar' = TRUE and in the case of a
+  2 x 2 table.
 
   resid/sresid/asresid: Pearson Residuals (from chi-square tests).
 
 }
 \author{Jakson Aquino has splited the function \code{CrossTable} (from the
-package \code{gmodels}) in two: \code{CrossTable} and \code{print.CrossTable}.
-The \code{gmodels}'s function was developed by Marc Schwartz (original version
-posted to r-devel on Jul 27, 2002. SPSS format modifications added by Nitin Jain
-based upon code provided by Dirk Enzmann).}
+  package \code{gmodels}) in two: \code{CrossTable} and \code{print.CrossTable}.
+  The \code{gmodels}'s function was developed by Marc Schwartz (original version
+  posted to r-devel on Jul 27, 2002. SPSS format modifications added by Nitin Jain
+  based upon code provided by Dirk Enzmann).}
 
 \seealso{\code{\link{table}}, \code{\link{xtabs}}, \code{\link{prop.table}}}
 
@@ -119,8 +120,8 @@ based upon code provided by Dirk Enzmann).}
 # using infertility data
 data(infert, package = "datasets")
 CrossTable(infert$education, infert$induced, expected = TRUE)
-CrossTable(infert$education, infert$induced, expected = TRUE, format="SAS")
-CrossTable(infert$education, infert$induced, expected = TRUE, format="SPSS")
+CrossTable(infert$education, infert$induced, expected = TRUE, format = "SAS")
+CrossTable(infert$education, infert$induced, expected = TRUE, format = "SPSS")
 CrossTable(warpbreaks$wool, warpbreaks$tension, dnn = c("Wool", "Tension"))
 }
 \keyword{category}

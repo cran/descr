@@ -4,7 +4,7 @@
 #include <R.h>
 
 void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
-    int *end, int *ncols){
+    int *end, int *ncols, int *verbose){
 
   int i, j, k, len, l = 0, min, max = 0, maxget, nskipped = 0;
   char *b;
@@ -24,18 +24,18 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
 
   b = (char*)malloc((maxget + 3) * sizeof(char));
   if(b == NULL){
-    Rprintf("\nError: could not allocate memory (%d bytes)\n", maxget + 3 *
+    REprintf("\nError: could not allocate memory (%d bytes)\n", maxget + 3 *
         sizeof(char));
     return;
   }
   fwf = fopen(fwffile[0], "r");
   if(fwf == NULL){
-    Rprintf("\nError: could not read file \"%s\".\n", fwffile[0]);
+    REprintf("\nError: could not read file \"%s\".\n", fwffile[0]);
     return;
   }
   csv = fopen(csvfile[0], "w");
   if(csv == NULL){
-    Rprintf("\nError: could not write file \"%s\".\n", csvfile[0]);
+    REprintf("\nError: could not write file \"%s\".\n", csvfile[0]);
     return;
   }
 
@@ -56,7 +56,7 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
       continue;
     }
     if(len < min){
-      Rprintf("\nError: line %d has only %d characters.\n", l, len);
+      REprintf("\nError: line %d has only %d characters.\n", l, len);
       fclose(csv);
       fclose(fwf);
       return;
@@ -65,17 +65,17 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
       j = begin[i];
       k = 0;
       while(j < end[i]){
-	value[k] = b[j];
-	k++;
-	j++;
+        value[k] = b[j];
+        k++;
+        j++;
       }
       value[k] = 0;
 
       /* delete empty spaces at the end of the field */
       k--;
       while(value[k] == ' ' && k > 0){
-	value[k] = 0;
-	k--;
+        value[k] = 0;
+        k--;
       }
 
       /* put the value into the csv file */
@@ -83,17 +83,21 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
 
       /* put either a field separator or the end of line */
       if(i < (n - 1))
-	putc('\t', csv);
+        putc('\t', csv);
       else
-	putc('\n', csv);
+        putc('\n', csv);
     }
   }
 
   /* Finish */
   fclose(fwf);
   fclose(csv);
-  Rprintf("\n%d lines written in \"%s\".\n", l, csvfile[0]);
-  if(nskipped > 0)
-    Rprintf("\n%d lines from \"%s\" skipped because shorter than 3 characters.\n",
-        nskipped, fwffile[0]);
+  if(verbose[0] == 1)
+      Rprintf("\n%d lines written in \"%s\".\n", l, csvfile[0]);
+  if(nskipped == 1)
+    REprintf("\nOne line from \"%s\" skipped because shorter than 3 characters.\n", fwffile[0]);
+  else
+    if(nskipped > 0)
+      REprintf("\n%d lines from \"%s\" skipped because shorter than 3 characters.\n",
+          nskipped, fwffile[0]);
 }

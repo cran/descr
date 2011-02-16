@@ -1,42 +1,40 @@
 
 .onLoad <- function(dir, package) {
-  library.dynam("descr", package, dir, local=FALSE);
+    library.dynam("descr", package, dir, local=FALSE);
 
-  if(is.null(getOption("descr.plot"))){
-      options(descr.plot=TRUE)
-  }
+    if(is.null(getOption("descr.plot")))
+	options(descr.plot=TRUE)
 }
 
 .onUnload <- function(libpath) {
-  library.dynam.unload("descr", libpath)
+    library.dynam.unload("descr", libpath)
 }
 
 
-# R do not have variable labels.
-# See Hmisc package.
+# R does not have variable labels.
 descr <- function (x)
 {
     if (class(x)[1] == "data.frame") {
-        l <- length(x)
-        bnames <- names(x)
-        for (i in 1:l) {
-            lb <- attr(x[[i]], "label")
-            if (length(lb) > 0) {
-                cat("\n", bnames[i], " - ", lb, "\n", sep = "")
-            }
-	    else {
-	      cat("\n", bnames[i], "\n", sep = "")
+	l <- length(x)
+	bnames <- names(x)
+	for (i in 1:l) {
+	    lb <- attr(x[[i]], "label")
+	    if (length(lb) > 0) {
+		cat("\n", bnames[i], " - ", lb, "\n", sep = "")
 	    }
-            print(summary(x[[i]]))
-        }
+	    else {
+		cat("\n", bnames[i], "\n", sep = "")
+	    }
+	    print(summary(x[[i]]))
+	}
 	return(invisible(NULL))
     }
     else {
-        lb <- attr(x, "label")
-        if (length(lb) > 0) {
-            cat(deparse(substitute(x)), " - ", lb, "\n", sep = "")
-        }
-        print(summary(x))
+	lb <- attr(x, "label")
+	if (length(lb) > 0) {
+	    cat(deparse(substitute(x)), " - ", lb, "\n", sep = "")
+	}
+	print(summary(x))
 	return(invisible(NULL))
     }
 }
@@ -52,52 +50,49 @@ descr <- function (x)
 # I had to change the name because the "." was causing R to think that the
 # function was a method of hist.
 histkdnc <- function (v, breaks = 0, include.lowest = T, right = T,
-  main = "Histogram with kernel density and normal curve",
-  col = grey(0.90), xlab = deparse(substitute(v)), ...) 
+    main = "Histogram with kernel density and normal curve",
+    col = grey(0.90), xlab = deparse(substitute(v)), ...) 
 {
-  v2 <- na.omit(v)
-  x <- v2
-  h <- hist.default(v2, plot = F)
-  if (length(breaks) == 1) 
-    breaks <- h$breaks
-  dens <- density(v2)
-  ylim <- range(0, h$density, dnorm(x = v2, mean = mean(v2), sd = sd(v2)), 
-    dens$y)
-  xlim <- range(v2, dens$x)
-  hist(v2, freq = F, breaks = breaks, include.lowest = include.lowest, 
-    right = right, xlim = xlim, ylim = ylim, col = col, 
-    xlab = xlab, main = main, ...)
-  lines(density(v2), col = "red")
-  curve(dnorm(x, mean = mean(v2), sd = sd(v2)), col = "blue", 
-    add = T)
+    v2 <- na.omit(v)
+    x <- v2
+    h <- hist.default(v2, plot = F)
+    if (length(breaks) == 1) 
+	breaks <- h$breaks
+    dens <- density(v2)
+    ylim <- range(0, h$density, dnorm(x = v2, mean = mean(v2), sd = sd(v2)), 
+	dens$y)
+    xlim <- range(v2, dens$x)
+    hist(v2, freq = F, breaks = breaks, include.lowest = include.lowest, 
+	right = right, xlim = xlim, ylim = ylim, col = col, 
+	xlab = xlab, main = main, ...)
+    lines(density(v2), col = "red")
+    curve(dnorm(x, mean = mean(v2), sd = sd(v2)), col = "blue", add = T)
 }
 
 
 # Calculates multiple R2 analogs (pseudo R2) of logistic regression:
 LogRegR2 <- function(model)
 {
-  if (!(model$family$family == "binomial" && (model$family$link == "logit" ||
-      model$family$link == "probit"))) {
-      stop("No logistic regression model, no pseudo R^2 computed.")
-  }
+    if (!(model$family$family == "binomial" && (model$family$link == "logit" || model$family$link == "probit")))
+	stop("No logistic regression model, no pseudo R^2 computed.")
 
-   n    <- dim(model$model)[1]
-   Chi2 <- model$null - model$dev
-   Df   <- model$df.null - model$df.res
-   p    <- 1-pchisq(Chi2,Df)
+    n    <- dim(model$model)[1]
+    Chi2 <- model$null - model$dev
+    Df   <- model$df.null - model$df.res
+    p    <- 1-pchisq(Chi2,Df)
 
-   Cox  <- 1-exp(-Chi2/n)             # Cox & Snell Index
-   Nag  <- Cox/(1-exp(-model$null/n)) # Nagelkerke Index
-   RL2  <- Chi2/model$null            # also called McFaddens R2
+    Cox  <- 1-exp(-Chi2/n)             # Cox & Snell Index
+    Nag  <- Cox/(1-exp(-model$null/n)) # Nagelkerke Index
+    RL2  <- Chi2/model$null            # also called McFaddens R2
 
-   cat(formatC(gettext("Chi2", domain = "R-descr"), flag = "-", width = 20), Chi2, "\n")
-   cat(formatC(gettext("Df", domain = "R-descr"), flag = "-", width = 20), Df, "\n")
-   cat(formatC(gettext("Sig.", domain = "R-descr"), flag = "-", width = 20), p, "\n")
-   cat(formatC(gettext("Cox & Snell Index", domain = "R-descr"), flag = "-", width = 20), Cox, "\n")
-   cat(formatC(gettext("Nagelkerke Index", domain = "R-descr"), flag = "-", width = 20), Nag, "\n")
-   cat(formatC(gettext("McFadden's R2", domain = "R-descr"), flag = "-", width = 20), RL2, "\n")
+    cat(formatC(gettext("Chi2", domain = "R-descr"), flag = "-", width = 20), Chi2, "\n")
+    cat(formatC(gettext("Df", domain = "R-descr"), flag = "-", width = 20), Df, "\n")
+    cat(formatC(gettext("Sig.", domain = "R-descr"), flag = "-", width = 20), p, "\n")
+    cat(formatC(gettext("Cox & Snell Index", domain = "R-descr"), flag = "-", width = 20), Cox, "\n")
+    cat(formatC(gettext("Nagelkerke Index", domain = "R-descr"), flag = "-", width = 20), Nag, "\n")
+    cat(formatC(gettext("McFadden's R2", domain = "R-descr"), flag = "-", width = 20), RL2, "\n")
 
-   x <- list('Chi2'=Chi2,'df'=Df,'p'=p,'RL2'=RL2,'CoxR2'=Cox,'NagelkerkeR2'=Nag)
-   return(invisible(x))
+    x <- list('Chi2'=Chi2,'df'=Df,'p'=p,'RL2'=RL2,'CoxR2'=Cox,'NagelkerkeR2'=Nag)
+    return(invisible(x))
 }
 

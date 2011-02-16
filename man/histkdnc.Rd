@@ -2,12 +2,12 @@
 \alias{histkdnc}
 \title{Histogram with kernel density and normal curve}
 \description{
-Plots a histogram with kernel density and normal curve.
+  Plots a histogram with kernel density and normal curve.
 }
 \usage{
 histkdnc(v, breaks = 0, include.lowest = T, right = T,
-  main = "Histogram with kernel density and normal curve",
-  col = grey(0.90), xlab = deparse(substitute(v)), \dots) 
+         main = "Histogram with kernel density and normal curve",
+         col = grey(0.90), xlab = deparse(substitute(v)), \dots) 
 }
 \arguments{
   \item{v}{The object from which the histogram is desired.}
@@ -22,8 +22,8 @@ histkdnc(v, breaks = 0, include.lowest = T, right = T,
 
 
 \details{
-The function plots a histogram of the object \code{x} with its kernel density and
-a normal curve with the same mean and standard deviation of \code{x}.
+  The function plots a histogram of the object \code{x} with its kernel density and
+  a normal curve with the same mean and standard deviation of \code{x}.
 }
 \value{
   NULL.

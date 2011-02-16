@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: descr 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 09:04-0300\n"
-"PO-Revision-Date: 2009-10-03 10:33-0300\n"
+"POT-Creation-Date: 2011-02-15 21:45-0300\n"
+"PO-Revision-Date: 2011-02-15 20:11-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,7 +40,8 @@ msgstr "dnn deve ter comprimento 2, um elemento para dimensão da tabela"
 msgid "unknown format"
 msgstr "formato desconhecido"
 
-#: R/CrossTable.R:260 R/CrossTable.R:474 R/compmeans.R:107 R/freq.R:29
+#: R/CrossTable.R:260 R/CrossTable.R:474 R/backup_freq.R:26 R/compmeans.R:112
+#: R/freq.R:76
 msgid "Total"
 msgstr "Total"
 
@@ -120,7 +122,7 @@ msgid "d.f. ="
 msgstr "g.l. ="
 
 #: R/CrossTable.R:529 R/CrossTable.R:537 R/CrossTable.R:549 R/CrossTable.R:557
-#: R/CrossTable.R:575 R/CrossTable.R:580 R/CrossTable.R:585 R/CrossTable.R:592
+#: R/CrossTable.R:575 R/CrossTable.R:580 R/CrossTable.R:585 R/CrossTable.R:591
 msgid "p ="
 msgstr "p ="
 
@@ -153,129 +155,127 @@ msgstr "Hipótese alternativa: a verdadeira razão de chances é maior do que 1"
 msgid "Alternative hypothesis: two.sided"
 msgstr "Hipótese alternativa: duas.caudas"
 
-#: R/CrossTable.R:602
+#: R/CrossTable.R:601
 msgid "Minimum expected frequency:"
 msgstr "Frequência esperada mínima:"
 
-#: R/CrossTable.R:607
+#: R/CrossTable.R:606
 msgid "Cells with Expected Frequency < 5:"
 msgstr "Células com frequências esperada < 5:"
 
-#: R/CrossTable.R:608
+#: R/CrossTable.R:607
 msgid "of"
 msgstr "de"
 
-#: R/compmeans.R:21 R/compmeans.R:46 R/compmeans.R:71
-msgid "Warning:"
-msgstr "Aviso:"
+#: R/backup_freq.R:59 R/backup_freq.R:65 R/backup_freq.R:75 R/backup_freq.R:80
+#: R/freq.R:35
+msgid "Frequency"
+msgstr "Frequência"
 
-#: R/compmeans.R:22
-msgid "boxplot of weighted values not implemented yet."
-msgstr "boxplot de valores ponderados não implementado ainda."
+#: R/backup_freq.R:60 R/backup_freq.R:66 R/backup_freq.R:76 R/backup_freq.R:81
+#: R/freq.R:36
+msgid "Percent"
+msgstr "Percentual"
 
-#: R/compmeans.R:33 R/compmeans.R:60
+#: R/backup_freq.R:61 R/backup_freq.R:67 R/freq.R:55
+msgid "Valid Percent"
+msgstr "% Válido"
+
+#: R/backup_freq.R:62 R/backup_freq.R:77 R/freq.R:67
+msgid "Cum Percent"
+msgstr "% Acum."
+
+#: R/backup_freq.R:101 R/freq.R:97
+msgid "Invalid y.axis: '"
+msgstr "y.axis inválido: '"
+
+#: R/compmeans.R:26 R/compmeans.R:68
 msgid "and"
 msgstr "e"
 
-#: R/compmeans.R:34
+#: R/compmeans.R:27
 msgid "have different lengths"
 msgstr "têm comprimentos diferentes"
 
-#: R/compmeans.R:42
+#: R/compmeans.R:36
 msgid "was converted into a factor, but the new variable had too many levels"
 msgstr ""
 "foi convertido em fator, mas a nova variável tinha muitas categorias (levels)"
 
-#: R/compmeans.R:47
+#: R/compmeans.R:40 R/compmeans.R:79
+msgid "Warning:"
+msgstr "Aviso:"
+
+#: R/compmeans.R:41
 msgid "was converted into factor!"
 msgstr "foi convertido em fator!"
 
-#: R/compmeans.R:61
+#: R/compmeans.R:69
 msgid "have different lengths."
 msgstr "têm comprimentos diferentes."
 
-#: R/compmeans.R:72
+#: R/compmeans.R:80
 msgid "was converted from factor into numeric!"
 msgstr "foi convertido de fator para numérico!"
 
-#: R/compmeans.R:83
+#: R/compmeans.R:91
 msgid "rows with missing values dropped"
 msgstr "linhas com valores faltantes excluídas"
 
-#: R/compmeans.R:109
+#: R/compmeans.R:114
 msgid "Mean"
 msgstr "Média"
 
-#: R/compmeans.R:109
+#: R/compmeans.R:115
 msgid "N"
 msgstr "N"
 
-#: R/compmeans.R:110
+#: R/compmeans.R:116
 msgid "Std. Dev."
 msgstr "Desv. Pd."
 
-#: R/compmeans.R:128
+#: R/compmeans.R:152
 msgid "Mean value of"
 msgstr "Valor médio de"
 
-#: R/compmeans.R:129
+#: R/compmeans.R:153
 msgid "according to"
 msgstr "segundo"
 
-#: R/descr.R:81
+#: R/descr.R:77
 msgid "No logistic regression model, no pseudo R^2 computed."
 msgstr "Nenhum modelo de regressão logística; nenhum pseudo R² calculado."
 
-#: R/descr.R:93
+#: R/descr.R:88
 msgid "Chi2"
 msgstr "Qui²"
 
-#: R/descr.R:94
+#: R/descr.R:89
 msgid "Df"
 msgstr "Gl"
 
-#: R/descr.R:95
+#: R/descr.R:90
 msgid "Sig."
 msgstr "Sig."
 
-#: R/descr.R:96
+#: R/descr.R:91
 msgid "Cox & Snell Index"
 msgstr "Índice de Cox & Snell"
 
-#: R/descr.R:97
+#: R/descr.R:92
 msgid "Nagelkerke Index"
 msgstr "Índice de Nagelkerke"
 
-#: R/descr.R:98
+#: R/descr.R:93
 msgid "McFadden's R2"
 msgstr "R² de McFadden"
-
-#: R/freq.R:49 R/freq.R:55 R/freq.R:65 R/freq.R:70
-msgid "Frequency"
-msgstr "Frequência"
-
-#: R/freq.R:50 R/freq.R:56 R/freq.R:66 R/freq.R:71
-msgid "Percent"
-msgstr "Percentual"
-
-#: R/freq.R:51 R/freq.R:66
-msgid "Cum Percent"
-msgstr "% Acum."
-
-#: R/freq.R:51 R/freq.R:57
-msgid "Valid Percent"
-msgstr "% Válido"
-
-#: R/freq.R:90
-msgid "Invalid y.axis: '"
-msgstr "y.axis inválido: '"
 
 #: R/fwf2csv.R:7
 msgid "The vectors \"names\", \"begin\" and \"end\" must have the same length."
 msgstr ""
 "Os vetores \"names\", \"begin\" e \"end\" devem ter o mesmo comprimento."
 
-#: R/fwf2csv.R:10
+#: R/fwf2csv.R:9
 msgid "File not found:"
 msgstr "Arquivo não encontrado:"
 
@@ -286,6 +286,3 @@ msgstr "Total da Linha"
 #: R/xtable.R:9
 msgid "Column Total"
 msgstr "Total da Coluna"
-
-#~ msgid "Total Observations in Table:"
-#~ msgstr "Total de observações na tabela:"

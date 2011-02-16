@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-10 14:57-0300\n"
+"POT-Creation-Date: 2011-02-16 22:57-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +41,8 @@ msgstr ""
 msgid "unknown format"
 msgstr ""
 
-#: R/CrossTable.R:260 R/CrossTable.R:474 R/compmeans.R:107 R/freq.R:29
+#: R/CrossTable.R:260 R/CrossTable.R:474 R/backup_freq.R:26 R/compmeans.R:112
+#: R/freq.R:76
 msgid "Total"
 msgstr ""
 
@@ -121,7 +123,7 @@ msgid "d.f. ="
 msgstr ""
 
 #: R/CrossTable.R:529 R/CrossTable.R:537 R/CrossTable.R:549 R/CrossTable.R:557
-#: R/CrossTable.R:575 R/CrossTable.R:580 R/CrossTable.R:585 R/CrossTable.R:592
+#: R/CrossTable.R:575 R/CrossTable.R:580 R/CrossTable.R:585 R/CrossTable.R:591
 msgid "p ="
 msgstr ""
 
@@ -154,127 +156,125 @@ msgstr ""
 msgid "Alternative hypothesis: two.sided"
 msgstr ""
 
-#: R/CrossTable.R:602
+#: R/CrossTable.R:601
 msgid "Minimum expected frequency:"
 msgstr ""
 
-#: R/CrossTable.R:607
+#: R/CrossTable.R:606
 msgid "Cells with Expected Frequency < 5:"
 msgstr ""
 
-#: R/CrossTable.R:608
+#: R/CrossTable.R:607
 msgid "of"
 msgstr ""
 
-#: R/compmeans.R:21 R/compmeans.R:46 R/compmeans.R:71
-msgid "Warning:"
-msgstr ""
-
-#: R/compmeans.R:22
-msgid "boxplot of weighted values not implemented yet."
-msgstr ""
-
-#: R/compmeans.R:33 R/compmeans.R:60
-msgid "and"
-msgstr ""
-
-#: R/compmeans.R:34
-msgid "have different lengths"
-msgstr ""
-
-#: R/compmeans.R:42
-msgid "was converted into a factor, but the new variable had too many levels"
-msgstr ""
-
-#: R/compmeans.R:47
-msgid "was converted into factor!"
-msgstr ""
-
-#: R/compmeans.R:61
-msgid "have different lengths."
-msgstr ""
-
-#: R/compmeans.R:72
-msgid "was converted from factor into numeric!"
-msgstr ""
-
-#: R/compmeans.R:83
-msgid "rows with missing values dropped"
-msgstr ""
-
-#: R/compmeans.R:109
-msgid "Mean"
-msgstr ""
-
-#: R/compmeans.R:109
-msgid "N"
-msgstr ""
-
-#: R/compmeans.R:110
-msgid "Std. Dev."
-msgstr ""
-
-#: R/compmeans.R:128
-msgid "Mean value of"
-msgstr ""
-
-#: R/compmeans.R:129
-msgid "according to"
-msgstr ""
-
-#: R/descr.R:81
-msgid "No logistic regression model, no pseudo R^2 computed."
-msgstr ""
-
-#: R/descr.R:93
-msgid "Chi2"
-msgstr ""
-
-#: R/descr.R:94
-msgid "Df"
-msgstr ""
-
-#: R/descr.R:95
-msgid "Sig."
-msgstr ""
-
-#: R/descr.R:96
-msgid "Cox & Snell Index"
-msgstr ""
-
-#: R/descr.R:97
-msgid "Nagelkerke Index"
-msgstr ""
-
-#: R/descr.R:98
-msgid "McFadden's R2"
-msgstr ""
-
-#: R/freq.R:49 R/freq.R:55 R/freq.R:65 R/freq.R:70
+#: R/backup_freq.R:59 R/backup_freq.R:65 R/backup_freq.R:75 R/backup_freq.R:80
+#: R/freq.R:35
 msgid "Frequency"
 msgstr ""
 
-#: R/freq.R:50 R/freq.R:56 R/freq.R:66 R/freq.R:71
+#: R/backup_freq.R:60 R/backup_freq.R:66 R/backup_freq.R:76 R/backup_freq.R:81
+#: R/freq.R:36
 msgid "Percent"
 msgstr ""
 
-#: R/freq.R:51 R/freq.R:57
+#: R/backup_freq.R:61 R/backup_freq.R:67 R/freq.R:55
 msgid "Valid Percent"
 msgstr ""
 
-#: R/freq.R:51 R/freq.R:66
+#: R/backup_freq.R:62 R/backup_freq.R:77 R/freq.R:67
 msgid "Cum Percent"
 msgstr ""
 
-#: R/freq.R:90
+#: R/backup_freq.R:101 R/freq.R:97
 msgid "Invalid y.axis: '"
+msgstr ""
+
+#: R/compmeans.R:26 R/compmeans.R:68
+msgid "and"
+msgstr ""
+
+#: R/compmeans.R:27
+msgid "have different lengths"
+msgstr ""
+
+#: R/compmeans.R:36
+msgid "was converted into a factor, but the new variable had too many levels"
+msgstr ""
+
+#: R/compmeans.R:40 R/compmeans.R:79
+msgid "Warning:"
+msgstr ""
+
+#: R/compmeans.R:41
+msgid "was converted into factor!"
+msgstr ""
+
+#: R/compmeans.R:69
+msgid "have different lengths."
+msgstr ""
+
+#: R/compmeans.R:80
+msgid "was converted from factor into numeric!"
+msgstr ""
+
+#: R/compmeans.R:91
+msgid "rows with missing values dropped"
+msgstr ""
+
+#: R/compmeans.R:114
+msgid "Mean"
+msgstr ""
+
+#: R/compmeans.R:115
+msgid "N"
+msgstr ""
+
+#: R/compmeans.R:116
+msgid "Std. Dev."
+msgstr ""
+
+#: R/compmeans.R:152
+msgid "Mean value of"
+msgstr ""
+
+#: R/compmeans.R:153
+msgid "according to"
+msgstr ""
+
+#: R/descr.R:77
+msgid "No logistic regression model, no pseudo R^2 computed."
+msgstr ""
+
+#: R/descr.R:88
+msgid "Chi2"
+msgstr ""
+
+#: R/descr.R:89
+msgid "Df"
+msgstr ""
+
+#: R/descr.R:90
+msgid "Sig."
+msgstr ""
+
+#: R/descr.R:91
+msgid "Cox & Snell Index"
+msgstr ""
+
+#: R/descr.R:92
+msgid "Nagelkerke Index"
+msgstr ""
+
+#: R/descr.R:93
+msgid "McFadden's R2"
 msgstr ""
 
 #: R/fwf2csv.R:7
 msgid "The vectors \"names\", \"begin\" and \"end\" must have the same length."
 msgstr ""
 
-#: R/fwf2csv.R:10
+#: R/fwf2csv.R:9
 msgid "File not found:"
 msgstr ""
 
