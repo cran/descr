@@ -11,15 +11,3 @@ xtable.CrossTable <- function(x, caption=NULL, label=NULL, align=NULL,
     xtable::xtable(nt, caption=caption, label=label, align=align, digits=digits, display=display, ...)
 }
 
-## xtable.meanscomp <- function(x, caption=NULL, label=NULL, align=NULL,
-##     digits=0, display=NULL, ...)
-## {
-##     xtable::xtable(x$table, caption=caption, label=label, align=align, digits=digits, display=display, ...)
-## }
-## 
-## xtable.freqtable <- function(x,  caption=NULL, label=NULL, align=NULL,
-##     digits=0, display=NULL, ...)
-## {
-##     xtable::xtable(x$freqtable, caption=caption, label=label, align=align, digits=digits, display=display, ...)
-## }
-## 

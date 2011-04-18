@@ -6,13 +6,9 @@ wtd.sd <- function(x, weights)
 }
 
 
-compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
-                      plot = getOption("descr.plot"),
-                      xlab = deparse(substitute(f)),
-                      ylab = deparse(substitute(x)), user.missing, ...)
+compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
+                      plot = getOption("descr.plot"), ...)
 {
-    xlab <- xlab
-    ylab <- ylab
     row.label <- attr(f, "label")
     column.label <- attr(x, "label")
     row.name <- deparse(substitute(f))
@@ -125,15 +121,17 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
     attr(tab, "column.name") <- column.name
     attr(tab, "row.label") <- row.label
     attr(tab, "column.label") <- column.label
-    class(tab) <- c("matrix", "meanscomp")
-    if(plot){
-        if(is.factor(f) && length(levels(f)) < maxlevels){
-            if(!missing(w))
-                ENmisc::wtd.boxplot(x ~ f, weights = w, ylab = ylab, xlab = xlab, ...)
-            else
-                boxplot(x ~ f, ylab = ylab, xlab = xlab, ...)
-        }
-    }
+    attr(tab, "maxlevels") <- maxlevels
+    class(tab) <- c("meanscomp", "matrix")
+
+    # Add attributes to plot the object:
+    attr(tab, "x") <- x
+    attr(tab, "f") <- f
+    if(!missing(w))
+        attr(tab, "w") <- w
+
+    if(plot == TRUE)
+        plot.meanscomp(tab, ...)
     tab
 }
 
@@ -183,8 +181,34 @@ print.meanscomp <- function(x, ...)
     attr(x, "column.name") <- NULL
     attr(x, "row.label") <- NULL
     attr(x, "column.label") <- NULL
+    attr(x, "maxlevels") <- NULL
+    attr(x, "x") <- NULL
+    attr(x, "f") <- NULL
+    attr(x, "w") <- NULL
     class(x) <- "matrix"
     print(x, ...)
     return(invisible(NULL))
 }
 
+plot.meanscomp <- function(x, xlab, ylab, ...)
+{
+    if(missing(xlab))
+        xlab <- attr(x, "row.name")
+    if(missing(ylab))
+        ylab <- attr(x, "column.name")
+    maxlevels <- attr(x, "maxlevels")
+    v <- attr(x, "x")
+    f <- attr(x, "f")
+    w <- attr(x, "w")
+
+    if(!is.factor(f))
+        stop(gettext("f is not a factor.", domain = "R-descr"))
+    if(length(levels(f)) > maxlevels)
+        stop(gettext("Number of levels of \"f\" is higher than maxlevels.",
+                     domain = "R-descr"))
+
+    if(is.null(w))
+        boxplot(v ~ f, ylab = ylab, xlab = xlab, ...)
+    else
+        ENmisc::wtd.boxplot(v ~ f, weights = w, ylab = ylab, xlab = xlab, ...)
+}

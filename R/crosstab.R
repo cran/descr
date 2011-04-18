@@ -5,10 +5,12 @@ crosstab <- function(x, y, weight = NULL, digits = 3, max.width = 5,
                      fisher = FALSE, mcnemar = FALSE, resid = FALSE,
                      sresid = FALSE, asresid = FALSE, missing.include = FALSE,
                      format = "SPSS", dnn = NULL, user.missing.x,
-                     user.missing.y, plot = getOption("descr.plot"), 
-                     xlab = deparse(substitute(x)), ylab = deparse(substitute(y)),
-                     main = "", col = gray.colors(length(levels(y)), 0.9, 0.3), ...) 
+                     user.missing.y, plot = getOption("descr.plot"),
+                     xlab = deparse(substitute(x)),
+                     ylab = deparse(substitute(y)), main = "", ...)
 {
+    xlab <- xlab
+    ylab <- ylab
     if(!missing(user.missing.x)){
         user.missing.x <- paste("^", user.missing.x, "$", sep = "")
         xlevels <- levels(x)
@@ -37,17 +39,56 @@ crosstab <- function(x, y, weight = NULL, digits = 3, max.width = 5,
         tab <- table(x, y)
     else
         tab <- round(xtabs(weight ~ x + y))
-    if (plot) 
-        plot(tab, main = main, xlab = xlab, ylab = ylab, col = col, ...)
 
-    tab <- CrossTable(tab, digits = digits, max.width = max.width,
+    crosstb <- CrossTable(tab, digits = digits, max.width = max.width,
                       expected = expected, prop.r = prop.r, prop.c = prop.c,
                       prop.t = prop.t, prop.chisq = prop.chisq, chisq = chisq,
                       fisher = fisher, mcnemar = mcnemar, resid = resid,
                       sresid = sresid, asresid = asresid,
                       missing.include = missing.include, format = format,
                       dnn = dnn)
-    tab
+
+    # Attributes for plotting
+    attr(crosstb, "xlab") <- xlab
+    attr(crosstb, "ylab") <- ylab
+
+    if(plot == TRUE)
+        plot.CrossTable(crosstb, ...)
+
+    crosstb
 }
 
+
+plot.CrossTable <- function(x, xlab, ylab, main = "", col, inv.x = FALSE, inv.y = FALSE, ...)
+{
+    tabforplot <- x$t
+    if(missing(xlab)){
+        lab <- attr(x, "xlab")
+        if(!is.null(lab))
+            xlab <- lab
+        else
+            xlab <- names(dimnames(tabforplot))[1]
+    }
+    if(missing(ylab)){
+        lab <- attr(x, "ylab")
+        if(!is.null(lab))
+            ylab <- lab
+        else
+            ylab <- names(dimnames(tabforplot))[2]
+    }
+    nxlev <- dim(tabforplot)[1]
+    nylev <- dim(tabforplot)[2]
+    if(missing(col)){
+        col.min <- 0.9 - 0.25 * (nylev - 1)
+        if(col.min < 0.3)
+            col.min  <- 0.3
+        col <- gray.colors(nylev, 0.9, col.min)
+    }
+    if(inv.x)
+        tabforplot <- tabforplot[nxlev:1, ]
+    if(inv.y)
+        tabforplot <- tabforplot[, nylev:1]
+    class(tabforplot) <- "table"
+    mosaicplot(tabforplot, main = main, xlab = xlab, ylab = ylab, col = col, ...)
+}
 

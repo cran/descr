@@ -3,7 +3,8 @@
     library.dynam("descr", package, dir, local=FALSE);
 
     if(is.null(getOption("descr.plot")))
-	options(descr.plot=TRUE)
+        options(descr.plot = TRUE)
+
 }
 
 .onUnload <- function(libpath) {

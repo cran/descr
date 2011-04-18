@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-16 22:57-0300\n"
+"POT-Creation-Date: 2011-04-18 21:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,8 +41,7 @@ msgstr ""
 msgid "unknown format"
 msgstr ""
 
-#: R/CrossTable.R:260 R/CrossTable.R:474 R/backup_freq.R:26 R/compmeans.R:112
-#: R/freq.R:76
+#: R/CrossTable.R:260 R/CrossTable.R:474 R/compmeans.R:108 R/freq.R:75
 msgid "Total"
 msgstr ""
 
@@ -168,106 +167,112 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: R/backup_freq.R:59 R/backup_freq.R:65 R/backup_freq.R:75 R/backup_freq.R:80
-#: R/freq.R:35
-msgid "Frequency"
-msgstr ""
-
-#: R/backup_freq.R:60 R/backup_freq.R:66 R/backup_freq.R:76 R/backup_freq.R:81
-#: R/freq.R:36
-msgid "Percent"
-msgstr ""
-
-#: R/backup_freq.R:61 R/backup_freq.R:67 R/freq.R:55
-msgid "Valid Percent"
-msgstr ""
-
-#: R/backup_freq.R:62 R/backup_freq.R:77 R/freq.R:67
-msgid "Cum Percent"
-msgstr ""
-
-#: R/backup_freq.R:101 R/freq.R:97
-msgid "Invalid y.axis: '"
-msgstr ""
-
-#: R/compmeans.R:26 R/compmeans.R:68
+#: R/compmeans.R:22 R/compmeans.R:64
 msgid "and"
 msgstr ""
 
-#: R/compmeans.R:27
+#: R/compmeans.R:23
 msgid "have different lengths"
 msgstr ""
 
-#: R/compmeans.R:36
+#: R/compmeans.R:32
 msgid "was converted into a factor, but the new variable had too many levels"
 msgstr ""
 
-#: R/compmeans.R:40 R/compmeans.R:79
+#: R/compmeans.R:36 R/compmeans.R:75
 msgid "Warning:"
 msgstr ""
 
-#: R/compmeans.R:41
+#: R/compmeans.R:37
 msgid "was converted into factor!"
 msgstr ""
 
-#: R/compmeans.R:69
+#: R/compmeans.R:65
 msgid "have different lengths."
 msgstr ""
 
-#: R/compmeans.R:80
+#: R/compmeans.R:76
 msgid "was converted from factor into numeric!"
 msgstr ""
 
-#: R/compmeans.R:91
+#: R/compmeans.R:87
 msgid "rows with missing values dropped"
 msgstr ""
 
-#: R/compmeans.R:114
+#: R/compmeans.R:110
 msgid "Mean"
 msgstr ""
 
-#: R/compmeans.R:115
+#: R/compmeans.R:111
 msgid "N"
 msgstr ""
 
-#: R/compmeans.R:116
+#: R/compmeans.R:112
 msgid "Std. Dev."
 msgstr ""
 
-#: R/compmeans.R:152
+#: R/compmeans.R:150
 msgid "Mean value of"
 msgstr ""
 
-#: R/compmeans.R:153
+#: R/compmeans.R:151
 msgid "according to"
 msgstr ""
 
-#: R/descr.R:77
+#: R/compmeans.R:205
+msgid "f is not a factor."
+msgstr ""
+
+#: R/compmeans.R:207
+msgid "Number of levels of \"f\" is higher than maxlevels."
+msgstr ""
+
+#: R/descr.R:78
 msgid "No logistic regression model, no pseudo R^2 computed."
 msgstr ""
 
-#: R/descr.R:88
+#: R/descr.R:89
 msgid "Chi2"
 msgstr ""
 
-#: R/descr.R:89
+#: R/descr.R:90
 msgid "Df"
 msgstr ""
 
-#: R/descr.R:90
+#: R/descr.R:91
 msgid "Sig."
 msgstr ""
 
-#: R/descr.R:91
+#: R/descr.R:92
 msgid "Cox & Snell Index"
 msgstr ""
 
-#: R/descr.R:92
+#: R/descr.R:93
 msgid "Nagelkerke Index"
 msgstr ""
 
-#: R/descr.R:93
+#: R/descr.R:94
 msgid "McFadden's R2"
+msgstr ""
+
+#: R/freq.R:34
+msgid "Frequency"
+msgstr ""
+
+#: R/freq.R:35
+msgid "Percent"
+msgstr ""
+
+#: R/freq.R:54
+msgid "Valid Percent"
+msgstr ""
+
+#: R/freq.R:66
+msgid "Cum Percent"
+msgstr ""
+
+#: R/freq.R:126
+msgid "Invalid y.axis: '"
 msgstr ""
 
 #: R/fwf2csv.R:7

@@ -1,4 +1,13 @@
+Version 0.3.4 (2011-04-18)
+--------------------------
+
+  Changes:
+
+    - Objects of classes meanscomp, freqtable and CrossTable now have
+      plot methods.
+
 Version 0.3.3 (2011-02-08)
+--------------------------
 
   Changes:
 

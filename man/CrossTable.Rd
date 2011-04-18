@@ -113,7 +113,7 @@ CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE, prop.r = TRUE,
   posted to r-devel on Jul 27, 2002. SPSS format modifications added by Nitin Jain
   based upon code provided by Dirk Enzmann).}
 
-\seealso{\code{\link{table}}, \code{\link{xtabs}}, \code{\link{prop.table}}}
+\seealso{\code{\link[base]{table}}, \code{\link[base]{prop.table}}, \code{\link[stats]{xtabs}}, \code{\link{crosstab}}.}
 
 \examples{
 # Simple cross tabulation of education versus prior induced abortions

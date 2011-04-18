@@ -49,13 +49,68 @@ flush(stderr()); flush(stdout())
 
 
 cleanEx()
+nameEx("compmeans")
+### * compmeans
+
+flush(stderr()); flush(stdout())
+
+### Name: compmeans
+### Title: Means of a numerical vector according to a factor
+### Aliases: compmeans
+### Keywords: file
+
+### ** Examples
+
+educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))
+educ <- factor(educ, levels = c(1, 2), labels = c("Low", "High"))
+income <- rnorm(200, 1000, 100) + 100 * as.numeric(educ)
+attr(educ, "label") <- "Education level"
+attr(income, "label") <- "Income"
+w <- sample(c(10, 15, 19), 200, replace = TRUE)
+
+compmeans(income, educ, col = "gray90")
+comp <- compmeans(income, educ, w, plot = FALSE)
+comp
+plot(comp)
+
+
+
+cleanEx()
+nameEx("crosstab")
+### * crosstab
+
+flush(stderr()); flush(stdout())
+
+### Name: crosstab
+### Title: Cross tabulation with mosaic plot
+### Aliases: crosstab
+### Keywords: file
+
+### ** Examples
+
+educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))
+educ <- factor(educ, levels = c(1, 2), labels = c("Low", "High"))
+income <- sample(c(1, 2, 3), 200, replace = TRUE, prob = c(0.3, 0.4, 0.3))
+income <- factor(income, levels = c(1, 2, 3), labels = c("Low", "Middle", "High"))
+attr(educ, "label") <- "Education level"
+attr(income, "label") <- "Income level"
+w <- sample(c(10, 15, 19), 200, replace = TRUE)
+
+crosstab(income, educ, ylab = "Education", xlab = "Income")
+ct <- crosstab(income, educ, w, plot = FALSE)
+ct
+plot(ct, inv.y = TRUE)
+
+
+
+cleanEx()
 nameEx("freq")
 ### * freq
 
 flush(stderr()); flush(stdout())
 
 ### Name: freq
-### Title: Frequency table with barplot
+### Title: Frequency table
 ### Aliases: freq
 ### Keywords: file
 
@@ -65,8 +120,11 @@ x <- c(rep(1, 100), rep(2, 120), rep(3, 10), rep(NA, 12))
 w <- c(rep(1.1, 122), rep(0.9, 120))
 x <- factor(x, levels = c(1, 2, 3), labels = c("No", "Yes", "No answer"))
 attr(x, "label") <- "Do you agree?"
-freq(x)
-freq(x, w, y.axis = "percent", user.missing = "No answer")
+
+freq(x, y.axis = "percent")
+f <- freq(x, w, user.missing = "No answer", plot = FALSE)
+f
+plot(f)
 
 
 

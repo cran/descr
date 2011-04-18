@@ -1,6 +1,5 @@
 
-freq <- function (x, w, plot = getOption("descr.plot"),
-                  y.axis = c("count", "percent"), user.missing, ...)
+freq <- function (x, w, user.missing, plot = getOption("descr.plot"), ...)
 {
     xlab <- attr(x, "label", TRUE)
     if(is.null(xlab))
@@ -79,30 +78,29 @@ freq <- function (x, w, plot = getOption("descr.plot"),
     rownames(ftab) <- rnames
 
     attr(ftab, "xlab") <- xlab
-    class(ftab) <- c("matrix", "freqtable")
+    class(ftab) <- c("freqtable", "matrix")
 
-    p <- plot
-    if(p){
-        if(y.axis[1] == "count"){
-            if(nmiss || !missing(user.missing))
-                xdata <- xvfreq
-            else
-                xdata <- xfreq
-        } else if(y.axis[1] == "percent"){
-            if(nmiss || !missing(user.missing))
-                xdata <- xvperc
-            else
-                xdata <- xperc
-        } else {
-            msg <- paste(gettext("Invalid y.axis: '", domain = "R-descr"),
-                         y.axis[1], "'", sep = "")
-            stop(msg)
-        }
-        if(length(grep("^NA's$", names(xdata))) > 0)
-            xdata["NA's"] <- NA
-        xdata <- xdata[!is.na(xdata)]
-        barplot(xdata, ...)
-    }
+    # Attributes for plotting
+    if(nmiss || !missing(user.missing))
+        xdata.c <- xvfreq
+    else
+        xdata.c <- xfreq
+    if(length(grep("^NA's$", names(xdata.c))) > 0)
+        xdata.c["NA's"] <- NA
+    xdata.c <- xdata.c[!is.na(xdata.c)]
+    if(nmiss || !missing(user.missing))
+        xdata.p <- xvperc
+    else
+        xdata.p <- xperc
+    if(length(grep("^NA's$", names(xdata.p))) > 0)
+        xdata.p["NA's"] <- NA
+    xdata.p <- xdata.p[!is.na(xdata.p)]
+
+    attr(ftab, "xdata.c") <- xdata.c
+    attr(ftab, "xdata.p") <- xdata.p
+
+    if(plot == TRUE)
+        plot.freqtable(ftab, ...)
 
     ftab
 }
@@ -111,8 +109,24 @@ print.freqtable <- function(x, digits = 4, na.print="", ...){
     xlab <- attr(x, "xlab")
     cat(xlab, "\n")
     attr(x, "xlab") <- NULL
+    attr(x, "xdata.c") <- NULL
+    attr(x, "xdata.p") <- NULL
     class(x) <- "matrix"
     print(x, digits = digits, na.print = na.print, ...)
     return(invisible(NULL))
+}
+
+plot.freqtable <- function(x, y.axis = "count", ...)
+{
+    if(y.axis == "count"){
+        xdata <- attr(x, "xdata.c")
+    } else if(y.axis == "percent"){
+        xdata <- attr(x, "xdata.p")
+    } else {
+        msg <- paste(gettext("Invalid y.axis: '", domain = "R-descr"),
+                     y.axis[1], "'", sep = "")
+        stop(msg)
+    }
+    barplot(xdata, ...)
 }
 

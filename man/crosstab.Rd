@@ -10,10 +10,9 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
          prop.r = FALSE, prop.c = FALSE, prop.t = FALSE, prop.chisq = FALSE,
          chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
          sresid = FALSE, asresid = FALSE, missing.include = FALSE,
-         format = "SPSS", dnn = NULL, user.missing.x, user.missing.y,
+         format = "SPSS", dnn = NULL, user.missing.x, user.missing.y, 
          plot = getOption("descr.plot"), xlab = deparse(substitute(x)),
-         ylab = deparse(substitute(y)), main = "", 
-         col = gray.colors(length(levels(y)), 0.9, 0.3), \dots) 
+         ylab = deparse(substitute(y)), main = "", \dots) 
 }
 
 \arguments{
@@ -46,20 +45,33 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
     \code{\link[graphics]{title}}).}
   \item{xlab}{A title for the x axis (see \code{\link[graphics]{title}}).}
   \item{ylab}{A title for the y axis (see \code{\link[graphics]{title}}).}
-  \item{col}{A specification for the default plotting color. (See section
-    \sQuote{Color Specification} of \code{\link[graphics]{par}}).}
   \item{\dots}{Further arguments to be passed to
     \code{\link[graphics]{mosaicplot}}.}
 }
 
 \details{
-  \code{crosstab} invokes the \code{\link{CrossTable}} function in the
-  \pkg{gmodels} package with all boolean options set to \code{FALSE} and
-  \code{"SPSS"} as the default \code{format} option.
+  \code{crosstab} invokes the \code{\link{CrossTable}} with all boolean
+  options set to \code{FALSE} and \code{"SPSS"} as the default \code{format}
+  option. The returned CrossTable object can be plotted, generating a
+  \code{\link[graphics]{mosaicplot}}.
 }
 
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
 
-\seealso{\code{\link{CrossTable}}}
+\seealso{\code{\link{CrossTable}}, \code{\link{plot.CrossTable}}.}
 
+\examples{
+educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))
+educ <- factor(educ, levels = c(1, 2), labels = c("Low", "High"))
+income <- sample(c(1, 2, 3), 200, replace = TRUE, prob = c(0.3, 0.4, 0.3))
+income <- factor(income, levels = c(1, 2, 3), labels = c("Low", "Middle", "High"))
+attr(educ, "label") <- "Education level"
+attr(income, "label") <- "Income level"
+w <- sample(c(10, 15, 19), 200, replace = TRUE)
+
+crosstab(income, educ, ylab = "Education", xlab = "Income")
+ct <- crosstab(income, educ, w, plot = FALSE)
+ct
+plot(ct, inv.y = TRUE)
+}
 \keyword{file}
