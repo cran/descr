@@ -58,7 +58,8 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
 
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
 
-\seealso{\code{\link{CrossTable}}, \code{\link{plot.CrossTable}}.}
+\seealso{\code{\link{CrossTable}}, \code{\link{plot.CrossTable}},
+  \code{\link{xtable.CrossTable}}.}
 
 \examples{
 educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))
@@ -70,8 +71,12 @@ attr(income, "label") <- "Income level"
 w <- sample(c(10, 15, 19), 200, replace = TRUE)
 
 crosstab(income, educ, ylab = "Education", xlab = "Income")
-ct <- crosstab(income, educ, w, plot = FALSE)
+ct <- crosstab(income, educ, w, expected = TRUE, plot = FALSE)
 ct
 plot(ct, inv.y = TRUE)
+\dontrun{
+print(xtable(ct))
+print(xtable(ct, decimal.mark = ",", digits = 1, multirow = TRUE, hline = TRUE, align = "ll|rr|r"),
+      sanitize.text.function = function(x) x, include.rownames = FALSE) 
 }
-\keyword{file}
+}

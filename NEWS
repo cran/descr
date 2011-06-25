@@ -1,10 +1,21 @@
-Version 0.3.4 (2011-04-18)
+Version 0.4.0 (2011-06-25)
+--------------------------
+
+  Changes:
+
+    - odfTable method for object of class CrossTable.
+
+    - Improved xtable method for object of class CrossTable.
+
+
+Version 0.3.4 (2011-04-24)
 --------------------------
 
   Changes:
 
     - Objects of classes meanscomp, freqtable and CrossTable now have
       plot methods.
+
 
 Version 0.3.3 (2011-02-08)
 --------------------------

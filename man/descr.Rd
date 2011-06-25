@@ -23,4 +23,3 @@ descr(x)
 
 \seealso{\code{\link[base]{summary}}}
 
-\keyword{file}

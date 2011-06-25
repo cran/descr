@@ -31,4 +31,3 @@ LogRegR2(m)
 }
 }
 
-\keyword{file}

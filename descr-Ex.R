@@ -13,7 +13,6 @@ flush(stderr()); flush(stdout())
 ### Name: CrossTable
 ### Title: Cross tabulation with tests for factor independence
 ### Aliases: CrossTable
-### Keywords: category univar
 
 ### ** Examples
 

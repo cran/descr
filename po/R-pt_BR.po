@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: descr 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-16 18:06-0300\n"
+"POT-Creation-Date: 2011-06-25 09:06-0300\n"
 "PO-Revision-Date: 2011-04-14 15:14-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
@@ -36,133 +36,134 @@ msgstr "x e y devem ter o mesmo comprimento"
 msgid "dnn must have length of 2, one element for each table dimension"
 msgstr "dnn deve ter comprimento 2, um elemento para dimensão da tabela"
 
-#: R/CrossTable.R:252
+#: R/CrossTable.R:253
 msgid "unknown format"
 msgstr "formato desconhecido"
 
-#: R/CrossTable.R:260 R/CrossTable.R:474 R/compmeans.R:108 R/freq.R:75
+#: R/CrossTable.R:261 R/CrossTable.R:475 R/compmeans.R:108 R/freq.R:75
+#: R/odfTable.R:65 R/odfTable.R:66 R/xtable.R:9 R/xtable.R:99
 msgid "Total"
 msgstr "Total"
 
-#: R/CrossTable.R:287
+#: R/CrossTable.R:288
 msgid "Cell Contents"
 msgstr "Conteúdo das células"
 
-#: R/CrossTable.R:291
+#: R/CrossTable.R:292
 msgid "|                       N |"
 msgstr "|                       N |"
 
-#: R/CrossTable.R:293
+#: R/CrossTable.R:294
 msgid "|              Expected N |"
 msgstr "|              N esperado |"
 
-#: R/CrossTable.R:295 R/CrossTable.R:311
+#: R/CrossTable.R:296 R/CrossTable.R:312
 msgid "| Chi-square contribution |"
 msgstr "| contribuição para Qui²  |"
 
-#: R/CrossTable.R:297
+#: R/CrossTable.R:298
 msgid "|           N / Row Total |"
 msgstr "|      N / Total da linha |"
 
-#: R/CrossTable.R:299
+#: R/CrossTable.R:300
 msgid "|           N / Col Total |"
 msgstr "|     N / Total da coluna |"
 
-#: R/CrossTable.R:301
+#: R/CrossTable.R:302
 msgid "|         N / Table Total |"
 msgstr "|     N / Total da tabela |"
 
-#: R/CrossTable.R:307
+#: R/CrossTable.R:308
 msgid "|                   Count |"
 msgstr "|                Contagem |"
 
-#: R/CrossTable.R:309
+#: R/CrossTable.R:310
 msgid "|         Expected Values |"
 msgstr "|       Valores esperados |"
 
-#: R/CrossTable.R:313
+#: R/CrossTable.R:314
 msgid "|             Row Percent |"
 msgstr "|    Percentual por linha |"
 
-#: R/CrossTable.R:315
+#: R/CrossTable.R:316
 msgid "|          Column Percent |"
 msgstr "|   Percentual por coluna |"
 
-#: R/CrossTable.R:317
+#: R/CrossTable.R:318
 msgid "|           Total Percent |"
 msgstr "|        Percentual total |"
 
-#: R/CrossTable.R:319
+#: R/CrossTable.R:320
 msgid "|                Residual |"
 msgstr "|                 Resíduo |"
 
-#: R/CrossTable.R:321
+#: R/CrossTable.R:322
 msgid "|            Std Residual |"
 msgstr "|          Resíduo padrão |"
 
-#: R/CrossTable.R:323
+#: R/CrossTable.R:324
 msgid "|           Adj Std Resid |"
 msgstr "| Resíduo padrão ajustado |"
 
-#: R/CrossTable.R:378
+#: R/CrossTable.R:379
 msgid "Number of Missing Observations:"
 msgstr "Número de observações omissas:"
 
-#: R/CrossTable.R:522
+#: R/CrossTable.R:523
 msgid "Statistics for All Table Factors"
 msgstr "Estatísticas para todos os fatores da tabela"
 
-#: R/CrossTable.R:527 R/CrossTable.R:535 R/CrossTable.R:547 R/CrossTable.R:555
+#: R/CrossTable.R:528 R/CrossTable.R:536 R/CrossTable.R:548 R/CrossTable.R:556
 msgid "Chi^2 ="
 msgstr "Qui² ="
 
-#: R/CrossTable.R:528 R/CrossTable.R:536 R/CrossTable.R:548 R/CrossTable.R:556
+#: R/CrossTable.R:529 R/CrossTable.R:537 R/CrossTable.R:549 R/CrossTable.R:557
 msgid "d.f. ="
 msgstr "g.l. ="
 
-#: R/CrossTable.R:529 R/CrossTable.R:537 R/CrossTable.R:549 R/CrossTable.R:557
-#: R/CrossTable.R:575 R/CrossTable.R:580 R/CrossTable.R:585 R/CrossTable.R:591
+#: R/CrossTable.R:530 R/CrossTable.R:538 R/CrossTable.R:550 R/CrossTable.R:558
+#: R/CrossTable.R:576 R/CrossTable.R:581 R/CrossTable.R:586 R/CrossTable.R:592
 msgid "p ="
 msgstr "p ="
 
-#: R/CrossTable.R:566
+#: R/CrossTable.R:567
 msgid "Fisher's Exact Test for Count Data"
 msgstr "Teste exato de Fisher"
 
-#: R/CrossTable.R:571
+#: R/CrossTable.R:572
 msgid "Sample estimate odds ratio:"
 msgstr "Estimativa da razão de chances da amostra:"
 
-#: R/CrossTable.R:573
+#: R/CrossTable.R:574
 msgid "Alternative hypothesis: true odds ratio is not equal to 1"
 msgstr "Hipótese alternativa: a verdadeira razão de chances não é igual a 1"
 
-#: R/CrossTable.R:576 R/CrossTable.R:581 R/CrossTable.R:586
+#: R/CrossTable.R:577 R/CrossTable.R:582 R/CrossTable.R:587
 #, c-format
 msgid "95% confidence interval:"
 msgstr "intervalo de confiança a 95%:"
 
-#: R/CrossTable.R:578
+#: R/CrossTable.R:579
 msgid "Alternative hypothesis: true odds ratio is less than 1"
 msgstr "Hipótese alternativa: a verdadeira razão de chances é menor do que 1"
 
-#: R/CrossTable.R:583
+#: R/CrossTable.R:584
 msgid "Alternative hypothesis: true odds ratio is greater than 1"
 msgstr "Hipótese alternativa: a verdadeira razão de chances é maior do que 1"
 
-#: R/CrossTable.R:590
+#: R/CrossTable.R:591
 msgid "Alternative hypothesis: two.sided"
 msgstr "Hipótese alternativa: duas.caudas"
 
-#: R/CrossTable.R:601
+#: R/CrossTable.R:602
 msgid "Minimum expected frequency:"
 msgstr "Frequência esperada mínima:"
 
-#: R/CrossTable.R:606
+#: R/CrossTable.R:607
 msgid "Cells with Expected Frequency < 5:"
 msgstr "Células com frequências esperada < 5:"
 
-#: R/CrossTable.R:607
+#: R/CrossTable.R:608
 msgid "of"
 msgstr "de"
 
@@ -227,33 +228,33 @@ msgstr "f não é factor."
 msgid "Number of levels of \"f\" is higher than maxlevels."
 msgstr "Número de levels de \"f\" é maior do que maxlevels."
 
-#: R/descr.R:78
-msgid "No logistic regression model, no pseudo R^2 computed."
-msgstr "Nenhum modelo de regressão logística; nenhum pseudo R² calculado."
-
-#: R/descr.R:89
+#: R/descr.R:77
 msgid "Chi2"
 msgstr "Qui²"
 
-#: R/descr.R:90
+#: R/descr.R:78
 msgid "Df"
 msgstr "Gl"
 
-#: R/descr.R:91
+#: R/descr.R:79
 msgid "Sig."
 msgstr "Sig."
 
-#: R/descr.R:92
+#: R/descr.R:80
 msgid "Cox & Snell Index"
 msgstr "Índice de Cox & Snell"
 
-#: R/descr.R:93
+#: R/descr.R:81
 msgid "Nagelkerke Index"
 msgstr "Índice de Nagelkerke"
 
-#: R/descr.R:94
+#: R/descr.R:82
 msgid "McFadden's R2"
 msgstr "R² de McFadden"
+
+#: R/descr.R:90
+msgid "No logistic regression model, no pseudo R^2 computed."
+msgstr "Nenhum modelo de regressão logística; nenhum pseudo R² calculado."
 
 #: R/freq.R:34
 msgid "Frequency"
@@ -284,10 +285,8 @@ msgstr ""
 msgid "File not found:"
 msgstr "Arquivo não encontrado:"
 
-#: R/xtable.R:8
-msgid "Row Total"
-msgstr "Total da Linha"
+#~ msgid "Row Total"
+#~ msgstr "Total da Linha"
 
-#: R/xtable.R:9
-msgid "Column Total"
-msgstr "Total da Coluna"
+#~ msgid "Column Total"
+#~ msgstr "Total da Coluna"

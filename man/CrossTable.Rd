@@ -124,5 +124,3 @@ CrossTable(infert$education, infert$induced, expected = TRUE, format = "SAS")
 CrossTable(infert$education, infert$induced, expected = TRUE, format = "SPSS")
 CrossTable(warpbreaks$wool, warpbreaks$tension, dnn = c("Wool", "Tension"))
 }
-\keyword{category}
-\keyword{univar}

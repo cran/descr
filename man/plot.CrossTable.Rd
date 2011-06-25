@@ -28,4 +28,3 @@
 
 \seealso{\code{\link{CrossTable}}, \code{\link{crosstab}}.}
 
-\keyword{file}

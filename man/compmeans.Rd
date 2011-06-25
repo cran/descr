@@ -42,5 +42,10 @@ compmeans(income, educ, col = "gray90")
 comp <- compmeans(income, educ, w, plot = FALSE)
 comp
 plot(comp)
+\dontrun{
+print(xtable(comp))
+# If the decimal separator in your country is a comma:
+# options(OutDec = ",")
+print(xtable(comp, align = "lrrr", display = c("s", "f", "d", "f")))
 }
-\keyword{file}
+}

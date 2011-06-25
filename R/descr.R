@@ -71,6 +71,18 @@ histkdnc <- function (v, breaks = 0, include.lowest = T, right = T,
 }
 
 
+# Print multiple R2 analogs
+print.LogRegR2 <- function(x)
+{
+    cat(formatC(gettext("Chi2", domain = "R-descr"), flag = "-", width = 20), x$Chi2, "\n")
+    cat(formatC(gettext("Df", domain = "R-descr"), flag = "-", width = 20), x$df, "\n")
+    cat(formatC(gettext("Sig.", domain = "R-descr"), flag = "-", width = 20), x$p, "\n")
+    cat(formatC(gettext("Cox & Snell Index", domain = "R-descr"), flag = "-", width = 20), x$CoxR2, "\n")
+    cat(formatC(gettext("Nagelkerke Index", domain = "R-descr"), flag = "-", width = 20), x$NagelkerkeR2, "\n")
+    cat(formatC(gettext("McFadden's R2", domain = "R-descr"), flag = "-", width = 20), x$RL2, "\n")
+    return(invisible(NULL))
+}
+
 # Calculates multiple R2 analogs (pseudo R2) of logistic regression:
 LogRegR2 <- function(model)
 {
@@ -86,14 +98,8 @@ LogRegR2 <- function(model)
     Nag  <- Cox/(1-exp(-model$null/n)) # Nagelkerke Index
     RL2  <- Chi2/model$null            # also called McFaddens R2
 
-    cat(formatC(gettext("Chi2", domain = "R-descr"), flag = "-", width = 20), Chi2, "\n")
-    cat(formatC(gettext("Df", domain = "R-descr"), flag = "-", width = 20), Df, "\n")
-    cat(formatC(gettext("Sig.", domain = "R-descr"), flag = "-", width = 20), p, "\n")
-    cat(formatC(gettext("Cox & Snell Index", domain = "R-descr"), flag = "-", width = 20), Cox, "\n")
-    cat(formatC(gettext("Nagelkerke Index", domain = "R-descr"), flag = "-", width = 20), Nag, "\n")
-    cat(formatC(gettext("McFadden's R2", domain = "R-descr"), flag = "-", width = 20), RL2, "\n")
-
     x <- list('Chi2'=Chi2,'df'=Df,'p'=p,'RL2'=RL2,'CoxR2'=Cox,'NagelkerkeR2'=Nag)
-    return(invisible(x))
+    class(x) <- "LogRegR2"
+    x
 }
 

@@ -20,4 +20,3 @@ file.head(file, n, truncate.cols = TRUE)
 }
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
 
-\keyword{file}

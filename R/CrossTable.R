@@ -198,6 +198,7 @@ CrossTable <- function (x, y, digits = 3, max.width = 5, expected = FALSE,
 	resid = resid, sresid = sresid, asresid = asresid,
 	missing.include = missing.include, format = format)
     class(res) <- "CrossTable"
+
     res
 }
 
@@ -617,4 +618,8 @@ print.CrossTable <- function(x, ...)
 as.data.frame.CrossTable <- function(x, ...) as.data.frame(x$t, ...)
 
 
+# Needed by tableStyles() of odfWeave package:
+dim.CrossTable <- function(x){
+    dim(x$t) + 1
+}
 

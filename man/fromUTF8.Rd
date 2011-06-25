@@ -26,4 +26,3 @@ fromUTF8(x, to = "WINDOWS-1252")
 
 \seealso{\link[base]{iconv}, \link[Hmisc]{label}}
 
-\keyword{file}

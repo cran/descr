@@ -30,4 +30,3 @@ histkdnc(v, breaks = 0, include.lowest = T, right = T,
 }
 \author{Dirk Enzmann (modified by Jakson Aquino\email{jalvesaq@gmail.com}).}
 
-\keyword{file}

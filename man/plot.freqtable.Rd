@@ -18,4 +18,3 @@
 
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
 
-\keyword{file}
