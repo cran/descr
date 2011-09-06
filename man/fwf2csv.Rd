@@ -5,7 +5,8 @@
   Convert fixed width formated file into a tab separated one.
 }
 \usage{
-fwf2csv(fwffile, csvfile, names, begin, end, verbose = getOption("verbose"))
+fwf2csv(fwffile, csvfile, names, begin, end,
+        verbose = getOption("verbose"))
 }
 \arguments{
   \item{fwffile}{The fixed width format file.}
@@ -35,9 +36,11 @@ fwf2csv(fwffile, csvfile, names, begin, end, verbose = getOption("verbose"))
 \examples{
 \dontrun{begin <- c(1, 3, 6, 9, 10, 11, 13)
 end <- c(2, 5, 8, 9, 10, 12, 16)
-names <- c("state", "municp", "house", "cond", "sex", "age", "income")
+names <- c("state", "municp", "house", "cond", "sex",
+           "age", "income")
 fwf2csv("example.txt", "example.csv", names, begin, end)
-df <- read.table("example.csv", header = TRUE, sep = "\t", quote = "")
+df <- read.table("example.csv", header = TRUE,
+                 sep = "\t", quote = "")
 }
 }
 

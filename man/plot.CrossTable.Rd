@@ -6,7 +6,8 @@
   argument and produces a mosaicplot.
 }
 \usage{
-\method{plot}{CrossTable}(x, xlab, ylab, main = "", col, inv.x = FALSE, inv.y = FALSE, \dots)
+\method{plot}{CrossTable}(x, xlab, ylab, main = "", col,
+           inv.x = FALSE, inv.y = FALSE, \dots)
 }
 
 \arguments{

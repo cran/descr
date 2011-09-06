@@ -35,7 +35,6 @@ flush(stderr()); flush(stdout())
 ### Name: LogRegR2
 ### Title: Pseudo R² of logistic regression
 ### Aliases: LogRegR2
-### Keywords: file
 
 ### ** Examples
 
@@ -56,7 +55,6 @@ flush(stderr()); flush(stdout())
 ### Name: compmeans
 ### Title: Means of a numerical vector according to a factor
 ### Aliases: compmeans
-### Keywords: file
 
 ### ** Examples
 
@@ -71,6 +69,12 @@ compmeans(income, educ, col = "gray90")
 comp <- compmeans(income, educ, w, plot = FALSE)
 comp
 plot(comp)
+## Not run: 
+##D print(xtable(comp))
+##D # If the decimal separator in your country is a comma:
+##D # options(OutDec = ",")
+##D print(xtable(comp, align = "lrrr", display = c("s", "f", "d", "f")))
+## End(Not run)
 
 
 
@@ -83,7 +87,6 @@ flush(stderr()); flush(stdout())
 ### Name: crosstab
 ### Title: Cross tabulation with mosaic plot
 ### Aliases: crosstab
-### Keywords: file
 
 ### ** Examples
 
@@ -96,9 +99,14 @@ attr(income, "label") <- "Income level"
 w <- sample(c(10, 15, 19), 200, replace = TRUE)
 
 crosstab(income, educ, ylab = "Education", xlab = "Income")
-ct <- crosstab(income, educ, w, plot = FALSE)
+ct <- crosstab(income, educ, w, expected = TRUE, plot = FALSE)
 ct
 plot(ct, inv.y = TRUE)
+## Not run: 
+##D print(xtable(ct))
+##D print(xtable(ct, decimal.mark = ",", digits = 1, multirow = TRUE, hline = TRUE, align = "ll|rr|r"),
+##D       sanitize.text.function = function(x) x, include.rownames = FALSE) 
+## End(Not run)
 
 
 
@@ -111,7 +119,6 @@ flush(stderr()); flush(stdout())
 ### Name: freq
 ### Title: Frequency table
 ### Aliases: freq
-### Keywords: file
 
 ### ** Examples
 
@@ -124,6 +131,12 @@ freq(x, y.axis = "percent")
 f <- freq(x, w, user.missing = "No answer", plot = FALSE)
 f
 plot(f)
+## Not run: 
+##D print(xtable(f))
+##D # If the decimal separator in your country is a comma:
+##D # options(OutDec = ",")
+##D print(xtable(f, align = "lrrr", display = c("s", "d", "f", "f")))
+## End(Not run)
 
 
 
@@ -136,7 +149,6 @@ flush(stderr()); flush(stdout())
 ### Name: fwf2csv
 ### Title: Fast conversion of a fwf file into a csv one
 ### Aliases: fwf2csv
-### Keywords: file
 
 ### ** Examples
 

@@ -1,6 +1,6 @@
 
-.onLoad <- function(dir, package) {
-    library.dynam("descr", package, dir, local=FALSE);
+.onLoad <- function(libname, pkgname) {
+    library.dynam("descr", pkgname, libname, local = FALSE);
 
     if(is.null(getOption("descr.plot")))
         options(descr.plot = TRUE)

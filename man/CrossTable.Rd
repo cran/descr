@@ -8,11 +8,13 @@
   of all table factors.
 }
 \usage{
-CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE, prop.r = TRUE,
-           prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE, chisq = FALSE,
-           fisher = FALSE, mcnemar = FALSE, resid = FALSE, sresid = FALSE,
-           asresid = FALSE, missing.include = FALSE, format = c("SAS","SPSS"),
-           dnn = NULL, \dots)
+CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE,
+           prop.r = TRUE, prop.c = TRUE, prop.t = TRUE,
+           prop.chisq = TRUE, chisq = FALSE, fisher = FALSE,
+           mcnemar = FALSE, resid = FALSE, sresid = FALSE,
+           asresid = FALSE, missing.include = FALSE,
+           format = c("SAS","SPSS"), dnn = NULL, xlab, ylab,
+           \dots)
 }
 \arguments{
   \item{x}{A vector or a matrix. If y is specified, x must be a vector}
@@ -47,6 +49,10 @@ CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE, prop.r = TRUE,
     output desired.}
   \item{dnn}{the names to be given to the dimensions in the result (the dimnames
     names).}
+  \item{xlab}{A title for the x axis when plotting the CrossTable object (see
+    \code{\link[graphics]{title}}).}
+  \item{ylab}{A title for the y axis when plotting the CrossTable object (see
+    \code{\link[graphics]{title}}).}
   \item{\dots}{Optional arguments passed to \code{\link[stats]{chisq.test}}.}
 }
 \details{
@@ -116,11 +122,14 @@ CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE, prop.r = TRUE,
 \seealso{\code{\link[base]{table}}, \code{\link[base]{prop.table}}, \code{\link[stats]{xtabs}}, \code{\link{crosstab}}.}
 
 \examples{
-# Simple cross tabulation of education versus prior induced abortions
-# using infertility data
+# Simple cross tabulation of education versus prior induced
+# abortions using infertility data
 data(infert, package = "datasets")
 CrossTable(infert$education, infert$induced, expected = TRUE)
-CrossTable(infert$education, infert$induced, expected = TRUE, format = "SAS")
-CrossTable(infert$education, infert$induced, expected = TRUE, format = "SPSS")
-CrossTable(warpbreaks$wool, warpbreaks$tension, dnn = c("Wool", "Tension"))
+CrossTable(infert$education, infert$induced, expected = TRUE,
+           format = "SAS")
+CrossTable(infert$education, infert$induced, expected = TRUE,
+           format = "SPSS")
+CrossTable(warpbreaks$wool, warpbreaks$tension,
+           dnn = c("Wool", "Tension"))
 }

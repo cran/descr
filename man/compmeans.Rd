@@ -3,8 +3,9 @@
 \title{Means of a numerical vector according to a factor}
 \description{Calculates the means of a numerical vector according to a factor.}
 \usage{
-compmeans(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
-          plot = getOption("descr.plot"), \dots)
+compmeans(x, f, w, sort = FALSE, maxlevels = 60,
+          user.missing, plot = getOption("descr.plot"),
+          \dots)
 }
 \arguments{
   \item{x}{A numeric vector.}
@@ -14,10 +15,13 @@ compmeans(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
   \item{maxlevels}{Maximum number of levels that \code{x} converted into factor
     should have.}
   \item{user.missing}{Character vector, indicating what levels of \code{f}
-    must be considered missing values.}
+    must be treated as missing values.}
   \item{plot}{Logical: if \code{TRUE} (default), a boxplot is produced.
-    You may put \code{options(descr.plot = FALSE)} in your \file{.Rprofile} to
-    change the default function behavior.}
+    You may put
+
+    \code{options(descr.plot = FALSE)}
+
+    in your \file{.Rprofile} to change the default function behavior.}
   \item{\dots}{Further arguments to be passed to either
     \code{\link[graphics]{boxplot}} or \code{\link[ENmisc]{wtd.boxplot}}.}
 }

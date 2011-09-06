@@ -46,11 +46,7 @@ crosstab <- function(x, y, weight = NULL, digits = 3, max.width = 5,
                       fisher = fisher, mcnemar = mcnemar, resid = resid,
                       sresid = sresid, asresid = asresid,
                       missing.include = missing.include, format = format,
-                      dnn = dnn)
-
-    # Attributes for plotting
-    attr(crosstb, "xlab") <- xlab
-    attr(crosstb, "ylab") <- ylab
+                      dnn = dnn, xlab = xlab, ylab = ylab)
 
     if(plot == TRUE)
         plot.CrossTable(crosstb, ...)

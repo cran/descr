@@ -27,10 +27,11 @@
 }
 
 \details{
-  If either \code{multirow} or \code{hline} is \code{TRUE}, the argument
-  \code{sanitize.text.function} of \code{\link[xtable]{print.xtable}} must be
-  defined. You will also have to add \verb{\usepackage\{multirow\}} to your
-  Rnoweb document.  See the \code{Example} section of \code{\link{crosstab}}.
+  If either \code{multirow} or \code{hline} is \code{TRUE}, the
+  \code{sanitize.text.function} argument of \code{\link[xtable]{print.xtable}}
+  must be defined. You will also have to add \verb{\usepackage\{multirow\}} to
+  your Rnoweb document.  See the \code{Example} section of
+  \code{\link{crosstab}}.
 }
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
 

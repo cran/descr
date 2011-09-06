@@ -1,3 +1,12 @@
+Version 0.4.1 (2011-09-06)
+--------------------------
+
+  Bug fix:
+
+    - file.head(): Does not fail if file encoding is Latin1 or other single
+                   byte encoding and system encoding is UTF-8.
+
+
 Version 0.4.0 (2011-06-25)
 --------------------------
 

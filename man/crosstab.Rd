@@ -6,12 +6,15 @@
   mosaic plot and making it easier to do a weighted cross-tabulation.
 }
 \usage{
-crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
-         prop.r = FALSE, prop.c = FALSE, prop.t = FALSE, prop.chisq = FALSE,
-         chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
-         sresid = FALSE, asresid = FALSE, missing.include = FALSE,
-         format = "SPSS", dnn = NULL, user.missing.x, user.missing.y, 
-         plot = getOption("descr.plot"), xlab = deparse(substitute(x)),
+crosstab(x, y, weight = NULL, digits = 3, max.width = 5,
+         expected = FALSE, prop.r = FALSE, prop.c = FALSE,
+         prop.t = FALSE, prop.chisq = FALSE, chisq = FALSE,
+         fisher = FALSE, mcnemar = FALSE, resid = FALSE,
+         sresid = FALSE, asresid = FALSE,
+         missing.include = FALSE, format = "SPSS",
+         dnn = NULL, user.missing.x, user.missing.y,
+         plot = getOption("descr.plot"),
+         xlab = deparse(substitute(x)),
          ylab = deparse(substitute(y)), main = "", \dots) 
 }
 
@@ -39,8 +42,11 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
   \item{user.missing.y}{An optional character vector with the levels of
     \code{y} that should be treated as missing values.}
   \item{plot}{Logical: if \code{TRUE} (default), a mosaic plot is produced.
-    You may put \code{options(descr.plot = FALSE)} in your \file{.Rprofile} to
-    change the default function behavior.}
+    You may put
+    
+    \code{options(descr.plot = FALSE)}
+    
+    in your \file{.Rprofile} to change the default function behavior.}
   \item{main}{An overall title for the plot (see
     \code{\link[graphics]{title}}).}
   \item{xlab}{A title for the x axis (see \code{\link[graphics]{title}}).}
@@ -52,7 +58,7 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
 \details{
   \code{crosstab} invokes the \code{\link{CrossTable}} with all boolean
   options set to \code{FALSE} and \code{"SPSS"} as the default \code{format}
-  option. The returned CrossTable object can be plotted, generating a
+  option. The returned CrossTable object can be plotted as a
   \code{\link[graphics]{mosaicplot}}.
 }
 
@@ -64,8 +70,10 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = 5, expected = FALSE,
 \examples{
 educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))
 educ <- factor(educ, levels = c(1, 2), labels = c("Low", "High"))
-income <- sample(c(1, 2, 3), 200, replace = TRUE, prob = c(0.3, 0.4, 0.3))
-income <- factor(income, levels = c(1, 2, 3), labels = c("Low", "Middle", "High"))
+income <- sample(c(1, 2, 3), 200, replace = TRUE,
+                 prob = c(0.3, 0.4, 0.3))
+income <- factor(income, levels = c(1, 2, 3),
+                 labels = c("Low", "Middle", "High"))
 attr(educ, "label") <- "Education level"
 attr(income, "label") <- "Income level"
 w <- sample(c(10, 15, 19), 200, replace = TRUE)
@@ -76,7 +84,9 @@ ct
 plot(ct, inv.y = TRUE)
 \dontrun{
 print(xtable(ct))
-print(xtable(ct, decimal.mark = ",", digits = 1, multirow = TRUE, hline = TRUE, align = "ll|rr|r"),
-      sanitize.text.function = function(x) x, include.rownames = FALSE) 
+print(xtable(ct, decimal.mark = ",", digits = 1,
+             multirow = TRUE, hline = TRUE, align = "ll|rr|r"),
+      sanitize.text.function = function(x) x,
+      include.rownames = FALSE) 
 }
 }

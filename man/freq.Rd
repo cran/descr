@@ -12,12 +12,15 @@ freq(x, w, user.missing, plot = getOption("descr.plot"), \dots)
   \item{x}{The factor from which the frequency of values is desired.}
   \item{w}{An optional vector for a weighted frequency table.}
   \item{user.missing}{Character vector, indicating what levels must be
-    considered missing values while calculating the valid percents. Levels
+    treated as missing values while calculating valid percents. Levels
     representing user missing values are not shown in the
     \code{\link[graphics]{barplot}}.}
   \item{plot}{Logical: if \code{TRUE} (default), a barplot is produced.
-    You may put \code{options(descr.plot = FALSE)} in your \file{.Rprofile} to
-    change the default function behavior.}
+    You may put
+   
+    \code{options(descr.plot = FALSE)}
+   
+    in your \file{.Rprofile} to change the default function behavior.}
   \item{\dots}{Further arguments to be passed to \code{\link{plot.freqtable}}.}
 }
 \details{
@@ -36,7 +39,8 @@ freq(x, w, user.missing, plot = getOption("descr.plot"), \dots)
 \examples{
 x <- c(rep(1, 100), rep(2, 120), rep(3, 10), rep(NA, 12))
 w <- c(rep(1.1, 122), rep(0.9, 120))
-x <- factor(x, levels = c(1, 2, 3), labels = c("No", "Yes", "No answer"))
+x <- factor(x, levels = c(1, 2, 3),
+            labels = c("No", "Yes", "No answer"))
 attr(x, "label") <- "Do you agree?"
 
 freq(x, y.axis = "percent")

@@ -22,8 +22,18 @@ CrossTable <- function (x, y, digits = 3, max.width = 5, expected = FALSE,
     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE,
     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
     sresid = FALSE, asresid = FALSE, missing.include = FALSE,
-    format = c("SAS", "SPSS"), dnn = NULL, ...)
+    format = c("SAS", "SPSS"), dnn = NULL, xlab, ylab, ...)
 {
+    if(missing(xlab))
+        xlab = deparse(substitute(x))
+    if(missing(ylab)){
+        if(missing(y)){
+            xlab = "x"
+            ylab = "y"
+        } else {
+            ylab = deparse(substitute(y))
+        }
+    }
 
     format = match.arg(format)
 
@@ -197,6 +207,11 @@ CrossTable <- function (x, y, digits = 3, max.width = 5, expected = FALSE,
 	vector.x = vector.x, expected = expected, prop.chisq = prop.chisq,
 	resid = resid, sresid = sresid, asresid = asresid,
 	missing.include = missing.include, format = format)
+
+    # Attributes for plotting
+    attr(res, "xlab") <- xlab
+    attr(res, "ylab") <- ylab
+
     class(res) <- "CrossTable"
 
     res
