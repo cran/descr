@@ -57,8 +57,9 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
         class(x) <- "numeric"
     }
     if (missing(w)) {
-        w <- rep(1, lf)
+        wt <- rep(1, lf)
     } else {
+        wt <- w
         lw <- length(w)
         if (lw != lf) {
             msg <- paste(f.name, gettext("and", domain = "R-descr"), "weight",
@@ -66,8 +67,8 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
             stop(msg)
         }
     }
-    if(is.numeric(w)){
-        class(w) <- "numeric"
+    if(is.numeric(wt)){
+        class(wt) <- "numeric"
     }
 
     if (is.factor(x) == TRUE) {
@@ -77,10 +78,10 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
         warning(wmsg)
     }
     has.w <- FALSE
-    k <- grep(FALSE, (is.na(f) | is.na(x) | is.na(w)))
+    k <- grep(FALSE, (is.na(f) | is.na(x) | is.na(wt)))
     f <- f[k]
     x <- x[k]
-    w <- w[k]
+    wt <- wt[k]
     lf2 <- length(f)
     if (lf > lf2) {
         cat("\n")
@@ -89,20 +90,20 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
         warning(wmsg)
     }
 
-    xwsum <- tapply(x*w, f, sum)
-    wsum <- tapply(w, f, sum)
+    xwsum <- tapply(x * wt, f, sum)
+    wsum <- tapply(wt, f, sum)
     xmean <- xwsum / wsum
     wsum <- round(wsum)
     wsd <- xmean
 
     nflevs <- length(levels(f))
-    b <- split(data.frame(x, w), f)
-    wsd <- sapply(b, function(.df) wtd.sd(.df$x, .df$w))
+    b <- split(data.frame(x, wt), f)
+    wsd <- sapply(b, function(.df) wtd.sd(.df$x, .df$wt))
 
     l <- length(xmean)
-    xmean[l+1] <- weighted.mean(x, w)
-    wsum[l+1] <- round(sum(w))
-    wsd[l+1] <- wtd.sd(x, w)
+    xmean[l+1] <- weighted.mean(x, wt)
+    wsum[l+1] <- round(sum(wt))
+    wsd[l+1] <- wtd.sd(x, wt)
     tab <- cbind(xmean, wsum, wsd)
     tabrn <- rownames(tab)
     tabrn[l+1] <- gettext("Total", domain = "R-descr")
@@ -128,7 +129,7 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
     attr(tab, "x") <- x
     attr(tab, "f") <- f
     if(!missing(w))
-        attr(tab, "w") <- w
+        attr(tab, "w") <- wt
 
     if(plot == TRUE)
         plot.meanscomp(tab, ...)

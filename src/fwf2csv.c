@@ -1,7 +1,24 @@
+/* This file is part of descr R package
+**
+** It is distributed under the GNU General Public License.
+** See the file ../LICENSE for details.
+** 
+** (c) 2009-2011 Jakson Aquino: jalvesaq@gmail.com
+**
+***************************************************************/
+
+#include <R.h>
+
+#ifdef ENABLE_NLS
+#include <libintl.h>
+#define _(String) dgettext ("descr", String)
+#else
+#define _(String) (String)
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <R.h>
 
 void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
     int *end, int *ncols, int *verbose){
@@ -24,18 +41,18 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
 
   b = (char*)malloc((maxget + 3) * sizeof(char));
   if(b == NULL){
-    REprintf("\nError: could not allocate memory (%d bytes)\n", maxget + 3 *
+    REprintf(_("Error: could not allocate memory (%d bytes)\n"), maxget + 3 *
         sizeof(char));
     return;
   }
   fwf = fopen(fwffile[0], "r");
   if(fwf == NULL){
-    REprintf("\nError: could not read file \"%s\".\n", fwffile[0]);
+    REprintf(_("Error: could not read file \"%s\".\n"), fwffile[0]);
     return;
   }
   csv = fopen(csvfile[0], "w");
   if(csv == NULL){
-    REprintf("\nError: could not write file \"%s\".\n", csvfile[0]);
+    REprintf(_("Error: could not write file \"%s\".\n"), csvfile[0]);
     return;
   }
 
@@ -56,7 +73,7 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
       continue;
     }
     if(len < min){
-      REprintf("\nError: line %d has only %d characters.\n", l, len);
+      REprintf(_("Error: line %d has only %d characters.\n"), l, len);
       fclose(csv);
       fclose(fwf);
       return;
@@ -93,11 +110,11 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
   fclose(fwf);
   fclose(csv);
   if(verbose[0] == 1)
-      Rprintf("\n%d lines written in \"%s\".\n", l, csvfile[0]);
+      REprintf(_("%d lines written in \"%s\".\n"), l, csvfile[0]);
   if(nskipped == 1)
-    REprintf("\nOne line from \"%s\" skipped because shorter than 3 characters.\n", fwffile[0]);
+    REprintf(_("One line from \"%s\" skipped because shorter than 3 characters.\n"), fwffile[0]);
   else
     if(nskipped > 0)
-      REprintf("\n%d lines from \"%s\" skipped because shorter than 3 characters.\n",
+      REprintf(_("%d lines from \"%s\" skipped because shorter than 3 characters.\n"),
           nskipped, fwffile[0]);
 }

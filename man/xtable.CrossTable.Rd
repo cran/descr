@@ -12,10 +12,10 @@
 
 \arguments{
   \item{x}{A object of class CrossTable.}
-  \item{multirow}{A logical value indicanting whether the command
+  \item{multirow}{A logical value indicating whether the command
     \verb{\multirow} should be added to the table. See the Details section
     below.}
-  \item{hline}{A logical value indicanting whether the command
+  \item{hline}{A logical value indicating whether the command
     \verb{\hline} should be added to the table. See the Details section
     below.}
   \item{caption}{See \code{\link[xtable]{xtable}}.}

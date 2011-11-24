@@ -72,7 +72,7 @@ histkdnc <- function (v, breaks = 0, include.lowest = T, right = T,
 
 
 # Print multiple R2 analogs
-print.LogRegR2 <- function(x)
+print.LogRegR2 <- function(x, ...)
 {
     cat(formatC(gettext("Chi2", domain = "R-descr"), flag = "-", width = 20), x$Chi2, "\n")
     cat(formatC(gettext("Df", domain = "R-descr"), flag = "-", width = 20), x$df, "\n")

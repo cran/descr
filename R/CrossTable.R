@@ -55,6 +55,10 @@ CrossTable <- function (x, y, digits = 3, max.width = 5, expected = FALSE,
 	chisq <- TRUE
     if (chisq)
 	expected <- TRUE
+    if(resid | sresid | asresid){
+        expected <- TRUE
+        chisq <- TRUE
+    }
 
     if (missing(y))
     {
@@ -620,8 +624,8 @@ print.CrossTable <- function(x, ...)
 	    {
 		NCells = length(CST$expected)
 		cat(gettext("Cells with Expected Frequency < 5:", domain = "R-descr"),
-		    " ", NMinExpF, " ", gettext("of", domain = "R-descr"), NCells,
-		    " (", 100*NMinExpF/NCells, "%)\n", sep = "")
+		    " ", NMinExpF, " ", gettext("of", domain = "R-descr"), " ",
+                    NCells, " (", 100*NMinExpF/NCells, "%)\n", sep = "")
 	    }
 	    cat("\n")
 

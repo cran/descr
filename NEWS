@@ -1,10 +1,27 @@
+Version 0.4.2 (2011-11-24)
+--------------------------
+
+  Changes:
+
+    - Replace method odfTable.CrossTable with function forODFTable to avoid
+      dependency on odfWeave which currently is not installable on Windows.
+
+  Bug fix:
+
+    - CrossTable(): Improve documentation about default values of chisq,
+      resid, sresid, and asresid. Set the value of expected to TRUE if
+      residuals are requested (thanks for David Carlson for reporting the
+      bugs).
+
+
 Version 0.4.1 (2011-09-06)
 --------------------------
 
   Bug fix:
 
     - file.head(): Does not fail if file encoding is Latin1 or other single
-                   byte encoding and system encoding is UTF-8.
+                   byte encoding and system encoding is UTF-8 (thanks to
+                   Sergio Martins for reporting the bug).
 
 
 Version 0.4.0 (2011-06-25)

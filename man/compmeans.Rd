@@ -27,7 +27,7 @@ compmeans(x, f, w, sort = FALSE, maxlevels = 60,
 }
 \value{
   A matrix with class \code{c("matrix", "meanscomp")} with labels attributes
-  for \code{x} and \code{f}. The returned object can be ploted, generating
+  for \code{x} and \code{f}. The returned object can be plotted, generating
   a \code{\link[graphics]{boxplot}} of \code{x} grouped by \code{f}.
 }
 \author{Jakson A. Aquino, \email{jalvesaq@gmail.com}.}

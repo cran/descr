@@ -1,6 +1,12 @@
 
-odfTable.CrossTable <- function(x, digits = 1, ...)
+forODFTable <- function(x, digits = 1, ...)
 {
+    if(class(x) != "CrossTable"){
+        msg <- sprintf(gettext("'%s' should be of class 'CrossTable'.",
+                               domain = "R-descr"), deparse(substitute(x)))
+        stop(msg)
+    }
+
     if(x$format == "SPSS")
         hdd <- 100
     else
@@ -64,6 +70,7 @@ odfTable.CrossTable <- function(x, digits = 1, ...)
     tab <- rbind(tab, c(x$cs, x$gt))
     rownames(tab)[dim(tab)[1]] <- gettext("Total", domain = "R-descr")
     colnames(tab)[dim(tab)[2]] <- gettext("Total", domain = "R-descr")
-    odfWeave::odfTable(tab, ...)
+    # odfWeave::odfTable(tab, ...)
+    tab
 }
 
