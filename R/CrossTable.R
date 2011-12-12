@@ -18,7 +18,7 @@
 # so that large integers do not print in
 # scientific notation
 
-CrossTable <- function (x, y, digits = 3, max.width = 5, expected = FALSE,
+CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE,
     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
     sresid = FALSE, asresid = FALSE, missing.include = FALSE,
@@ -44,7 +44,7 @@ CrossTable <- function (x, y, digits = 3, max.width = 5, expected = FALSE,
 	ColData <- deparse(substitute(y))
 
     ## Ensure that max.width >= 1
-    if (max.width < 1)
+    if (!is.na(max.width) && max.width < 1)
 	stop("max.width must be >= 1")
     ## Set 'x' vector flag
     vector.x <- FALSE
@@ -281,12 +281,24 @@ print.CrossTable <- function(x, ...)
     RowTotal <- ColTotal
 
     ## Set consistent column widths based upon dimnames and table values
-    CWidth <- max(digits + 2, c(nchar(t), nchar(dimnames(t)[[2]]), nchar(RS), nchar(CS), nchar(RowTotal)))
-    RWidth <- max(c(nchar(dimnames(t)[[1]]), nchar(ColTotal)))
+    strt <- formatC(t, digits = digits, format = "f", width = 0, decimal.mark = outDec)
+    CWidth <- max(digits + 2, c(nchar(strt, type = "width"),
+                                nchar(dimnames(t)[[2]], type = "width"),
+                                nchar(RS, type = "width"),
+                                nchar(CS, type = "width"),
+                                nchar(RowTotal, type = "width")))
+    if(prop.r){
+        if(vector.x)
+            strt <- formatC(CPT, digits = digits, format = "f", width = 0, decimal.mark = outDec)
+        else
+            strt <- formatC(CPR, digits = digits, format = "f", width = 0, decimal.mark = outDec)
+        CWidth <- max(CWidth, nchar(strt, type = "width"))
+    }
+    RWidth <- max(c(nchar(dimnames(t)[[1]], type = "width"), nchar(ColTotal, type = "width")))
 
     ## Adjust first column width if Data Titles present
     if (is.na(RowData) == FALSE)
-	RWidth <- max(RWidth, nchar(RowData))
+	RWidth <- max(RWidth, nchar(RowData, type = "width"))
 
     ## Create row separators
     RowSep <- paste(rep("-", CWidth + 2), collapse = "")
@@ -303,7 +315,7 @@ print.CrossTable <- function(x, ...)
     #### Printing the tables
 
     ## Print Cell Layout
-    cat(rep("\n", 2))
+    cat("\n\n")
     cat("  ", gettext("Cell Contents", domain = "R-descr"), "\n")
     if (format=="SAS")
     {
@@ -348,6 +360,8 @@ print.CrossTable <- function(x, ...)
 
     ## Print 1 X N vector
     if (vector.x) {
+        if(is.na(max.width))
+            max.width = floor((getOption("width") - 2) / (CWidth + 3))
 	if (length(t) > max.width)
 	{
 	    ## set breakpoints for output based upon max.width
@@ -371,26 +385,24 @@ print.CrossTable <- function(x, ...)
 	}
 
 	SpaceSep3 <- paste(SpaceSep2, " ", sep = "")
+        cat("\n")
 
 	for (i in 1:length(start))
 	{
-	    cat(cat(SpaceSep2, sep = " | ", collapse=""),
-		cat(formatC(dimnames(t)[[2]][start[i]:end[i]],
-			width = CWidth-1, format = "s"), sep = nsep, collapse = "\n"),
-		sep = "", collapse="")
-	    cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
-		    1), sep = "|", collapse = "\n")
-	    cat(cat(SpaceSep2, sep = " | ", collapse=""),
-		cat(formatC(t[, start[i]:end[i]], width = CWidth-1, format = "d"),
-		    sep = nsep, collapse = "\n"),
-		sep = "", collapse="")
-	    if(prop.r)
-		cat(cat(SpaceSep2, sep = " | ", collapse=""),
-		    cat(formatC(CPT[, start[i]:end[i]] * hdd, width = CWidth-1,
-			    digits = digits, format = "f", decimal.mark = outDec), sep = psep,
-			collapse = ""), sep = "", collapse="\n")
-	    cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
-		    1), sep = "|", collapse = "\n")
+	    cat("| ")
+            cat(paste(formatC(dimnames(t)[[2]][start[i]:end[i]], width = CWidth, format = "s"), collapse = " | "))
+            cat(" |\n|")
+	    cat(rep(RowSep, (end[i] - start[i]) + 1), sep = "|")
+            cat("|\n| ")
+            cat(formatC(t[, start[i]:end[i]], width = CWidth, format = "d"), sep = " | ")
+	    if(prop.r){
+		cat(" |\n| ")
+                cat(formatC(CPT[, start[i]:end[i]] * hdd, width = CWidth,
+			    digits = digits, format = "f", decimal.mark = outDec), sep = " | ")
+            }
+	    cat(" |\n|")
+            cat(rep(RowSep, (end[i] - start[i]) + 1), sep = "|")
+            cat("|\n\n")
 
 	}  ## End of for (i in 1:length(start))
 
@@ -500,18 +512,51 @@ print.CrossTable <- function(x, ...)
     colnames(m) <- c(colnames(t), ColTotal)
 
     ## Print table cells
+    cat("\n\n")
     nc <- nc + 1
     colWidths <- vector(mode = "numeric", length = nc)
     mcolnames <- colnames(m)
-    cat("\n\n")
     for(i in 1:nc)
-	colWidths[i] <- max(c(nchar(m[, i]), nchar(mcolnames[i])))
-    labelwidth <- max(nchar(rnames)) + 1
+	colWidths[i] <- max(c(nchar(m[, i], type = "width"), nchar(mcolnames[i], type = "width")))
+    labelwidth <- max(nchar(rnames, type = "width"), nchar(RowData, type = "width")) + 1
     dashedline <- rep("-", sum(colWidths) + 3 * nc + labelwidth)
     ddashedline <- gsub("-", "=", dashedline)
 
+    minimumw <- max(digits + 3, 6)
+    biggestw <- max(c(labelwidth - 1, colWidths))
+    totalwidth <- labelwidth + (sum(colWidths + 3))
+    availablewidth <- getOption("width")
+    if(totalwidth > availablewidth){
+        # Truncate row and column labels. Withdraw one char of the biggest
+        # label until the rows fit in the screen
+        while(totalwidth > availablewidth && biggestw >= minimumw){
+            biggestw <- max(c(labelwidth - 1, colWidths))
+            subp <- paste(rep(".", biggestw - 1), collapse = "")
+            subp <- paste("(", subp, ").*", sep = "")
+            if(labelwidth > biggestw){
+                RowData <- sub(subp, "\\1", RowData)
+                for(i in 1:nr)
+                    rnames[i] <- sub(subp, "\\1", rnames[i])
+                labelwidth <- max(nchar(rnames, type = "width"), nchar(RowData, type = "width")) + 1
+            } else {
+                for(i in 1:nc){
+                    mcolnames[i] <- sub(subp, "\\1", mcolnames[i])
+                    colWidths[i] <- max(c(nchar(m[, i], type = "width"), nchar(mcolnames[i], type = "width")))
+                }
+            }
+            totalwidth <- labelwidth + (sum(colWidths + 3))
+        }
+        dashedline <- rep("-", sum(colWidths) + 3 * nc + labelwidth)
+        ddashedline <- gsub("-", "=", dashedline)
+    }
+
     cat("\n", ddashedline, "\n", sep = "")
-    cat(formatC(" ", width = labelwidth))
+    if(ColData != "")
+        cat(formatC(" ", width = labelwidth), "   ", ColData, "\n", sep = "", collapse = "")
+    if(RowData == "")
+        cat(formatC(" ", width = labelwidth))
+    else
+        cat(formatC(RowData, width = labelwidth, format = "s", flag = "-"))
     for(j in 1:nc)
 	cat("  ", formatC(mcolnames[j], width = colWidths[j]))
     for(i in 1:nr){

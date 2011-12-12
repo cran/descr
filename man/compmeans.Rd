@@ -5,7 +5,7 @@
 \usage{
 compmeans(x, f, w, sort = FALSE, maxlevels = 60,
           user.missing, plot = getOption("descr.plot"),
-          \dots)
+          relative.widths = TRUE, col = "lightgray", \dots)
 }
 \arguments{
   \item{x}{A numeric vector.}
@@ -22,6 +22,9 @@ compmeans(x, f, w, sort = FALSE, maxlevels = 60,
     \code{options(descr.plot = FALSE)}
 
     in your \file{.Rprofile} to change the default function behavior.}
+  \item{relative.widths}{If \code{TRUE}, the boxes widths will be proportional
+    to the number of elements in each level of \code{f}.}
+  \item{col}{Vector with the boxes colors.}
   \item{\dots}{Further arguments to be passed to either
     \code{\link[graphics]{boxplot}} or \code{\link[ENmisc]{wtd.boxplot}}.}
 }
@@ -42,7 +45,7 @@ attr(educ, "label") <- "Education level"
 attr(income, "label") <- "Income"
 w <- sample(c(10, 15, 19), 200, replace = TRUE)
 
-compmeans(income, educ, col = "gray90")
+compmeans(income, educ, col = c("#FFD0E0", "#D8E8FF"))
 comp <- compmeans(income, educ, w, plot = FALSE)
 comp
 plot(comp)

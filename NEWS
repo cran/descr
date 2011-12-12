@@ -1,3 +1,22 @@
+Version 0.9.7 (2011-12-12)
+--------------------------
+
+  Changes:
+
+    - Boxplot made by compmeans now have relative widths and the boxes have
+      gray color.
+
+    - Adapt the width of cross tables to options("width").
+
+  Bug fix:
+
+    - CrossTable, crosstab and compmeans: Correctly calculate widths if the
+      text is in Chinese (thanks to Wincent Ronggui Huang for reporting the
+      bug).
+
+    - print.CrossTable() and xtable.CrossTable(): handle the argument dnn,
+      which was being ignored.
+
 Version 0.4.2 (2011-11-24)
 --------------------------
 

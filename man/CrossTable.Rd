@@ -8,7 +8,7 @@
   of all table factors.
 }
 \usage{
-CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE,
+CrossTable(x, y, digits = 3, max.width = NA, expected = FALSE,
            prop.r = TRUE, prop.c = TRUE, prop.t = TRUE,
            prop.chisq = TRUE, chisq = FALSE, fisher = FALSE,
            mcnemar = FALSE, resid = FALSE, sresid = FALSE,
@@ -73,8 +73,8 @@ CrossTable(x, y, digits = 3, max.width = 5, expected = FALSE,
   Note 1: If 'x' is a vector and 'y' is not specified, no statistical tests will
   be performed, even if any are set to \code{TRUE}.
 
-  Note 2: A limited xtable method is provided by the package; expected values,
-  proportions and other information are not included in the generated table.
+  Note 2: 'x' and 'y' labels will be truncated if the table is not going to
+  fit to the screen, according to the value of \code{getOption("width")}.
 }
 \value{
   A list of class \code{CrossTable} containing parameters used by the

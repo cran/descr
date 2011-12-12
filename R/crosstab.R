@@ -1,5 +1,5 @@
 
-crosstab <- function(x, y, weight = NULL, digits = 3, max.width = 5,
+crosstab <- function(x, y, weight = NULL, digits = 3, max.width = NA,
                      expected = FALSE, prop.r = FALSE, prop.c = FALSE,
                      prop.t = FALSE, prop.chisq = FALSE, chisq = FALSE,
                      fisher = FALSE, mcnemar = FALSE, resid = FALSE,
@@ -11,6 +11,9 @@ crosstab <- function(x, y, weight = NULL, digits = 3, max.width = 5,
 {
     xlab <- xlab
     ylab <- ylab
+    dimnameX <- deparse(substitute(x))
+    dimnameY <- deparse(substitute(y))
+
     if(!missing(user.missing.x)){
         user.missing.x <- paste("^", user.missing.x, "$", sep = "")
         xlevels <- levels(x)
@@ -39,6 +42,7 @@ crosstab <- function(x, y, weight = NULL, digits = 3, max.width = 5,
         tab <- table(x, y)
     else
         tab <- round(xtabs(weight ~ x + y))
+    names(dimnames(tab)) <- c(dimnameX, dimnameY)
 
     crosstb <- CrossTable(tab, digits = digits, max.width = max.width,
                       expected = expected, prop.r = prop.r, prop.c = prop.c,

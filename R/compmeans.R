@@ -6,8 +6,9 @@ wtd.sd <- function(x, weights)
 }
 
 
-compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
-                      plot = getOption("descr.plot"), ...)
+compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
+                      user.missing, plot = getOption("descr.plot"),
+                      relative.widths = TRUE, col = "lightgray", ...)
 {
     row.label <- attr(f, "label")
     column.label <- attr(x, "label")
@@ -100,6 +101,7 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
     b <- split(data.frame(x, wt), f)
     wsd <- sapply(b, function(.df) wtd.sd(.df$x, .df$wt))
 
+    width <- wsum
     l <- length(xmean)
     xmean[l+1] <- weighted.mean(x, wt)
     wsum[l+1] <- round(sum(wt))
@@ -111,7 +113,7 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
     colnames(tab) <- c(gettext("Mean", domain = "R-descr"),
                        gettext("N", domain = "R-descr"),
                        gettext("Std. Dev.", domain = "R-descr"))
-    if (sort == TRUE) {
+    if (sort) {
         len <- length(xmean)
         len1 <- len - 1
         ordl <- order(xmean[1:len1]) # Do not sort the "Total"
@@ -123,15 +125,20 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60, user.missing,
     attr(tab, "row.label") <- row.label
     attr(tab, "column.label") <- column.label
     attr(tab, "maxlevels") <- maxlevels
+    attr(tab, "col") <- col
+    if(relative.widths)
+        attr(tab, "width") <- width
+    else
+        attr(tab, "width") <- rep(1, length(width))
     class(tab) <- c("meanscomp", "matrix")
 
     # Add attributes to plot the object:
     attr(tab, "x") <- x
     attr(tab, "f") <- f
     if(!missing(w))
-        attr(tab, "w") <- wt
+        attr(tab, "wt") <- wt
 
-    if(plot == TRUE)
+    if(plot)
         plot.meanscomp(tab, ...)
     tab
 }
@@ -154,16 +161,16 @@ print.meanscomp <- function(x, ...)
     msg <- paste(msg1, ' "', clab, '" ', msg2, ' "', rlab, '"', sep = "")
 
     # Break the label string if it is too large:
-    if(nchar(msg) < lwd){
+    if(nchar(msg, type = "width") < lwd){
         cat(msg, "\n", sep = "")
     } else {
-        if((nchar(msg1) + nchar(clab)) < lwd) {
+        if((nchar(msg1, type = "width") + nchar(clab, type = "width")) < lwd) {
             msg <- paste(msg1, ' "', clab, '" ', sep = "")
-            if((nchar(msg) + nchar(msg2)) < lwd) {
+            if((nchar(msg, type = "width") + nchar(msg2, type = "width")) < lwd) {
                 cat(msg, msg2, '\n', '"', rlab, '"', '\n', sep = "")
             } else {
                 cat(msg, "\n", sep = "")
-                if((nchar(msg2) + nchar(rlab)) < (lwd - 1)){
+                if((nchar(msg2, type = "width") + nchar(rlab, type = "width")) < (lwd - 1)){
                     cat(msg2, ' "', rlab, '"\n', sep = "")
                 } else {
                     cat(msg2, '\n"', rlab, '"\n', sep = "")
@@ -171,7 +178,7 @@ print.meanscomp <- function(x, ...)
             }
         } else {
             cat(msg1, '\n"', clab, '"\n', sep = "")
-            if((nchar(msg2) + nchar(rlab)) < (lwd - 1)){
+            if((nchar(msg2, type = "width") + nchar(rlab, type = "width")) < (lwd - 1)){
                 cat(msg2, ' "', rlab, '"\n', sep = "")
             } else {
                 cat(msg2, '\n"', rlab, '"\n', sep = "")
@@ -185,22 +192,28 @@ print.meanscomp <- function(x, ...)
     attr(x, "maxlevels") <- NULL
     attr(x, "x") <- NULL
     attr(x, "f") <- NULL
-    attr(x, "w") <- NULL
+    attr(x, "wt") <- NULL
+    attr(x, "col") <- NULL
+    attr(x, "width") <- NULL
     class(x) <- "matrix"
     print(x, ...)
     return(invisible(NULL))
 }
 
-plot.meanscomp <- function(x, xlab, ylab, ...)
+plot.meanscomp <- function(x, xlab, ylab, width, col, ...)
 {
     if(missing(xlab))
         xlab <- attr(x, "row.name")
     if(missing(ylab))
         ylab <- attr(x, "column.name")
+    if(missing(width))
+        width <- attr(x, "width")
+    if(missing(col))
+        col <- attr(x, "col")
     maxlevels <- attr(x, "maxlevels")
     v <- attr(x, "x")
     f <- attr(x, "f")
-    w <- attr(x, "w")
+    w <- attr(x, "wt")
 
     if(!is.factor(f))
         stop(gettext("f is not a factor.", domain = "R-descr"))
@@ -209,7 +222,7 @@ plot.meanscomp <- function(x, xlab, ylab, ...)
                      domain = "R-descr"))
 
     if(is.null(w))
-        boxplot(v ~ f, ylab = ylab, xlab = xlab, ...)
+        boxplot(v ~ f, ylab = ylab, xlab = xlab, width = width, col = col, ...)
     else
-        ENmisc::wtd.boxplot(v ~ f, weights = w, ylab = ylab, xlab = xlab, ...)
+        ENmisc::wtd.boxplot(v ~ f, weights = w, ylab = ylab, xlab = xlab, width = width, col = col, ...)
 }

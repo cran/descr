@@ -6,7 +6,7 @@
   mosaic plot and making it easier to do a weighted cross-tabulation.
 }
 \usage{
-crosstab(x, y, weight = NULL, digits = 3, max.width = 5,
+crosstab(x, y, weight = NULL, digits = 3, max.width = NA,
          expected = FALSE, prop.r = FALSE, prop.c = FALSE,
          prop.t = FALSE, prop.chisq = FALSE, chisq = FALSE,
          fisher = FALSE, mcnemar = FALSE, resid = FALSE,
@@ -85,7 +85,7 @@ plot(ct, inv.y = TRUE)
 \dontrun{
 print(xtable(ct))
 print(xtable(ct, decimal.mark = ",", digits = 1,
-             multirow = TRUE, hline = TRUE, align = "ll|rr|r"),
+             multirow = TRUE, hline = TRUE, align = "llrrr"),
       sanitize.text.function = function(x) x,
       include.rownames = FALSE) 
 }

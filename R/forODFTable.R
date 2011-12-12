@@ -70,7 +70,7 @@ forODFTable <- function(x, digits = 1, ...)
     tab <- rbind(tab, c(x$cs, x$gt))
     rownames(tab)[dim(tab)[1]] <- gettext("Total", domain = "R-descr")
     colnames(tab)[dim(tab)[2]] <- gettext("Total", domain = "R-descr")
-    # odfWeave::odfTable(tab, ...)
+
     tab
 }
 
