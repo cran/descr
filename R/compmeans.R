@@ -221,8 +221,8 @@ plot.meanscomp <- function(x, xlab, ylab, width, col, ...)
         stop(gettext("Number of levels of \"f\" is higher than maxlevels.",
                      domain = "R-descr"))
 
-    if(is.null(w))
-        boxplot(v ~ f, ylab = ylab, xlab = xlab, width = width, col = col, ...)
-    else
-        ENmisc::wtd.boxplot(v ~ f, weights = w, ylab = ylab, xlab = xlab, width = width, col = col, ...)
+    if(!is.null(w))
+        warning("Weighted boxplot not implemented.")
+    boxplot(v ~ f, ylab = ylab, xlab = xlab, width = width, col = col, ...)
+    #ENmisc::wtd.boxplot(v ~ f, weights = w, ylab = ylab, xlab = xlab, width = width, col = col, ...)
 }

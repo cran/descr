@@ -23,5 +23,5 @@ toUTF8(x, from = "WINDOWS-1252")
 }
 \author{Jakson A. Aquino, \email{jalvesaq@gmail.com}.}
 
-\seealso{\link[base]{iconv}, \link[Hmisc]{label}}
+\seealso{\link[base]{iconv}}
 

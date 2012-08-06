@@ -25,8 +25,7 @@ compmeans(x, f, w, sort = FALSE, maxlevels = 60,
   \item{relative.widths}{If \code{TRUE}, the boxes widths will be proportional
     to the number of elements in each level of \code{f}.}
   \item{col}{Vector with the boxes colors.}
-  \item{\dots}{Further arguments to be passed to either
-    \code{\link[graphics]{boxplot}} or \code{\link[ENmisc]{wtd.boxplot}}.}
+  \item{\dots}{Further arguments to be passed to \code{\link[graphics]{boxplot}}.}
 }
 \value{
   A matrix with class \code{c("matrix", "meanscomp")} with labels attributes
@@ -35,7 +34,7 @@ compmeans(x, f, w, sort = FALSE, maxlevels = 60,
 }
 \author{Jakson A. Aquino, \email{jalvesaq@gmail.com}.}
 
-\seealso{\code{\link[ENmisc]{wtd.boxplot}}, \code{\link[graphics]{boxplot}}.}
+\seealso{\code{\link[graphics]{boxplot}}.}
 
 \examples{
 educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))

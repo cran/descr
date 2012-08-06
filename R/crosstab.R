@@ -5,7 +5,8 @@ crosstab <- function(x, y, weight = NULL, digits = 3, max.width = NA,
                      fisher = FALSE, mcnemar = FALSE, resid = FALSE,
                      sresid = FALSE, asresid = FALSE, missing.include = FALSE,
                      format = "SPSS", dnn = NULL, user.missing.x,
-                     user.missing.y, plot = getOption("descr.plot"),
+                     user.missing.y, cell.layout = TRUE,
+                     plot = getOption("descr.plot"),
                      xlab = deparse(substitute(x)),
                      ylab = deparse(substitute(y)), main = "", ...)
 {

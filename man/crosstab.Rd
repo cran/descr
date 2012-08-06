@@ -13,7 +13,7 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = NA,
          sresid = FALSE, asresid = FALSE,
          missing.include = FALSE, format = "SPSS",
          dnn = NULL, user.missing.x, user.missing.y,
-         plot = getOption("descr.plot"),
+         cell.layout = TRUE, plot = getOption("descr.plot"),
          xlab = deparse(substitute(x)),
          ylab = deparse(substitute(y)), main = "", \dots) 
 }
@@ -37,6 +37,7 @@ crosstab(x, y, weight = NULL, digits = 3, max.width = NA,
   \item{missing.include}{See \code{\link{CrossTable}}.}
   \item{format}{See \code{\link{CrossTable}}.}
   \item{dnn}{See \code{\link{CrossTable}}.}
+  \item{cell.layout}{See \code{\link{CrossTable}}.}
   \item{user.missing.x}{An optional character vector with the levels of
     \code{x} that should be treated as missing values.}
   \item{user.missing.y}{An optional character vector with the levels of

@@ -13,8 +13,8 @@ CrossTable(x, y, digits = 3, max.width = NA, expected = FALSE,
            prop.chisq = TRUE, chisq = FALSE, fisher = FALSE,
            mcnemar = FALSE, resid = FALSE, sresid = FALSE,
            asresid = FALSE, missing.include = FALSE,
-           format = c("SAS","SPSS"), dnn = NULL, xlab, ylab,
-           \dots)
+           format = c("SAS","SPSS"), dnn = NULL,
+           cell.layout = TRUE, xlab, ylab, \dots)
 }
 \arguments{
   \item{x}{A vector or a matrix. If y is specified, x must be a vector.}
@@ -57,6 +57,7 @@ CrossTable(x, y, digits = 3, max.width = NA, expected = FALSE,
     output desired.}
   \item{dnn}{the names to be given to the dimensions in the result (the dimnames
     names).}
+  \item{cell.layout}{If \code{TRUE}, print the cell layout.}
   \item{xlab}{A title for the x axis when plotting the CrossTable object (see
     \code{\link[graphics]{title}}).}
   \item{ylab}{A title for the y axis when plotting the CrossTable object (see
@@ -142,4 +143,9 @@ CrossTable(infert$education, infert$induced, expected = TRUE,
            format = "SPSS")
 CrossTable(warpbreaks$wool, warpbreaks$tension,
            dnn = c("Wool", "Tension"))
+
+# Get a matrix with residuals
+x <- CrossTable(infert$education, infert$induced, expected = TRUE)
+rs <- x$chisq$observed - x$chisq$expected
+rs
 }

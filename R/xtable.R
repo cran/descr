@@ -26,6 +26,8 @@ xtable.CrossTable <- function(x, multirow = FALSE, hline = FALSE, caption = NULL
     if(!is.na(x$expected) && x$expected == TRUE){
         xex <- outer(x$rs, x$cs, "*")
         xex <- xex / x$gt
+        if(is.null(digits))
+            digits = 1
         xx <- format(round(xex, digits), ...)
         xx <- cbind(rep("", nr), xx, rep("", nr))
         nt <- rbind(nt, xx)
