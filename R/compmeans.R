@@ -118,6 +118,7 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
         len1 <- len - 1
         ordl <- order(xmean[1:len1]) # Do not sort the "Total"
         tab <- tab[c(ordl, len),]
+        width <- width[ordl]
         f <- factor(as.numeric(f), levels = ordl, labels = levels(f)[ordl])
     }
     attr(tab, "row.name") <- row.name

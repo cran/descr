@@ -23,12 +23,3 @@ LogRegR2(model)
 
 \author{Dirk Enzmann}
 
-\examples{
-# Suppose that "happy" is a factor and "income" is a numeric
-# vector in a data frame:
-\dontrun{
-m <- glm(happy ~ income, family=binomial(link="logit"))
-LogRegR2(m)
-}
-}
-

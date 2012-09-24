@@ -318,7 +318,6 @@ print.CrossTable <- function(x, ...)
 
     ## Print Cell Layout
     if(cell.layout){
-        cat("\n\n")
         cat("  ", gettext("Cell Contents", domain = "R-descr"), "\n")
         if (format=="SAS")
         {
@@ -516,7 +515,7 @@ print.CrossTable <- function(x, ...)
     colnames(m) <- c(colnames(t), ColTotal)
 
     ## Print table cells
-    cat("\n\n")
+    # cat("\n\n")
     nc <- nc + 1
     colWidths <- vector(mode = "numeric", length = nc)
     mcolnames <- colnames(m)
@@ -587,7 +586,7 @@ print.CrossTable <- function(x, ...)
     ## Print Statistics
     if (chisq)
     {
-	cat(rep("\n", 2))
+	cat("\n")
 	cat(gettext("Statistics for All Table Factors", domain = "R-descr"),
 	    "\n\n", sep="")
 

@@ -112,6 +112,8 @@ xtable.CrossTable <- function(x, multirow = FALSE, hline = FALSE, caption = NULL
     if(hline)
         nt[idx, 1] <- paste("\\hline\n", nt[idx, 1], sep = "")
 
+    len <- dim(nt)[1]
+    rownames(nt) <- as.character(1:len)
     xtable::xtable(nt, caption=caption, label=label, align=align, display=display, ...)
 }
 

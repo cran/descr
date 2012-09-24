@@ -47,8 +47,8 @@ w <- sample(c(10, 15, 19), 200, replace = TRUE)
 compmeans(income, educ, col = c("#FFD0E0", "#D8E8FF"))
 comp <- compmeans(income, educ, w, plot = FALSE)
 comp
-plot(comp)
 \dontrun{
+plot(comp)
 print(xtable(comp))
 # If the decimal separator in your country is a comma:
 # options(OutDec = ",")

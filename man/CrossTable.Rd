@@ -135,17 +135,7 @@ CrossTable(x, y, digits = 3, max.width = NA, expected = FALSE,
 \examples{
 # Simple cross tabulation of education versus prior induced
 # abortions using infertility data
-data(infert, package = "datasets")
-CrossTable(infert$education, infert$induced, expected = TRUE)
-CrossTable(infert$education, infert$induced, expected = TRUE,
-           format = "SAS")
-CrossTable(infert$education, infert$induced, expected = TRUE,
-           format = "SPSS")
+data(warpbreaks, package = "datasets")
 CrossTable(warpbreaks$wool, warpbreaks$tension,
            dnn = c("Wool", "Tension"))
-
-# Get a matrix with residuals
-x <- CrossTable(infert$education, infert$induced, expected = TRUE)
-rs <- x$chisq$observed - x$chisq$expected
-rs
 }
