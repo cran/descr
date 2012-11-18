@@ -1,7 +1,7 @@
-0f229de4efc151dcfbc9d963327fb27e *DESCRIPTION
+fa65fb1c0d9694ec57a3cdf22a031f85 *DESCRIPTION
 77740e21b599fc44c1e803c66b181cf5 *LICENSE
 8cdfa14f203e836f124f765f9290f125 *NAMESPACE
-9739139cb4be4c894c7445e4bab0ea44 *NEWS
+e0928bf141d7442f6cd7144999c56d8f *NEWS
 157a5bd127a82dc441d5382c171ff03d *R/CrossTable.R
 633010e9f41b21a0a5a98fbf6208a7e1 *R/UTF-8.R
 207e51d07f5e0c2cfe08c82d91f371d6 *R/compmeans.R
@@ -23,7 +23,7 @@ bae7236ac6c8791b9305dbacf8c28b3f *man/compmeans.Rd
 da11a5028525cbf42d3183a84ab6321d *man/forODFTable.Rd
 1d597dd839c7086f1da4688f8278bf91 *man/freq.Rd
 f02e25dccfa1da8a2b8fb59ffb644522 *man/fromUTF8.Rd
-2791b4d0ab8a14b182b843766b1d76f1 *man/fwf2csv.Rd
+1886f9f949e990c14f0a9954a7110f57 *man/fwf2csv.Rd
 e103742e94d9ab4474be7b35e09ac17d *man/histkdnc.Rd
 db353743e6ad28c65b8f8ec548b03dec *man/plot.CrossTable.Rd
 d29e31f49670caeec470c9610a0d7377 *man/plot.freqtable.Rd
@@ -33,4 +33,4 @@ dcb29510016522cdb4ad1a42bf498554 *po/R-descr.pot
 d78e1a0de30b1a905c928915e5fc1b41 *po/R-pt_BR.po
 edc9a675e8b264b221f72539c66daa91 *po/descr.pot
 7597a14b1e552f4fb735768f73955708 *po/pt_BR.po
-029b24632397cd9859e39ca330bb2a81 *src/fwf2csv.c
+f7af4c1f1f81ec84da0b41d81e0d6642 *src/fwf2csv.c

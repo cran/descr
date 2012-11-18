@@ -34,11 +34,19 @@ fwf2csv(fwffile, csvfile, names, begin, end,
 }
 
 \examples{
-\dontrun{begin <- c(1, 3, 6, 9, 10, 11, 13)
-end <- c(2, 5, 8, 9, 10, 12, 16)
-names <- c("state", "municp", "house", "cond", "sex",
-           "age", "income")
-fwf2csv("example.txt", "example.csv", names, begin, end)
+\dontrun{
+tab <- rbind(c("state",   1,  2),
+             c("municp",  3,  5),
+             c("house",   6,  8),
+             c("cond",    9,  9),
+             c("sex",    10, 10),
+             c("age",    11, 12),
+             c("income", 13, 16))
+
+fwf2csv("example.txt", "example.csv",
+        names = tab[, 1],
+        begin = as.numeric(tab[, 2]),
+        end = as.numeric(tab[, 3]))
 df <- read.table("example.csv", header = TRUE,
                  sep = "\t", quote = "")
 }

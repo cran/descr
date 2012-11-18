@@ -1,3 +1,11 @@
+Version 1.0.0 (2012-11-18)
+--------------------------
+
+  Bug fix:
+
+    - src/fwf2csv.c: Don't cause stack smashing if field is wider than 255
+      characters (thanks to Anthony Damico for reporting the bug).
+
 Version 0.9.9 (2012-09-24)
 --------------------------
 
