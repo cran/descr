@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: descr 0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-24 21:54-0300\n"
-"PO-Revision-Date: 2012-08-06 20:43-0300\n"
+"POT-Creation-Date: 2013-01-15 08:46-0300\n"
+"PO-Revision-Date: 2013-01-15 08:47-0300\n"
 "Last-Translator: Jakson Aquino <jalvesaq@gmail.com>\n"
 "Language-Team: pt <pt@li.org>\n"
 "Language: \n"
@@ -40,7 +40,7 @@ msgstr "dnn deve ter comprimento 2, um elemento para dimensão da tabela"
 msgid "unknown format"
 msgstr "formato desconhecido"
 
-#: descr/R/CrossTable.R:282 descr/R/CrossTable.R:509 descr/R/compmeans.R:111
+#: descr/R/CrossTable.R:282 descr/R/CrossTable.R:509 descr/R/compmeans.R:116
 #: descr/R/forODFTable.R:71 descr/R/forODFTable.R:72 descr/R/freq.R:75
 #: descr/R/xtable.R:13 descr/R/xtable.R:111
 msgid "Total"
@@ -143,7 +143,6 @@ msgid "Alternative hypothesis: true odds ratio is not equal to 1"
 msgstr "Hipótese alternativa: a verdadeira razão de chances não é igual a 1"
 
 #: descr/R/CrossTable.R:644 descr/R/CrossTable.R:649 descr/R/CrossTable.R:654
-#, c-format
 msgid "95% confidence interval:"
 msgstr "intervalo de confiança a 95%:"
 
@@ -171,92 +170,120 @@ msgstr "Células com frequências esperada < 5:"
 msgid "of"
 msgstr "de"
 
-#: descr/R/compmeans.R:23 descr/R/compmeans.R:66
+#: descr/R/bwplotstats.R:12 descr/R/bwplotstats.R:43
+msgid "'x' must be a numeric vector"
+msgstr "'x' deve ser um vetor numérico"
+
+#: descr/R/bwplotstats.R:16 descr/R/bwplotstats.R:55
+msgid "'weights' must be a numeric vector"
+msgstr "'weights' deve ser um vetor numérico"
+
+#: descr/R/bwplotstats.R:18 descr/R/bwplotstats.R:57
+msgid "'weights' must have the same length as 'x'"
+msgstr "'weights' deve ter o mesmo comprimento de 'x'"
+
+#: descr/R/bwplotstats.R:19
+msgid "missing or infinite weights"
+msgstr "pesos omissos ou infinitos"
+
+#: descr/R/bwplotstats.R:22
+msgid "'probs' must be a numeric vector with values in [0,1]"
+msgstr "'probs' deve ser um vetor numérico com valores no intervalo [0,1]"
+
+#: descr/R/bwplotstats.R:26
+msgid "missing values and NaN's not allowed if 'na.rm' is not TRUE"
+msgstr "valores omissos e NaNs não são permitidos se 'na.rm' não é TRUE"
+
+#: descr/R/bwplotstats.R:45
+msgid "'coef' must be a single non-negative number"
+msgstr "'coef' deve ser um único número não negativo"
+
+#: descr/R/compmeans.R:24 descr/R/compmeans.R:69
 msgid "and"
 msgstr "e"
 
-#: descr/R/compmeans.R:24
+#: descr/R/compmeans.R:25
 msgid "have different lengths"
 msgstr "têm comprimentos diferentes"
 
-#: descr/R/compmeans.R:33
+#: descr/R/compmeans.R:34
 msgid "was converted into a factor, but the new variable had too many levels"
 msgstr ""
 "foi convertido em fator, mas a nova variável tinha muitas categorias (levels)"
 
-#: descr/R/compmeans.R:37 descr/R/compmeans.R:77
+#: descr/R/compmeans.R:39 descr/R/compmeans.R:81
 msgid "Warning:"
 msgstr "Aviso:"
 
-#: descr/R/compmeans.R:38
+#: descr/R/compmeans.R:40
 msgid "was converted into factor!"
 msgstr "foi convertido em fator!"
 
-#: descr/R/compmeans.R:67
+#: descr/R/compmeans.R:70
 msgid "have different lengths."
 msgstr "têm comprimentos diferentes."
 
-#: descr/R/compmeans.R:78
+#: descr/R/compmeans.R:82
 msgid "was converted from factor into numeric!"
 msgstr "foi convertido de fator para numérico!"
 
-#: descr/R/compmeans.R:89
+#: descr/R/compmeans.R:94
 msgid "rows with missing values dropped"
 msgstr "linhas com valores faltantes excluídas"
 
-#: descr/R/compmeans.R:113
+#: descr/R/compmeans.R:118
 msgid "Mean"
 msgstr "Média"
 
-#: descr/R/compmeans.R:114
+#: descr/R/compmeans.R:119
 msgid "N"
 msgstr "N"
 
-#: descr/R/compmeans.R:115
+#: descr/R/compmeans.R:120
 msgid "Std. Dev."
 msgstr "Desv. Pd."
 
-#: descr/R/compmeans.R:159
+#: descr/R/compmeans.R:164
 msgid "Mean value of"
 msgstr "Valor médio de"
 
-#: descr/R/compmeans.R:160
+#: descr/R/compmeans.R:165
 msgid "according to"
 msgstr "segundo"
 
-#: descr/R/compmeans.R:220
+#: descr/R/compmeans.R:225
 msgid "f is not a factor."
 msgstr "f não é factor."
 
-#: descr/R/compmeans.R:222
+#: descr/R/compmeans.R:227
 msgid "Number of levels of \"f\" is higher than maxlevels."
 msgstr "Número de levels de \"f\" é maior do que maxlevels."
 
-#: descr/R/descr.R:77
+#: descr/R/descr.R:79
 msgid "Chi2"
 msgstr "Qui²"
 
-#: descr/R/descr.R:78
+#: descr/R/descr.R:80
 msgid "Df"
 msgstr "Gl"
 
-#: descr/R/descr.R:79
+#: descr/R/descr.R:81
 msgid "Sig."
 msgstr "Sig."
 
-#: descr/R/descr.R:80
+#: descr/R/descr.R:82
 msgid "Cox & Snell Index"
 msgstr "Índice de Cox & Snell"
 
-#: descr/R/descr.R:81
+#: descr/R/descr.R:83
 msgid "Nagelkerke Index"
 msgstr "Índice de Nagelkerke"
 
-#: descr/R/descr.R:82
+#: descr/R/descr.R:84
 msgid "McFadden's R2"
 msgstr "R² de McFadden"
 
-#: descr/R/descr.R:90
+#: descr/R/descr.R:92
 msgid "No logistic regression model, no pseudo R^2 computed."
 msgstr "Nenhum modelo de regressão logística; nenhum pseudo R² calculado."
 
@@ -294,8 +321,8 @@ msgstr ""
 msgid "File not found:"
 msgstr "Arquivo não encontrado:"
 
-#~ msgid "Row Total"
-#~ msgstr "Total da Linha"
-
 #~ msgid "Column Total"
 #~ msgstr "Total da Coluna"
+
+#~ msgid "Row Total"
+#~ msgstr "Total da Linha"

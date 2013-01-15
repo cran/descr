@@ -122,11 +122,12 @@ CrossTable(x, y, digits = 3, max.width = NA, expected = FALSE,
   resid/sresid/asresid: Pearson Residuals (from chi-square tests).
 
 }
-\author{Jakson Aquino has splited the function \code{CrossTable} (from the
-  package \code{gmodels}) in two: \code{CrossTable} and \code{print.CrossTable}.
-  The \code{gmodels}'s function was developed by Marc Schwartz (original version
-  posted to r-devel on Jul 27, 2002. SPSS format modifications added by Nitin Jain
-  based upon code provided by Dirk Enzmann).}
+\author{Jakson Aquino \email{jalvesaq@gmail.com} has splited the function
+  \code{CrossTable} (from the package \code{gmodels}) in two:
+  \code{CrossTable} and \code{print.CrossTable}. The \code{gmodels}'s function
+  was developed by Marc Schwartz (original version posted to r-devel on Jul
+  27, 2002. SPSS format modifications added by Nitin Jain based upon code
+  provided by Dirk Enzmann).}
 
 \seealso{\code{\link{forODFTable}}, \code{\link[base]{table}},
   \code{\link[base]{prop.table}}, \code{\link[stats]{xtabs}},

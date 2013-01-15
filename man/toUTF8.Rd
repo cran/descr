@@ -21,7 +21,7 @@ toUTF8(x, from = "WINDOWS-1252")
 \value{
   The object with its label and levels converted.
 }
-\author{Jakson A. Aquino, \email{jalvesaq@gmail.com}.}
+\author{Jakson A. Aquino \email{jalvesaq@gmail.com}.}
 
 \seealso{\link[base]{iconv}}
 

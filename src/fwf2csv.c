@@ -132,6 +132,8 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
     /* Finish */
     fclose(fwf);
     fclose(csv);
+    free(value);
+    free(b);
     if(verbose[0] == 1)
         REprintf(_("%d lines written in \"%s\".\n"), l, csvfile[0]);
     if(nskipped == 1)

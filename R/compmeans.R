@@ -8,7 +8,8 @@ wtd.sd <- function(x, weights)
 
 compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
                       user.missing, plot = getOption("descr.plot"),
-                      relative.widths = TRUE, col = "lightgray", ...)
+                      relative.widths = TRUE, col = "lightgray",
+                      warn = getOption("descr.warn"), ...)
 {
     row.label <- attr(f, "label")
     column.label <- attr(x, "label")
@@ -34,10 +35,12 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
                                  domain = "R-descr"))
             stop(msg)
         }
-        wmsg <- paste(gettext("Warning:", domain = "R-descr"), " \"", f.name,
-                      "\" ", gettext("was converted into factor!",
-                                     domain = "R-descr"), sep = "")
-        warning(wmsg)
+        if(warn){
+            wmsg <- paste(gettext("Warning:", domain = "R-descr"), " \"", f.name,
+                          "\" ", gettext("was converted into factor!",
+                                         domain = "R-descr"), sep = "")
+            warning(wmsg)
+        }
     } else{
         class(f) <- "factor"
     }
@@ -74,9 +77,11 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
 
     if (is.factor(x) == TRUE) {
         x <- as.numeric(x)
-        wmsg <- paste(gettext("Warning:", domain = "R-descr"), " \"", n.name, "\" ", 
-                      gettext("was converted from factor into numeric!", domain = "R-descr"))
-        warning(wmsg)
+        if(warn){
+            wmsg <- paste(gettext("Warning:", domain = "R-descr"), " \"", n.name, "\" ", 
+                          gettext("was converted from factor into numeric!", domain = "R-descr"))
+            warning(wmsg)
+        }
     }
     has.w <- FALSE
     k <- grep(FALSE, (is.na(f) | is.na(x) | is.na(wt)))
@@ -84,7 +89,7 @@ compmeans <- function(x, f, w, sort = FALSE, maxlevels = 60,
     x <- x[k]
     wt <- wt[k]
     lf2 <- length(f)
-    if (lf > lf2) {
+    if (lf > lf2 && warn) {
         cat("\n")
         msg <- gettext("rows with missing values dropped", domain = "R-descr")
         wmsg <- paste(lf - lf2, msg)
@@ -222,8 +227,24 @@ plot.meanscomp <- function(x, xlab, ylab, width, col, ...)
         stop(gettext("Number of levels of \"f\" is higher than maxlevels.",
                      domain = "R-descr"))
 
-    if(!is.null(w))
-        warning("Weighted boxplot not implemented.")
-    boxplot(v ~ f, ylab = ylab, xlab = xlab, width = width, col = col, ...)
-    #ENmisc::wtd.boxplot(v ~ f, weights = w, ylab = ylab, xlab = xlab, width = width, col = col, ...)
+    if(is.null(w)){
+        boxplot(v ~ f, ylab = ylab, xlab = xlab, width = width, col = col, ...)
+    } else {
+        d <- data.frame(v, f, w)
+        dd <- split(d, f)
+        zz <- lapply(dd, function(d) descr:::spBwplotStats(d$v, d$w))
+        z <- zz[[1]]
+        z$nzero <- NULL
+        z <- unclass(z)
+        z$group <- rep(1, length(z$out))
+        z$names <- levels(f)
+        for(i in 2:length(zz)){
+            z$stats <- cbind(z$stats, zz[[i]]$stats)
+            z$n <- c(z$n, zz[[i]]$n)
+            z$out <- c(z$out, zz[[i]]$out)
+            z$group <- c(z$group, rep(i, length(zz[[i]]$out)))
+        }
+        bxp(z, ylab = ylab, xlab = xlab, width = width, boxfill = col, ...)
+        return(invisible(z))
+    }
 }

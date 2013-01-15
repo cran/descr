@@ -15,7 +15,7 @@ forODFTable(x, digits = 1, \dots)
 \value{
   A matrix.
 }
-\author{Jakson A. Aquino, \email{jalvesaq@gmail.com}.}
+\author{Jakson A. Aquino \email{jalvesaq@gmail.com}.}
 
 \seealso{\link{CrossTable}}
 

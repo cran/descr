@@ -5,7 +5,8 @@
 \usage{
 compmeans(x, f, w, sort = FALSE, maxlevels = 60,
           user.missing, plot = getOption("descr.plot"),
-          relative.widths = TRUE, col = "lightgray", \dots)
+          relative.widths = TRUE, col = "lightgray",
+          warn = getOption("descr.warn"), \dots)
 }
 \arguments{
   \item{x}{A numeric vector.}
@@ -25,33 +26,38 @@ compmeans(x, f, w, sort = FALSE, maxlevels = 60,
   \item{relative.widths}{If \code{TRUE}, the boxes widths will be proportional
     to the number of elements in each level of \code{f}.}
   \item{col}{Vector with the boxes colors.}
-  \item{\dots}{Further arguments to be passed to \code{\link[graphics]{boxplot}}.}
+  \item{warn}{Warn if conversion from factor into numeric or from numeric into
+    factor was performed and if missing values were dropped (default: \code{TRUE}).}
+  \item{\dots}{Further arguments to be passed to either
+    \code{\link[graphics]{boxplot}} (if \code{w} is missing) or
+    \code{\link[graphics]{bxp}} (for \code{w} weighted boxplot).}
 }
 \value{
   A matrix with class \code{c("matrix", "meanscomp")} with labels attributes
   for \code{x} and \code{f}. The returned object can be plotted, generating
   a \code{\link[graphics]{boxplot}} of \code{x} grouped by \code{f}.
 }
-\author{Jakson A. Aquino, \email{jalvesaq@gmail.com}.}
+\author{Jakson A. Aquino \email{jalvesaq@gmail.com}, with code for weighted
+  boxplots written by Stefan Kraft for simPopulation package.}
 
 \seealso{\code{\link[graphics]{boxplot}}.}
 
 \examples{
-educ <- sample(c(1, 2), 200, replace = TRUE, prob = c(0.3, 0.7))
-educ <- factor(educ, levels = c(1, 2), labels = c("Low", "High"))
-income <- rnorm(200, 1000, 100) + 100 * as.numeric(educ)
-attr(educ, "label") <- "Education level"
+sex <- factor(c(rep("F", 900), rep("M", 900)))
+income <- 100 * (rnorm(1800) + 5)
+weight <- rep(1, 1800)
+weight[sex == "F" & income > 500] <- 3
 attr(income, "label") <- "Income"
-w <- sample(c(10, 15, 19), 200, replace = TRUE)
+attr(sex, "label") <- "Sex"
+compmeans(income, sex, col = "lightgray", ylab = "income", xlab = "sex")
+comp <- compmeans(income, sex, weight, plot = FALSE)
+plot(comp, col = c("pink", "lightblue"), ylab = "income", xlab = "sex")
 
-compmeans(income, educ, col = c("#FFD0E0", "#D8E8FF"))
-comp <- compmeans(income, educ, w, plot = FALSE)
-comp
 \dontrun{
-plot(comp)
-print(xtable(comp))
+library(xtable)
 # If the decimal separator in your country is a comma:
 # options(OutDec = ",")
-print(xtable(comp, align = "lrrr", display = c("s", "f", "d", "f")))
+print(xtable(comp, align = "lrrr", caption = "Income according to sex",
+             label = "tab:incsx", display = c("s", "f", "d", "f")))
 }
 }

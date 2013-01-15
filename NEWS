@@ -1,3 +1,18 @@
+Version 1.0.1 (2013-01-15)
+--------------------------
+
+  Bug fix:
+
+    - src/fwf2csv.c: Free no longer used allocated memory.
+
+    - Implement weighted boxplot for compmeans (code written by Stefan Kraft
+      for the simPopulation package).
+
+  Change:
+
+    - Add option to suppress warnings: "descr.warn".
+
+
 Version 1.0.0 (2012-11-18)
 --------------------------
 

@@ -4,6 +4,8 @@
 
     if(is.null(getOption("descr.plot")))
         options(descr.plot = TRUE)
+    if(is.null(getOption("descr.warn")))
+        options(descr.warn = TRUE)
 
 }
 
