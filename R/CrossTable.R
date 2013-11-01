@@ -22,19 +22,9 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE,
     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
     sresid = FALSE, asresid = FALSE, missing.include = FALSE,
-    format = c("SAS", "SPSS"), dnn = NULL, cell.layout = TRUE, xlab, ylab, ...)
+    format = c("SAS", "SPSS"), dnn = NULL, cell.layout = TRUE,
+    xlab = NULL, ylab = NULL, ...)
 {
-    if(missing(xlab))
-        xlab = deparse(substitute(x))
-    if(missing(ylab)){
-        if(missing(y)){
-            xlab = "x"
-            ylab = "y"
-        } else {
-            ylab = deparse(substitute(y))
-        }
-    }
-
     format = match.arg(format)
 
     RowData <- deparse(substitute(x))
@@ -43,22 +33,28 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
     else
 	ColData <- deparse(substitute(y))
 
+    if(is.null(xlab)){
+        if(is.null(dnn))
+            xlab = deparse(substitute(x))
+        else
+            xlab = dnn[1]
+    }
+    if(is.null(ylab)){
+        if(is.null(dnn)){
+            if(missing(y))
+                ylab = "y"
+            else
+                ylab = deparse(substitute(y))
+        } else {
+            ylab = dnn[2]
+        }
+    }
+
     ## Ensure that max.width >= 1
     if (!is.na(max.width) && max.width < 1)
 	stop("max.width must be >= 1")
     ## Set 'x' vector flag
     vector.x <- FALSE
-    ## Ensure that if (expected), a chisq is done and vice-versa
-    if (prop.chisq)
-	chisq <- TRUE
-    if (expected)
-	chisq <- TRUE
-    if (chisq)
-	expected <- TRUE
-    if(resid | sresid | asresid){
-        expected <- TRUE
-        chisq <- TRUE
-    }
 
     if (missing(y))
     {
@@ -103,9 +99,7 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
 	}
 	else
 	    stop("x must be either a vector or a 2 dimensional matrix, if y is not given")
-    }
-    else
-    {
+    } else {
 	if(length(x) != length(y))
 	    stop("x and y must have the same length")
 
@@ -113,9 +107,7 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
 	{
 	    x <- factor(x, exclude=c())
 	    y <- factor(y, exclude=c())
-	}
-	else
-	{
+	} else {
 	    ## Remove unused factor levels from vectors
 	    x <- factor(x)
 	    y <- factor(y)
@@ -126,14 +118,11 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
 
     ## Create Titles for Table From Vector Names
     ## At least 2 x 2 table only (for now)
-    if (all(dim(t) >= 2))
-    {
-	if (!is.null(dnn))
-	{
+    if (all(dim(t) >= 2)) {
+	if (!is.null(dnn)) {
 	    if (length(dnn) != 2)
 		stop("dnn must have length of 2, one element for each table dimension")
-	    else
-	    {
+	    else {
 		RowData <- dnn[1]
 		ColData <- dnn[2]
 	    }
@@ -176,10 +165,17 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
 	TotalN <- length(x)
 
     ## Perform Chi-Square Tests
-    if (chisq) {
+    if (expected || chisq || prop.chisq || resid || sresid || asresid) {
+        if(!chisq && !prop.chisq){
+            wv <- getOption("warn")
+            options(warn = -1)
+        }
 	CST <- chisq.test(t, correct = FALSE, ...)
 	if (all(dim(t) == 2))
 	    CSTc <- chisq.test(t, correct = TRUE, ...)
+        if(!chisq && !prop.chisq){
+            options(warn = wv)
+        }
     }
 
     if (asresid & !vector.x)
@@ -203,15 +199,17 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
 	    McNc <- mcnemar.test(t, correct = TRUE)
     }
 
-    res <- list(t = t, prop.row = CPR, prop.col = CPC, prop.tbl = CPT, gt = GT,
-	rs = RS, cs = CS, total.n = TotalN, chisq = CST, chisq.corr = CSTc,
-	fisher.ts = FTt, fisher.lt = FTl, fisher.gt = FTg, print.mcnemar = mcnemar,
-	mcnemar = McN, mcnemar.corr = McNc, asr = ASR, RowData = RowData,
-	ColData = ColData, digits = digits, max.width = max.width,
-	vector.x = vector.x, expected = expected, prop.chisq = prop.chisq,
-	resid = resid, sresid = sresid, asresid = asresid,
-        missing.include = missing.include, format = format,
-        cell.layout = cell.layout)
+    res <- list(t = t, prop.row = CPR, prop.col = CPC, prop.tbl = CPT,
+                gt = GT, rs = RS, cs = CS, total.n = TotalN, chisq = chisq,
+                CST = CST, chisq.corr = CSTc, fisher.ts = FTt,
+                fisher.lt = FTl, fisher.gt = FTg, print.mcnemar = mcnemar,
+                mcnemar = McN, mcnemar.corr = McNc, asr = ASR,
+                RowData = RowData, ColData = ColData, digits = digits,
+                max.width = max.width, vector.x = vector.x,
+                expected = expected, prop.chisq = prop.chisq, resid = resid,
+                sresid = sresid, asresid = asresid,
+                missing.include = missing.include, format = format,
+                cell.layout = cell.layout)
 
     # Attributes for plotting
     attr(res, "xlab") <- xlab
@@ -232,7 +230,8 @@ print.CrossTable <- function(x, ...)
     RS <- x$rs
     CS <- x$cs
     TotalN <- x$total.n
-    CST <- x$chisq
+    chisq <- x$chisq
+    CST <- x$CST
     CSTc <- x$chisq.corr
     FTt <- x$fisher.ts
     FTl <- x$fisher.lt
@@ -249,7 +248,6 @@ print.CrossTable <- function(x, ...)
     prop.r <- (is.na(CPR[1]) == FALSE)
     prop.c <- (is.na(CPC[1]) == FALSE)
     prop.t <- (is.na(CPT[1]) == FALSE)
-    chisq <- (is.na(CST[1]) == FALSE)
     prop.chisq <- x$prop.chisq
     fisher <- (class(FTt) == "htest")
     resid <- x$resid
@@ -263,7 +261,6 @@ print.CrossTable <- function(x, ...)
 
     nsep <- "  | " # normal separator
     if(format == "SAS") {
-	resid <- sresid <- asresid <- FALSE
 	hdd <- 1
 	psep <- "  | " # percent separator
     } else {
@@ -283,7 +280,7 @@ print.CrossTable <- function(x, ...)
     RowTotal <- ColTotal
 
     ## Set consistent column widths based upon dimnames and table values
-    strt <- formatC(t, digits = digits, format = "f", width = 0, decimal.mark = outDec)
+    strt <- formatC(unclass(t), digits = digits, format = "f", width = 0, decimal.mark = outDec)
     CWidth <- max(digits + 2, c(nchar(strt, type = "width"),
                                 nchar(dimnames(t)[[2]], type = "width"),
                                 nchar(RS, type = "width"),
@@ -291,9 +288,9 @@ print.CrossTable <- function(x, ...)
                                 nchar(RowTotal, type = "width")))
     if(prop.r){
         if(vector.x)
-            strt <- formatC(CPT, digits = digits, format = "f", width = 0, decimal.mark = outDec)
+            strt <- formatC(unclass(CPT), digits = digits, format = "f", width = 0, decimal.mark = outDec)
         else
-            strt <- formatC(CPR, digits = digits, format = "f", width = 0, decimal.mark = outDec)
+            strt <- formatC(unclass(CPR), digits = digits, format = "f", width = 0, decimal.mark = outDec)
         CWidth <- max(CWidth, nchar(strt, type = "width"))
     }
     RWidth <- max(c(nchar(dimnames(t)[[1]], type = "width"), nchar(ColTotal, type = "width")))
@@ -319,9 +316,8 @@ print.CrossTable <- function(x, ...)
     ## Print Cell Layout
     if(cell.layout){
         cat("  ", gettext("Cell Contents", domain = "R-descr"), "\n")
-        if (format=="SAS")
-        {
-            cat("|-------------------------|\n")
+        cat("|-------------------------|\n")
+        if (format=="SAS") {
             cat(gettext("|                       N |", domain = "R-descr"), "\n")
             if (expected)
                 cat(gettext("|              Expected N |", domain = "R-descr"), "\n")
@@ -333,11 +329,7 @@ print.CrossTable <- function(x, ...)
                 cat(gettext("|           N / Col Total |", domain = "R-descr"), "\n")
             if (prop.t)                                                         
                 cat(gettext("|         N / Table Total |", domain = "R-descr"), "\n")
-            cat("|-------------------------|\n")
-        }
-        else if (format == "SPSS")
-        {
-            cat("|-------------------------|\n")
+        } else if (format == "SPSS") {
             cat(gettext("|                   Count |", domain = "R-descr"), "\n")
             if (expected)
                 cat(gettext("|         Expected Values |", domain = "R-descr"), "\n")
@@ -349,14 +341,14 @@ print.CrossTable <- function(x, ...)
                 cat(gettext("|          Column Percent |", domain = "R-descr"), "\n")
             if (prop.t)                                                           
                 cat(gettext("|           Total Percent |", domain = "R-descr"), "\n")
-            if (resid)                                                            
-                cat(gettext("|                Residual |", domain = "R-descr"), "\n")
-            if (sresid)                                                           
-                cat(gettext("|            Std Residual |", domain = "R-descr"), "\n")
-            if (asresid)                                                          
-                cat(gettext("|           Adj Std Resid |", domain = "R-descr"), "\n")
-            cat("|-------------------------|\n")
-        } ## End of if(format=="SPSS")
+        }
+        if (resid)                                                            
+            cat(gettext("|                Residual |", domain = "R-descr"), "\n")
+        if (sresid)                                                           
+            cat(gettext("|            Std Residual |", domain = "R-descr"), "\n")
+        if (asresid)                                                          
+            cat(gettext("|           Adj Std Resid |", domain = "R-descr"), "\n")
+        cat("|-------------------------|\n")
     }
 
     #cat(gettext("Total Observations in Table:", domain = "R-descr"), GT, "\n\n")
@@ -451,7 +443,7 @@ print.CrossTable <- function(x, ...)
 
 	if(prop.r){
 	    for(l in 1:nc)
-		m[k, l] <- formatC(CPR[i, l]*hdd, digits = digits, format = "f",
+		m[k, l] <- formatC(unclass(CPR)[i, l]*hdd, digits = digits, format = "f",
 		    decimal.mark = outDec)
 	    m[k, nc + 1] <- formatC(hdd*RS[i] / GT, digits = digits, format = "f",
 		decimal.mark = outDec)
@@ -677,7 +669,7 @@ print.CrossTable <- function(x, ...)
 	    }
 	    cat("\n")
 
-	} ## End of if (any(dim(t)...
+	} ## End of if (any(dim(t)...))
     }
     return(invisible(x))
 }

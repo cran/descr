@@ -143,3 +143,4 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
             REprintf(_("%d lines from \"%s\" skipped because shorter than 3 characters.\n"),
                     nskipped, fwffile[0]);
 }
+

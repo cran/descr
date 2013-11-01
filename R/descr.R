@@ -52,24 +52,30 @@ descr <- function (x)
 # Plot histogram of variable with kernel density estimates and normal curve:
 # I had to change the name because the "." was causing R to think that the
 # function was a method of hist.
-histkdnc <- function (v, breaks = 0, include.lowest = T, right = T,
+histkdnc <- function (v, breaks = 0, include.lowest = TRUE, right = TRUE,
     main = "Histogram with kernel density and normal curve",
-    col = grey(0.90), xlab = deparse(substitute(v)), ...) 
+    xlab = deparse(substitute(v)), col = grey(0.90),
+    col.cur = c("red", "blue"), lty.cur = c(1, 1),
+    xlim = NULL, ylim = NULL, ...) 
 {
     v2 <- na.omit(v)
     x <- v2
-    h <- hist.default(v2, plot = F)
+    h <- hist.default(v2, plot = FALSE)
     if (length(breaks) == 1) 
 	breaks <- h$breaks
     dens <- density(v2)
-    ylim <- range(0, h$density, dnorm(x = v2, mean = mean(v2), sd = sd(v2)), 
-	dens$y)
-    xlim <- range(v2, dens$x)
-    hist(v2, freq = F, breaks = breaks, include.lowest = include.lowest, 
+    argv <- list(...)
+    if(is.null(ylim))
+        ylim <- range(0, h$density, dnorm(x = v2, mean = mean(v2), sd = sd(v2)),
+                      dens$y)
+    if(is.null(xlim))
+        xlim <- range(v2, dens$x)
+    hist(v2, freq = FALSE, breaks = breaks, include.lowest = include.lowest, 
 	right = right, xlim = xlim, ylim = ylim, col = col, 
 	xlab = xlab, main = main, ...)
-    lines(density(v2), col = "red")
-    curve(dnorm(x, mean = mean(v2), sd = sd(v2)), col = "blue", add = T)
+    lines(density(v2), col = col.cur[1], lty = lty.cur[1])
+    curve(dnorm(x, mean = mean(v2), sd = sd(v2)), col = col.cur[2],
+          add = TRUE, lty = lty.cur[2])
 }
 
 
@@ -79,7 +85,7 @@ print.LogRegR2 <- function(x, ...)
     cat(formatC(gettext("Chi2", domain = "R-descr"), flag = "-", width = 20), x$Chi2, "\n")
     cat(formatC(gettext("Df", domain = "R-descr"), flag = "-", width = 20), x$df, "\n")
     cat(formatC(gettext("Sig.", domain = "R-descr"), flag = "-", width = 20), x$p, "\n")
-    cat(formatC(gettext("Cox & Snell Index", domain = "R-descr"), flag = "-", width = 20), x$CoxR2, "\n")
+    cat(formatC(gettext("Cox and Snell Index", domain = "R-descr"), flag = "-", width = 20), x$CoxR2, "\n")
     cat(formatC(gettext("Nagelkerke Index", domain = "R-descr"), flag = "-", width = 20), x$NagelkerkeR2, "\n")
     cat(formatC(gettext("McFadden's R2", domain = "R-descr"), flag = "-", width = 20), x$RL2, "\n")
     return(invisible(NULL))

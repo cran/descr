@@ -1,22 +1,26 @@
 
-xtable.CrossTable <- function(x, multirow = FALSE, hline = FALSE, caption = NULL,
-                              label = NULL, align = NULL, digits = 1,
-                              display = NULL, ...)
+xtable.CrossTable <- function(x, caption = NULL, label = NULL, align = NULL, digits = 1,
+                              display = NULL, multirow = FALSE, hline = FALSE, ...)
 {
     nr <- dim(x$t)[1]
     nc <- dim(x$t)[2]
     nt <- cbind(rownames(x$t), x$t, x$rs)
 
-    if(multirow)
-        colname1 <- paste("\\multirow{2}{*}{", attr(x, "xlab"), "} & \\multicolumn{",
-                          length(x$t[1,]), "}{c}{", attr(x, "ylab"), "} & \\multirow{2}{*}{",
+    if(multirow){
+        colname1 <- paste("\\multirow{2}{*}{",
+                          gsub("\\$", "\\\\$", x$RowData),
+                          "} & \\multicolumn{",
+                          length(x$t[1,]), "}{c}{",
+                          gsub("\\$", "\\\\$", x$ColData),
+                          "} & \\multirow{2}{*}{",
                           gettext("Total", domain = "R-descr"), "}\\\\\n \\cline{2-",
                           length(x$t[1,])+1,"}", sep = "")
-    else
+        colnames(nt) <- c(colname1, colnames(x$t), " ")
+    } else {
         colname1 <- attr(x, "xlab")
+        colnames(nt) <- c(attr(x, "xlab"), colnames(x$t), gettext("Total", domain = "R-descr"))
+    }
 
-    colnames(nt) <- c(colname1, colnames(x$t), " ")
-                      paste(sep = "")
 
     if(x$format == "SPSS")
         hdd <- 100
@@ -114,7 +118,30 @@ xtable.CrossTable <- function(x, multirow = FALSE, hline = FALSE, caption = NULL
 
     len <- dim(nt)[1]
     rownames(nt) <- as.character(1:len)
+    if(is.null(align))
+        align = paste0("ll", paste(rep("r", ncol(nt) - 1), collapse = ""))
     xtable::xtable(nt, caption=caption, label=label, align=align, display=display, ...)
 }
 
+xtable.freqtable <- function(x, caption = NULL, label = NULL, align = NULL,
+                             digits = 1, display = NULL, ...)
+{
+    if(is.null(align))
+        align <- paste0("l", paste0(rep("r", ncol(x)), collapse = ""))
+    if(is.null(display))
+        display <- c("s", "d", rep("f", ncol(x) - 1))
+    xtable::xtable(unclass(x), caption=caption, label=label, align=align,
+                   display=display, ...)
+}
+
+xtable.meanscomp <- function(x, caption = NULL, label = NULL, align = NULL,
+                             digits = 1, display = NULL, ...)
+{
+    if(is.null(align))
+        align <- "lrrr"
+    if(is.null(display))
+        display <- c("s", "f", "d", "f")
+    xtable::xtable(unclass(x), caption=caption, label=label, align=align,
+                   display=display, ...)
+}
 
