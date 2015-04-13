@@ -34,23 +34,6 @@ CrossTable <- function (x, y, digits = 3, max.width = NA, expected = FALSE,
     else
 	ColData <- deparse(substitute(y))
 
-    if(is.null(xlab)){
-        if(is.null(dnn))
-            xlab <- deparse(substitute(x))
-        else
-            xlab <- dnn[1]
-    }
-    if(is.null(ylab)){
-        if(is.null(dnn)){
-            if(missing(y))
-                ylab <- "y"
-            else
-                ylab <- deparse(substitute(y))
-        } else {
-            ylab <- dnn[2]
-        }
-    }
-
     ## Ensure that max.width >= 1
     if (!is.na(max.width) && max.width < 1)
 	stop("max.width must be >= 1")
@@ -581,17 +564,21 @@ print.CrossTable <- function(x, ...)
 
 	cat(CST$method, "\n")
 	cat("------------------------------------------------------------\n")
+	fp <- format.pval(CST$p.value, digits = digits)
+        pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
 	cat(gettext("Chi^2 =", domain = "R-descr"), CST$statistic,
 	    "    ", gettext("d.f. =", domain = "R-descr"), CST$parameter,
-	    "    ", gettext("p =", domain = "R-descr"), CST$p.value, "\n\n")
+	    "    ", pv, "\n\n")
 
 	if (all(dim(t) == 2))
 	{
 	    cat(CSTc$method, "\n")
 	    cat("------------------------------------------------------------\n")
+            fp <- format.pval(CSTc$p.value, digits = digits)
+            pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
 	    cat(gettext("Chi^2 =", domain = "R-descr"), CSTc$statistic,
 		"    ", gettext("d.f. =", domain = "R-descr"), CSTc$parameter,
-		"    ", gettext("p =", domain = "R-descr"), CSTc$p.value, "\n")
+		"    ", pv, "\n")
 	}
     }
 
@@ -601,17 +588,21 @@ print.CrossTable <- function(x, ...)
 	cat(rep("\n", 2))
 	cat(McN$method, "\n")
 	cat("------------------------------------------------------------\n")
+	fp <- format.pval(McN$p.value, digits = digits)
+        pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
 	cat(gettext("Chi^2 =", domain = "R-descr"), McN$statistic,
 	    "    ", gettext("d.f. =", domain = "R-descr"), McN$parameter,
-	    "    ", gettext("p =", domain = "R-descr"), McN$p.value, "\n\n")
+	    "    ", pv, "\n\n")
 
 	if (is.na(McNc[1]) == FALSE)
 	{
 	    cat(McNc$method, "\n")
 	    cat("------------------------------------------------------------\n")
+            fp <- format.pval(McNc$p.value, digits = digits)
+            pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
 	    cat(gettext("Chi^2 =", domain = "R-descr"), McNc$statistic,
 		"    ", gettext("d.f. =", domain = "R-descr"), McNc$parameter,
-		"    ", gettext("p =", domain = "R-descr"), McNc$p.value, "\n")
+		"    ", pv, "\n")
 	}
     }
 
@@ -629,23 +620,31 @@ print.CrossTable <- function(x, ...)
 
 	    cat(gettext("Alternative hypothesis: true odds ratio is not equal to 1",
 		    domain = "R-descr"), "\n")
-	    cat(gettext("p =", domain = "R-descr"), FTt$p.value, "\n")
+            fp <- format.pval(FTt$p.value, digits = digits)
+            pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
+	    cat(pv, "\n")
 	    cat(gettext("95% confidence interval:", domain = "R-descr"), FTt$conf.int, "\n\n")
 
 	    cat(gettext("Alternative hypothesis: true odds ratio is less than 1",
 		    domain = "R-descr"), "\n")
-	    cat(gettext("p =", domain = "R-descr"), FTl$p.value, "\n")
+            fp <- format.pval(FTl$p.value, digits = digits)
+            pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
+	    cat(pv, "\n")
 	    cat(gettext("95% confidence interval:", domain = "R-descr"), FTl$conf.int, "\n\n")
 
 	    cat(gettext("Alternative hypothesis: true odds ratio is greater than 1",
 		    domain = "R-descr"), "\n")
-	    cat(gettext("p =", domain = "R-descr"), FTg$p.value, "\n")
+            fp <- format.pval(FTg$p.value, digits = digits)
+            pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
+	    cat(pv, "\n")
 	    cat(gettext("95% confidence interval:", domain = "R-descr"), FTg$conf.int, "\n\n")
 	}
 	else
 	{
 	    cat(gettext("Alternative hypothesis: two.sided", domain = "R-descr"), "\n")
-	    cat(gettext("p =", domain = "R-descr"), FTt$p.value, "\n")
+            fp <- format.pval(FTt$p.value, digits = digits)
+            pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
+	    cat(pv, "\n")
 	}
     } ## End Of If(Fisher) Loop
 
