@@ -71,6 +71,10 @@ crosstab(dep, indep, weight = NULL,
   \code{\link[graphics]{mosaicplot}}. Note that the gray scale colors used by
   default in the mosaic plot do not have any statistical meaning. The colors
   are used only to ease the plot interpretation.
+
+  Differently from \code{\link{CrossTable}}, this function requires both
+  \code{dep} and \code{indep} arguments. If you want an univariate tabulation,
+  you should try either \code{\link{CrossTable}} or \code{\link{freq}}.
 }
 
 \author{Jakson A. Aquino \email{jalvesaq@gmail.com}}
@@ -98,9 +102,23 @@ ct <- crosstab(opinion, educ, weight,
 ct
 plot(ct, inv.y = TRUE)
 
+# Get the table of observed values as an object of class "table"
+tab <- ct$tab
+class(tab)
+tab
+
+# Get the complete cross table as "matrix"
+complete.tab <- descr:::CreateNewTab(ct)
+class(complete.tab)
+complete.tab
+
+## xtable support
 library(xtable)
+
+# Print ugly table
 print(xtable(ct))
 
+# Print pretty table
 # Add to the preamble of your Rnoweb document:
 # \usepackage{booktabs}
 # \usepackage{multirow}
