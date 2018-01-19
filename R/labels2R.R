@@ -24,6 +24,10 @@ labels2R <- function(lfile, rfile, dfname = "b", echo = FALSE)
         unlink(outfile)
     }
     input <- readLines(infile)
+
+    # The last line must be empty
+    input <- c(input, "")
+
     nlines <- length(input)
     lnum <- 1
     while (lnum <= nlines) {
@@ -34,7 +38,6 @@ labels2R <- function(lfile, rfile, dfname = "b", echo = FALSE)
         varlab <- NULL
         lev <- NULL
         lab <- NULL
-        exclud <- NULL
         if (cline != "" && grep("^[a-zA-Z]", cline) == 1) {
             varname <- sub("^([a-zA-Z0-9_\\.]*).*", "\\1", cline)
             if (grep(" ", cline) == 1) 

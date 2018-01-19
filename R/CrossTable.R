@@ -291,17 +291,13 @@ CrossTable <- function (x, y,
         tab <- table(x, y)
     }
 
-    ## Create Titles for Table From Vector Names
-    ## At least 2 x 2 table only (for now)
-    if (all(dim(tab) >= 2)) {
-        if (!is.null(dnn)) {
-            if (length(dnn) != 2)
-                stop("dnn must have length of 2, one element for each table dimension")
-            else {
-                RowData <- dnn[1]
-                ColData <- dnn[2]
-            }
-        }
+    ## Check dnn, and use it
+    if(!is.null(dnn)){
+        if(all(dim(tab) >= 2) && length(dnn) != 2)
+            stop("dnn must have length of 2, one element for each table dimension")
+        RowData <- dnn[1]
+        if(length(dnn) > 1)
+            ColData <- dnn[2]
     }
 
     ## if tab is not at least a 2 x 2, do not do stats
@@ -721,21 +717,21 @@ print.CrossTable <- function(x, ...)
             fp <- format.pval(FTt$p.value, digits = dgts$others)
             pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
             cat(pv, "\n")
-            cat(gettext("95% confidence interval:", domain = "R-descr"), FTt$conf.int, "\n\n")
+            cat(gettextf("95%s confidence interval:", "%", domain = "R-descr"), FTt$conf.int, "\n\n")
 
             cat(gettext("Alternative hypothesis: true odds ratio is less than 1",
                     domain = "R-descr"), "\n")
             fp <- format.pval(FTl$p.value, digits = dgts$others)
             pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
             cat(pv, "\n")
-            cat(gettext("95% confidence interval:", domain = "R-descr"), FTl$conf.int, "\n\n")
+            cat(gettext("95%s confidence interval:", "%", domain = "R-descr"), FTl$conf.int, "\n\n")
 
             cat(gettext("Alternative hypothesis: true odds ratio is greater than 1",
                     domain = "R-descr"), "\n")
             fp <- format.pval(FTg$p.value, digits = dgts$others)
             pv <- paste("p", if(substr(fp, 1L, 1L) == "<") fp else paste("=", fp))
             cat(pv, "\n")
-            cat(gettext("95% confidence interval:", domain = "R-descr"), FTg$conf.int, "\n\n")
+            cat(gettext("95%s confidence interval:", "%", domain = "R-descr"), FTg$conf.int, "\n\n")
         }
         else
         {
