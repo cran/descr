@@ -1,6 +1,6 @@
-4a825bdcd7fd7386c6ae44f7d35182bd *DESCRIPTION
+154540063c57c6e6e12b56c348cf13f5 *DESCRIPTION
 660668c6710f3db2d28533e6f74dcf5c *NAMESPACE
-1184014f77b9cb6d24517f3f73c9dea4 *NEWS
+c2f09e59ceb6cc829b68588980177777 *NEWS
 ddedc4a3bcef4b538cf6697071c67e1d *R/CrossTable.R
 633010e9f41b21a0a5a98fbf6208a7e1 *R/UTF-8.R
 b6ac10afea33bbf7c3b1c516b3c947b7 *R/bwplotstats.R
@@ -9,11 +9,11 @@ b6ac10afea33bbf7c3b1c516b3c947b7 *R/bwplotstats.R
 9d85682de98c3cc2bdffd8fdcba09f80 *R/dataframe2txt.R
 9bb80659e2ae2135674bb251aa01c657 *R/descr.R
 4bd0e7082f4d03dc92f384497f3fb295 *R/file.head.R
-6b8b5b12c03f3010cd7cb1bd4e8320c6 *R/forODFTable.R
+237072d90c4b8bcbfd6cfeddb8b4e871 *R/forODFTable.R
 380da165ea2c252d9f6301fd42aed762 *R/freq.R
 21cd309fa6d6cbe3d5a8b7559df0ba0a *R/fwf2csv.R
 1afdd694842afc1cc81abeb958e1be57 *R/labels2R.R
-adeccc0e4b7cf5f3a501e9d8530b7199 *R/xtable.R
+37e913b4cc76747fdc095b8a4127669b *R/xtable.R
 b8bb17608109359adcee59a570b9b9ac *README.md
 3d4a17a3e57df06fffc3aa56ba77ac16 *inst/po/en@quot/LC_MESSAGES/R-descr.mo
 e3f8d22b767011d59ede34c4fd844774 *inst/po/en@quot/LC_MESSAGES/descr.mo
@@ -35,7 +35,7 @@ d6db4c15687a6d5d96daddd3742b6fc0 *man/labels2R.Rd
 3d1da906317e46f17d48e3f7c866498e *man/plot.CrossTable.Rd
 d29e31f49670caeec470c9610a0d7377 *man/plot.freqtable.Rd
 d681de20bff96d3b06660626d2f1476d *man/toUTF8.Rd
-b276d005c88477a25a0c97b929210d45 *man/xtable.CrossTable.Rd
+d86510b35967c3d51654b629639a7d72 *man/xtable.CrossTable.Rd
 7dc518f6093a9ce9df56f15d524f363f *po/R-descr.pot
 e51e5c7c47ea54a983eabdaf0345bf55 *po/R-pt_BR.po
 6d629452ff77ed43a3a910fccb65318f *po/descr.pot
