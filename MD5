@@ -1,6 +1,6 @@
-154540063c57c6e6e12b56c348cf13f5 *DESCRIPTION
-660668c6710f3db2d28533e6f74dcf5c *NAMESPACE
-c2f09e59ceb6cc829b68588980177777 *NEWS
+3abb84a3633e37c30d121680f4a97968 *DESCRIPTION
+4e9d701861b07635148fa4b7c551a45f *NAMESPACE
+64ec8785d37cbdae0ea1ba492c3e48a8 *NEWS
 ddedc4a3bcef4b538cf6697071c67e1d *R/CrossTable.R
 633010e9f41b21a0a5a98fbf6208a7e1 *R/UTF-8.R
 b6ac10afea33bbf7c3b1c516b3c947b7 *R/bwplotstats.R
@@ -11,7 +11,7 @@ b6ac10afea33bbf7c3b1c516b3c947b7 *R/bwplotstats.R
 4bd0e7082f4d03dc92f384497f3fb295 *R/file.head.R
 237072d90c4b8bcbfd6cfeddb8b4e871 *R/forODFTable.R
 380da165ea2c252d9f6301fd42aed762 *R/freq.R
-21cd309fa6d6cbe3d5a8b7559df0ba0a *R/fwf2csv.R
+1df1f9dfd6d2559b8968247a2a26f0f5 *R/fwf2csv.R
 1afdd694842afc1cc81abeb958e1be57 *R/labels2R.R
 37e913b4cc76747fdc095b8a4127669b *R/xtable.R
 b8bb17608109359adcee59a570b9b9ac *README.md
@@ -29,7 +29,7 @@ bf04fc06158165daa22075a1110a36f4 *man/crosstab.Rd
 c37d89f509c77ec765a31124e737e2d6 *man/forODFTable.Rd
 b88237927b176fc0ed3ccc058ed379b0 *man/freq.Rd
 bacf0c555082c8ab189539bc9fe825cb *man/fromUTF8.Rd
-754c06b6a96c9eef8676aeb1a2fcd0d1 *man/fwf2csv.Rd
+8c696e9b020f4b31c8bf4b2547aa21cf *man/fwf2csv.Rd
 7c2a212c71720c769b6366b8c76e6fa3 *man/histkdnc.Rd
 d6db4c15687a6d5d96daddd3742b6fc0 *man/labels2R.Rd
 3d1da906317e46f17d48e3f7c866498e *man/plot.CrossTable.Rd
@@ -40,4 +40,4 @@ d86510b35967c3d51654b629639a7d72 *man/xtable.CrossTable.Rd
 e51e5c7c47ea54a983eabdaf0345bf55 *po/R-pt_BR.po
 6d629452ff77ed43a3a910fccb65318f *po/descr.pot
 4b8bab94ac0294a5cb68f239e86f497c *po/pt_BR.po
-34f0825a7e2eb7fbd0b9c2d3a3d945fe *src/descr.c
+de8fbd87ae1f83cad582d7965883eca4 *src/descr.c
