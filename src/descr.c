@@ -3,7 +3,7 @@
 ** It is distributed under the GNU General Public License.
 ** See the file ../LICENSE for details.
 ** 
-** (c) 2009-2012 Jakson Aquino: jalvesaq@gmail.com
+** (c) 2009-2023 Jakson Aquino: jalvesaq@gmail.com
 **
 ***************************************************************/
 
@@ -23,6 +23,12 @@
 #include <R_ext/Rdynload.h>
 #include <R_ext/Visibility.h>
 #include <Rinternals.h>
+
+#ifdef _WIN64
+#define FMTSIZEOF "llu"
+#else
+#define FMTSIZEOF "lu"
+#endif
 
 void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
         int *end, int *ncols, int *verbose){
@@ -52,15 +58,15 @@ void realfwf2csv(char **fwffile, char **csvfile, char **names, int *begin,
 
     value = (char*)malloc((maxvlen + 3) * sizeof(char));
     if(value == NULL){
-        REprintf(_("Error: could not allocate memory (%d bytes)\n"), maxvlen + 3 *
-                sizeof(char));
+        REprintf(_("Error: could not allocate memory (%" FMTSIZEOF " bytes)\n"),
+                 maxvlen + 3 * sizeof(char));
         return;
     }
 
     b = (char*)malloc((maxget + 3) * sizeof(char));
     if(b == NULL){
-        REprintf(_("Error: could not allocate memory (%d bytes)\n"), maxget + 3 *
-                sizeof(char));
+        REprintf(_("Error: could not allocate memory (%" FMTSIZEOF "bytes)\n"),
+                 maxget + 3 * sizeof(char));
         return;
     }
     fwf = fopen(fwffile[0], "r");

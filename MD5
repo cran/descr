@@ -1,6 +1,6 @@
-3abb84a3633e37c30d121680f4a97968 *DESCRIPTION
+bdf092d8f926dac6ab7521ea82e612b1 *DESCRIPTION
 4e9d701861b07635148fa4b7c551a45f *NAMESPACE
-64ec8785d37cbdae0ea1ba492c3e48a8 *NEWS
+488bb84a15cd821e55d1337cbe2fea48 *NEWS
 ddedc4a3bcef4b538cf6697071c67e1d *R/CrossTable.R
 633010e9f41b21a0a5a98fbf6208a7e1 *R/UTF-8.R
 b6ac10afea33bbf7c3b1c516b3c947b7 *R/bwplotstats.R
@@ -40,4 +40,4 @@ d86510b35967c3d51654b629639a7d72 *man/xtable.CrossTable.Rd
 e51e5c7c47ea54a983eabdaf0345bf55 *po/R-pt_BR.po
 6d629452ff77ed43a3a910fccb65318f *po/descr.pot
 4b8bab94ac0294a5cb68f239e86f497c *po/pt_BR.po
-de8fbd87ae1f83cad582d7965883eca4 *src/descr.c
+42e0d80c3d5434ef795bbf2bc37febaf *src/descr.c
